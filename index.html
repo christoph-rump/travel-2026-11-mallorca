@@ -98,44 +98,7 @@ td.num,th.num{text-align:right;font-family:var(--font-mono);font-variant-numeric
 .mapkey{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:13px;color:var(--muted);margin:0;padding:0;list-style:none}
 .mapkey li{display:flex;align-items:center;gap:7px}
 .mapkey svg{flex:0 0 auto}
-/* Satellitenkarte */
-.mapbox.sat{height:min(72vh,600px);min-height:340px}
-@media (max-width:600px){.mapbox.sat{height:58vh;min-height:300px}}
-.leaflet-attribution-flag{display:none!important}
-.leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}
-.mapbox.sat #map{display:none}
-#lmap{position:absolute;inset:0}
-.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}
-.leaflet-container{overflow:hidden;background:#16272d;font-family:var(--font-body);-webkit-tap-highlight-color:transparent}
-.leaflet-container img,.leaflet-container .leaflet-tile{max-width:none!important;max-height:none!important}
-.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{user-select:none;-webkit-user-drag:none}
-.leaflet-tile{visibility:hidden}.leaflet-tile-loaded{visibility:inherit}
-.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}
-.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}
-.leaflet-zoom-animated{transform-origin:0 0}
-.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform .25s cubic-bezier(0,0,.25,1)}
-.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{transition:none}
-.leaflet-grab{cursor:grab}.leaflet-dragging .leaflet-grab{cursor:move}
-.leaflet-marker-icon,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}
-.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive{pointer-events:auto}
-.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}
-.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}
-.leaflet-control{position:relative;z-index:800;pointer-events:auto;float:left;clear:both}
-.leaflet-right .leaflet-control{float:right}
-.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:0}
-.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:0}
-.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.5);border-radius:6px;overflow:hidden}
-.leaflet-bar a{display:block;width:30px;height:30px;line-height:30px;text-align:center;text-decoration:none;background:#fff;color:#1d2a2c;border-bottom:1px solid #d5dedd;font:600 18px/30px var(--font-mono)}
-.leaflet-bar a:last-child{border-bottom:none}
-.leaflet-control-attribution{background:rgba(255,255,255,.82);color:#333;font-size:10.5px;line-height:1.4;padding:1px 6px}
-.leaflet-control-attribution a{color:#0e6e74}
-.lpin{background:none;border:0}
-.lp{display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--pc);color:#fff;font:500 10px/1 var(--font-mono);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.5)}
-.lp.opt{background:#fff;color:#1d2a2c;border:2px dashed var(--pc)}
-.lp.big{border-radius:6px;background:#1d2a2c;font-weight:700;font-size:12px}
-.ltime{background:none;border:0}
-.ltime span{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;background:rgba(255,255,255,.94);color:#1d2a2c;border:1.5px solid;border-radius:999px;padding:2px 9px;font:500 11px/1.4 var(--font-mono);box-shadow:0 1px 4px rgba(0,0,0,.4)}
-#lmap.all-days .ltime{display:none}
+
 .maplist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:4px 18px;font-size:14px;margin:0;padding:0;list-style:none}
 .maplist li{display:flex;gap:8px;align-items:baseline}
 .maplist .pin{flex:0 0 22px;height:22px;border-radius:50%;color:#fff;font-family:var(--font-mono);font-size:11px;display:inline-flex;align-items:center;justify-content:center;background:var(--c)}
@@ -352,8 +315,7 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
     <li><svg width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="8" fill="var(--surface)" stroke="var(--d3)" stroke-width="2" stroke-dasharray="3 2"/></svg><span data-l="de">Ort optional</span><span data-l="en">optional place</span></li>
     <li><span aria-hidden="true">🚗 🚌 🚕 🚶</span><span data-l="de">Auto, Bus, Taxi, zu Fuss; Alternativen in Klammern. Uhrzeiten und Dauer stehen an den Routen, wenn ein einzelner Tag gewählt ist.</span><span data-l="en">Car, bus, taxi, on foot; alternatives in brackets. Times and durations appear on the routes when a single day is selected.</span></li>
   </ul>
-  <div class="mapbox" id="mapbox"><svg id="map" viewBox="0 0 860 500" role="img" aria-label="Map of southwest Mallorca with trip stops and routes"></svg><div id="lmap" hidden></div></div>
-  <p class="small muted" id="satnote" style="margin:-12px 0 0"><span data-l="de">Satellitenbild: erscheint automatisch, wenn die Seite ausserhalb von Claude geöffnet wird, z. B. über GitHub Pages oder lokal im Browser.</span><span data-l="en">Satellite view: appears automatically when the page is opened outside Claude, e.g. via GitHub Pages or locally in a browser.</span></p>
+  <div class="mapbox" id="mapbox"><svg id="map" viewBox="0 0 860 500" role="img" aria-label="Map of southwest Mallorca with trip stops and routes"></svg></div>
   <div class="panel">
     <h3><span data-l="de">Orte auf der Karte</span><span data-l="en">Places on the map</span></h3>
     <ul class="maplist" id="maplist" style="margin-top:8px"></ul>
@@ -872,54 +834,7 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
   el('line',{x1:sx+kmPx*5,y1:sy-4,x2:sx+kmPx*5,y2:sy+4,stroke:'var(--fg)','stroke-width':2});
   const st=el('text',{x:sx+kmPx*5+8,y:sy+4,'font-size':12,fill:'var(--fg)','font-family':'IBM Plex Mono, monospace'});st.textContent='5 km';
 
-  /* ---------- Satellitenkarte (nur wo Kartenkacheln geladen werden dürfen) ---------- */
-  const SAT={img:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-             ref:'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}'};
-  const SC={1:'#b9e35e',2:'#ff7a85',3:'#82bcff',4:'#ea9fe9',5:'#d7dbdd',air:'#ffb13d',acc:'#4fc1c4'};
-  const mapbox=document.getElementById('mapbox'), lmapEl=document.getElementById('lmap'), satNote=document.getElementById('satnote');
-  let satOK=false, satMap=null, satGroups={}, satPins=[], satLabels=[];
-  (function probe(){
-    const img=new Image();let done=false;
-    const tm=setTimeout(()=>{done=true;},6000);
-    img.onload=()=>{if(done)return;done=true;clearTimeout(tm);satOK=true;
-      const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';s.onload=maybeInitSat;document.head.appendChild(s);};
-    img.onerror=()=>{done=true;clearTimeout(tm);};
-    img.src=SAT.img.replace('{z}','10').replace('{y}','389').replace('{x}','519');
-  })();
-  function mapVisible(){const pg=document.getElementById('karte');return pg&&!pg.hidden;}
-  function maybeInitSat(){if(satOK&&window.L&&!satMap&&mapVisible())initSat();}
-  function initSat(){
-    mapbox.classList.add('sat');lmapEl.hidden=false;if(satNote)satNote.hidden=true;
-    const m=L.map(lmapEl,{scrollWheelZoom:false,zoomSnap:.5});
-    m.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
-    L.tileLayer(SAT.img,{maxZoom:18,attribution:'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'}).addTo(m);
-    L.tileLayer(SAT.ref,{maxZoom:18,opacity:.8}).addTo(m);
-    days.forEach(d=>{
-      const g=L.layerGroup();
-      [...d.routes].sort((a,b)=>(b.air?1:0)-(a.air?1:0)).forEach(r=>{
-        const ll=r.p.map(([lo,la])=>[la,lo]);const col=r.air?SC.air:SC[d.k];
-        L.polyline(ll,{color:'#0b1418',weight:r.opt?5:7,opacity:.5,interactive:false}).addTo(g);
-        L.polyline(ll,{color:col,weight:r.opt?2.8:4,opacity:1,dashArray:r.opt?'8 7':null,lineCap:r.opt?'butt':'round',interactive:false}).addTo(g);
-        if(r.lb){const pos=labelLL(r);const mk=L.marker([pos[1],pos[0]],{interactive:false,keyboard:false,icon:satLabelIcon(r,col)}).addTo(g);satLabels.push({mk,r,col});}
-      });
-      satGroups[d.k]=g;
-    });
-    places.forEach(p=>{
-      const col=p.big?'#1d2a2c':(p.air?SC.air:(p.d===0?SC.acc:SC[p.d]));
-      const html=p.big?'<span class="lp big">V</span>':`<span class="lp${p.opt?' opt':''}" style="--pc:${col}">${p.id}</span>`;
-      const mk=L.marker([p.c[1],p.c[0]],{keyboard:false,title:T(p.n),icon:L.divIcon({className:'lpin',html,iconSize:[22,22],iconAnchor:[11,11]})}).addTo(m);
-      satPins.push({mk,p});
-    });
-    satMap=m;refresh();
-  }
-  function satLabelIcon(r,col){return L.divIcon({className:'ltime',iconSize:[0,0],html:`<span style="border-color:${col};${r.opt?'border-style:dashed;':''}">${T(r.lb)}</span>`});}
-  function fitSat(){
-    if(!satMap)return;
-    const pts2=[];
-    days.forEach(d=>{if(sel===0||sel===d.k)d.routes.forEach(r=>r.p.forEach(([lo,la])=>pts2.push([la,lo])));});
-    if(pts2.length)satMap.fitBounds(pts2,{padding:[40,40],maxZoom:14});
-  }
-  window.__onTab=id=>{if(id!=='karte')return;layoutLabels();if(!satMap)maybeInitSat();else{satMap.invalidateSize();fitSat();}};
+  window.__onTab=id=>{if(id==='karte')layoutLabels();};
 
   const legend=document.getElementById('legend');
   let sel=1; // ein Tag aktiv, Start Donnerstag; 0 = alle Tage
@@ -939,12 +854,6 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
     legendBtns.forEach(([b,d])=>b.setAttribute('aria-pressed',sel===d.k?'true':'false'));
     allBtn.setAttribute('aria-pressed',sel===0?'true':'false');
     layoutLabels();
-    if(satMap){
-      Object.keys(satGroups).forEach(k=>{const g=satGroups[k];if(on(+k))g.addTo(satMap);else g.remove();});
-      lmapEl.classList.toggle('all-days',sel===0);
-      satPins.forEach(({mk,p})=>mk.setOpacity((p.d<=0||on(p.d))?1:.35));
-      fitSat();
-    }
   }
   const ml=document.getElementById('maplist');
   function renderMapText(){
@@ -960,8 +869,6 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
       li.innerHTML=`<span class="pin" style="--c:${col};${st}">${p.id}</span><span>${T(p.n)}</span>`;
       ml.appendChild(li);
     });
-    satLabels.forEach(({mk,r,col})=>mk.setIcon(satLabelIcon(r,col)));
-    satPins.forEach(({mk,p})=>{if(mk.getElement())mk.getElement().title=T(p.n);});
   }
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>layoutLabels());
 
