@@ -1,0 +1,852 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mallorca-Tage November</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: schmale Lesespalte mit Reiter-Navigation; jede "Seite" ist ein eigener Abschnitt, Karte als zentrales Bildelement */
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --fg:#1d2a2c; --muted:#5b6b6d; --line:#d5dedd;
+  --sea:#cfe3e6; --land:#ecebe2; --landline:#b9b6a6; --accent:#0e6e74;
+  --d1:#5f7d1f; --d2:#b8323f; --d3:#2f5d9b; --d4:#7a3b78; --d5:#6a6f72;
+  --warn-bg:#fff2dc; --warn-fg:#7a4b00; --ok-bg:#e3f2ea; --ok-fg:#1f5d3c; --info-bg:#e2eef0; --info-fg:#164c52; --bad:#a3242f;
+  --font-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121a1c; --surface:#1a2427; --fg:#e4ecea; --muted:#9aaeae; --line:#2e3d40;
+  --sea:#17323a; --land:#2a2f2b; --landline:#4a5148; --accent:#4fc1c4;
+  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae;
+  --warn-bg:#3a2d12; --warn-fg:#f3cf8a; --ok-bg:#16332a; --ok-fg:#9ad8b6; --info-bg:#163036; --info-fg:#a6dde0; --bad:#ff8a93; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121a1c; --surface:#1a2427; --fg:#e4ecea; --muted:#9aaeae; --line:#2e3d40;
+  --sea:#17323a; --land:#2a2f2b; --landline:#4a5148; --accent:#4fc1c4;
+  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae;
+  --warn-bg:#3a2d12; --warn-fg:#f3cf8a; --ok-bg:#16332a; --ok-fg:#9ad8b6; --info-bg:#163036; --info-fg:#a6dde0; --bad:#ff8a93; color-scheme:dark}
+
+/* Sprachumschaltung */
+:root:not([data-lang="en"]) [data-l="en"]{display:none!important}
+:root[data-lang="en"] [data-l="de"]{display:none!important}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.55}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:28px 12px}
+.toprow{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.langsw{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.langsw button{font:inherit;font-family:var(--font-mono);font-size:13px;border:0;background:none;color:var(--muted);padding:5px 11px;cursor:pointer}
+.langsw button[aria-pressed="true"]{background:var(--fg);color:var(--bg);font-weight:500}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,5.4vw,50px);line-height:1.04;margin:10px 0 10px;text-wrap:balance;letter-spacing:-.01em}
+h2{font-family:var(--font-display);font-weight:700;font-size:26px;line-height:1.15;margin:0 0 6px;text-wrap:balance}
+h3{font-family:var(--font-display);font-weight:700;font-size:19px;margin:0 0 4px}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.daystrip{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.daystrip span.d{font-family:var(--font-mono);font-size:12.5px;padding:3px 9px;border-radius:999px;color:#fff}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+nav.tabs button{flex:0 0 auto;font:inherit;font-size:14.5px;border:1px solid transparent;background:none;color:var(--muted);padding:7px 12px;border-radius:8px;cursor:pointer}
+nav.tabs button:hover{color:var(--fg)}
+nav.tabs button[aria-selected="true"]{background:var(--surface);color:var(--fg);border-color:var(--line);font-weight:700}
+main{padding-block:26px 60px}
+section.page{display:flex;flex-direction:column;gap:22px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.note{border-radius:10px;padding:12px 14px;font-size:15px}
+.note.warn{background:var(--warn-bg);color:var(--warn-fg)}
+.note.ok{background:var(--ok-bg);color:var(--ok-fg)}
+.note.info{background:var(--info-bg);color:var(--info-fg)}
+.note b{font-weight:700}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+ul.clean{margin:0;padding-left:18px}
+ul.clean li{margin:3px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
+.tscroll{overflow-x:auto}
+td.num,th.num{text-align:right;font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.arrivals{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.arr{border-left:3px solid var(--accent);padding:4px 0 4px 12px}
+.arr.out{border-left-color:var(--d5)}
+.arr .mono{font-size:13px;color:var(--muted)}
+.arr strong{font-family:var(--font-display);font-size:22px;display:block;line-height:1.1}
+
+.day{border-top:4px solid var(--c)}
+.dayhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:10px}
+.dayhead .tag{font-family:var(--font-mono);font-size:12px;color:#fff;background:var(--c);padding:2px 8px;border-radius:5px}
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.tl li{display:grid;grid-template-columns:62px 1fr;gap:12px;padding:9px 0;border-top:1px dashed var(--line)}
+.tl li:first-child{border-top:none}
+.tl time{font-family:var(--font-mono);font-size:14px;color:var(--c);font-weight:500;padding-top:1px}
+.tl .what{min-width:0}
+.tl .what b{font-weight:700}
+.drive{display:inline-block;font-family:var(--font-mono);font-size:12px;border:1px solid var(--line);border-radius:5px;padding:0 6px;margin:2px 4px 0 0;color:var(--muted);white-space:nowrap}
+.drive.nocar{border-style:dashed}
+.drive.sober{color:var(--warn-fg);background:var(--warn-bg);border-color:transparent}
+
+.mapbox{background:var(--sea);border-radius:12px;overflow:hidden;position:relative;border:1px solid var(--line)}
+.mapbox svg{display:block;width:100%;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.legend button{font:inherit;font-size:14px;display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
+.legend button i{width:14px;height:4px;border-radius:2px;background:var(--c);display:inline-block}
+.legend button[aria-pressed="false"]{opacity:.45}
+.maplist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:4px 18px;font-size:14px;margin:0;padding:0;list-style:none}
+.maplist li{display:flex;gap:8px;align-items:baseline}
+.maplist .pin{flex:0 0 22px;height:22px;border-radius:50%;color:#fff;font-family:var(--font-mono);font-size:11px;display:inline-flex;align-items:center;justify-content:center;background:var(--c)}
+
+.venue{display:flex;flex-direction:column;gap:4px}
+.venue .where{font-family:var(--font-mono);font-size:12.5px;color:var(--muted)}
+.pill{display:inline-block;font-size:12px;font-family:var(--font-mono);padding:1px 7px;border-radius:999px;margin-right:4px}
+.pill.open{background:var(--ok-bg);color:var(--ok-fg)}
+.pill.check{background:var(--warn-bg);color:var(--warn-fg)}
+.pill.day{color:#fff}
+
+.budget input[type=number]{width:84px;font:inherit;font-family:var(--font-mono);padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);text-align:right}
+.budget select{font:inherit;font-size:14px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);max-width:100%}
+.budget td:first-child{min-width:180px}
+.totals{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:baseline}
+.totals .big{font-family:var(--font-display);font-size:38px;font-weight:800;line-height:1}
+.totals .lbl{font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden;display:flex}
+.bar span{display:block;height:100%}
+
+.wx{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px}
+.wx div{border-top:2px solid var(--accent);padding-top:8px}
+.wx strong{font-family:var(--font-display);font-size:28px;display:block;line-height:1.1}
+footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
+@media (max-width:520px){.tl li{grid-template-columns:52px 1fr;gap:8px}.panel{padding:16px}}
+@media (prefers-reduced-motion:no-preference){section.page{animation:fade .25s ease}}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+</style>
+
+<header class="top wrap">
+  <div class="toprow">
+    <div class="eyebrow"><span data-l="de">Gruppenreise · Costa de la Calma · 11 Personen</span><span data-l="en">Group trip · Costa de la Calma · 11 people</span></div>
+    <div class="langsw" role="group" aria-label="Sprache / Language">
+      <button type="button" id="lang-de" data-set="de" aria-pressed="true">DE</button>
+      <button type="button" id="lang-en" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+  <h1><span data-l="de">Mallorca-Tage, 5.–9. November 2026</span><span data-l="en">Mallorca Days, 5–9 November 2026</span></h1>
+  <p class="lede"><span data-l="de">Villa 2 Gehminuten vom Playa Santa Ponsa, zwei Autos, möglichst kurze Fahrten. Plan, Karte, Lokale, Services und Budget auf einen Blick.</span><span data-l="en">Villa two minutes' walk from Playa Santa Ponsa, two cars, short drives only. Plan, map, venues, services and budget in one place.</span></p>
+  <div class="daystrip">
+    <span class="d" style="background:var(--d1)"><span data-l="de">Do 5.11. Ankunft &amp; Kochen</span><span data-l="en">Thu 5 Nov · Arrival &amp; cooking</span></span>
+    <span class="d" style="background:var(--d2)"><span data-l="de">Fr 6.11. Südwesten &amp; Sangria</span><span data-l="en">Fri 6 Nov · Southwest &amp; sangria</span></span>
+    <span class="d" style="background:var(--d3)"><span data-l="de">Sa 7.11. Wandern, Bierkönig &amp; Palma</span><span data-l="en">Sat 7 Nov · Hike, Bierkönig &amp; Palma</span></span>
+    <span class="d" style="background:var(--d4)"><span data-l="de">So 8.11. Peguera &amp; Wein</span><span data-l="en">Sun 8 Nov · Peguera &amp; wine</span></span>
+    <span class="d" style="background:var(--d5)"><span data-l="de">Mo 9.11. Abreise</span><span data-l="en">Mon 9 Nov · Departure</span></span>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Seiten / Pages">
+  <div class="wrap" role="tablist">
+    <button role="tab" data-p="ueberblick" id="t-ueberblick"><span data-l="de">Überblick</span><span data-l="en">Overview</span></button>
+    <button role="tab" data-p="plan" id="t-plan"><span data-l="de">Tagesplan</span><span data-l="en">Day plan</span></button>
+    <button role="tab" data-p="karte" id="t-karte"><span data-l="de">Karte</span><span data-l="en">Map</span></button>
+    <button role="tab" data-p="lokale" id="t-lokale"><span data-l="de">Essen &amp; Bars</span><span data-l="en">Food &amp; bars</span></button>
+    <button role="tab" data-p="services" id="t-services"><span data-l="de">Einkauf &amp; Services</span><span data-l="en">Shopping &amp; services</span></button>
+    <button role="tab" data-p="budget" id="t-budget">Budget</button>
+    <button role="tab" data-p="wetter" id="t-wetter"><span data-l="de">Wetter &amp; Packliste</span><span data-l="en">Weather &amp; packing</span></button>
+    <button role="tab" data-p="quellen" id="t-quellen"><span data-l="de">Quellen</span><span data-l="en">Sources</span></button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ÜBERBLICK / OVERVIEW -->
+<section class="page" id="ueberblick" role="tabpanel">
+  <div class="panel">
+    <h2><span data-l="de">Wer kommt und geht wann</span><span data-l="en">Who arrives and leaves when</span></h2>
+    <div class="arrivals" style="margin-top:12px">
+      <div class="arr"><span class="mono"><span data-l="de">Do 5.11. · ca. 14:00</span><span data-l="en">Thu 5 Nov · approx. 14:00</span></span><strong><span data-l="de">6 Personen</span><span data-l="en">6 people</span></strong><span class="small muted"><span data-l="de">Holen die 2 Mietwagen, machen den Grosseinkauf</span><span data-l="en">Pick up both rental cars, do the big shop</span></span></div>
+      <div class="arr"><span class="mono"><span data-l="de">Do 5.11. · ca. 23:00</span><span data-l="en">Thu 5 Nov · approx. 23:00</span></span><strong><span data-l="de">4 Personen</span><span data-l="en">4 people</span></strong><span class="small muted"><span data-l="de">Taxi empfohlen, damit am Abend niemand nüchtern bleiben muss</span><span data-l="en">Taxi recommended, so nobody has to stay sober that evening</span></span></div>
+      <div class="arr"><span class="mono"><span data-l="de">Fr 6.11. · ca. 18:00</span><span data-l="en">Fri 6 Nov · approx. 18:00</span></span><strong><span data-l="de">1 Person</span><span data-l="en">1 person</span></strong><span class="small muted"><span data-l="de">Abholung vor Sangria-Start oder Taxi</span><span data-l="en">Pick-up before sangria starts, or taxi</span></span></div>
+      <div class="arr out"><span class="mono"><span data-l="de">So 8.11. · abends</span><span data-l="en">Sun 8 Nov · evening</span></span><strong><span data-l="de">1 Person reist ab</span><span data-l="en">1 person leaves</span></strong><span class="small muted"><span data-l="de">Taxi zum Flughafen, damit die Weinprobe für alle bleibt</span><span data-l="en">Taxi to the airport, so the wine tasting stays on for everyone</span></span></div>
+      <div class="arr out"><span class="mono"><span data-l="de">Mo 9.11. · früh</span><span data-l="en">Mon 9 Nov · early</span></span><strong><span data-l="de">6 Personen</span><span data-l="en">6 people</span></strong><span class="small muted"><span data-l="de">Auto 1 (5 Plätze) plus 1 Taxi, Auto wird am Flughafen abgegeben</span><span data-l="en">Car 1 (5 seats) plus 1 taxi; car returned at the airport</span></span></div>
+      <div class="arr out"><span class="mono"><span data-l="de">Mo 9.11. · Checkout 10:00</span><span data-l="en">Mon 9 Nov · checkout 10:00</span></span><strong><span data-l="de">4 Personen</span><span data-l="en">4 people</span></strong><span class="small muted"><span data-l="de">Aufräum-Team behält Auto 2 und gibt es am Flughafen ab</span><span data-l="en">Clean-up team keeps car 2 and returns it at the airport</span></span></div>
+    </div>
+  </div>
+
+  <div class="note info"><b data-l="de">Korrektur Bierkönig:</b><b data-l="en">Correction, Bierkönig:</b> <span data-l="de">Der Bierkönig hat laut eigener Website 365 Tage im Jahr geöffnet, täglich ab 10 Uhr. Das Closing vom 22.–25. Oktober beendet nur die Hauptsaison mit den grossen Bühnenshows. Der kurze Abstecher am Samstag ist wieder im Plan; das Winterprogramm vorab per E-Mail erfragen.</span><span data-l="en">According to its own website, the Bierkönig is open 365 days a year, daily from 10:00. The 22–25 October closing only ends the main season with the big stage shows. The short stop on Saturday is back in the plan; ask about the winter programme by email beforehand.</span></div>
+  <div class="note warn"><b data-l="de">Sonntag einkaufen ist schwierig.</b><b data-l="en">Shopping on Sunday is hard.</b> <span data-l="de">Die meisten grossen Supermärkte (Mercadona, Lidl, Eroski) haben sonntags zu, auch Porto Pi. Beim Grosseinkauf am Donnerstag also bis Montagmorgen planen, Nachkauf am Samstag.</span><span data-l="en">Most big supermarkets (Mercadona, Lidl, Eroski) are closed on Sundays, and so is Porto Pi. Plan the Thursday shop through to Monday morning and top up on Saturday.</span></div>
+  <div class="note warn"><b data-l="de">Montag: 6 Personen, 5 Sitze.</b><b data-l="en">Monday: 6 people, 5 seats.</b> <span data-l="de">Wenn ein Auto beim Aufräum-Team bleibt, passt die Früh-Gruppe nicht in das andere. Entweder ein Taxi für die 6. Person buchen oder ein Auto jetzt noch auf einen 7-Sitzer umbuchen.</span><span data-l="en">If one car stays with the clean-up team, the early group won't fit in the other. Either book a taxi for the sixth person or upgrade one car to a 7-seater now.</span></div>
+  <div class="note warn"><b data-l="de">Port d'Andratx im Winter:</b><b data-l="en">Port d'Andratx in winter:</b> <span data-l="de">Viele Restaurants dort schliessen zwischen November und März. Mittagstisch am Freitag vorher telefonisch bestätigen.</span><span data-l="en">Many restaurants there close between November and March. Confirm Friday's lunch spot by phone beforehand.</span></div>
+
+  <div class="grid2">
+    <div class="panel">
+      <h3><span data-l="de">Logik gegen lange Fahrten</span><span data-l="en">Keeping drives short</span></h3>
+      <ul class="clean" data-l="de">
+        <li>Alles mit Alkohol findet in der Villa, zu Fuss oder mit Bus und Taxi statt.</li>
+        <li>Palma und Bierkönig am Samstag ohne eigene Autos: Bus 103 hin, Taxis dazwischen und zurück.</li>
+        <li>Autofahrten nur tagsüber und kurz: Wanderung 7 Min, Südwest-Runde mit Etappen von 10–15 Min.</li>
+        <li>Nüchterne Fahrer nur für drei Fenster: Fr 17–19 Uhr (Flughafen), Mo früh (Auto 1), Mo ab 10 Uhr (Auto 2).</li>
+      </ul>
+      <ul class="clean" data-l="en">
+        <li>Anything involving alcohol happens at the villa, on foot, or by bus and taxi.</li>
+        <li>Palma and Bierkönig on Saturday without our own cars: bus 103 there, taxis in between and back.</li>
+        <li>Drives only in daytime and short: hike 7 min, southwest loop in 10–15 min legs.</li>
+        <li>Sober drivers needed for three windows only: Fri 17–19 (airport), Mon early (car 1), Mon from 10:00 (car 2).</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3><span data-l="de">Jetzt reservieren</span><span data-l="en">Book now</span></h3>
+      <ul class="clean" data-l="de">
+        <li>Sa 20:00 La Bóveda, Palma (hinterer Gewölberaum für Gruppen)</li>
+        <li>Sa Nacht: Kleinbus oder Taxis Palma → Villa</li>
+        <li>So 13:30 Rendezvous, Peguera (Terrasse mit Meerblick)</li>
+        <li>So 16:30 Weinprobe in der Villa (Sommelier anfragen)</li>
+        <li>So Abend: Taxi für die abreisende Person</li>
+        <li>Mo früh: Taxi für die 6. Person oder 7-Sitzer</li>
+        <li>Fr 13:30 Mittagessen Port d'Andratx (nach Telefon-Check)</li>
+      </ul>
+      <ul class="clean" data-l="en">
+        <li>Sat 20:00 La Bóveda, Palma (vaulted back room for groups)</li>
+        <li>Sat night: minibus or taxis Palma → villa</li>
+        <li>Sun 13:30 Rendezvous, Peguera (sea-view terrace)</li>
+        <li>Sun 16:30 wine tasting at the villa (ask a sommelier)</li>
+        <li>Sun evening: taxi for the person leaving</li>
+        <li>Mon early: taxi for the sixth person, or a 7-seater</li>
+        <li>Fri 13:30 lunch in Port d'Andratx (after a phone check)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3><span data-l="de">Grobe Kosten</span><span data-l="en">Rough costs</span></h3>
+    <p class="small" style="margin:4px 0 0"><span data-l="de">Mit den Standardannahmen im Budget-Reiter landet ihr bei rund</span><span data-l="en">With the default assumptions in the Budget tab you end up at around</span> <b class="mono" id="ov-total">–</b> <span data-l="de">gesamt, also etwa</span><span data-l="en">in total, roughly</span> <b class="mono" id="ov-pp">–</b> <span data-l="de">pro Person, ohne Villa, Flüge und Mietwagen-Grundpreis.</span><span data-l="en">per person, excluding villa, flights and the base car-rental price.</span></p>
+  </div>
+</section>
+
+<!-- TAGESPLAN / DAY PLAN -->
+<section class="page" id="plan" role="tabpanel" hidden>
+  <p class="muted small" style="margin:0"><span data-l="de">Fahrzeiten sind Richtwerte ab der Villa bei normalem Verkehr. Legende:</span><span data-l="en">Drive times are estimates from the villa in normal traffic. Key:</span> <span class="drive">🚗 <span data-l="de">Auto</span><span data-l="en">Car</span></span><span class="drive nocar"><span data-l="de">ohne eigenes Auto</span><span data-l="en">no own car</span></span><span class="drive sober"><span data-l="de">Fahrer nüchtern</span><span data-l="en">driver sober</span></span></p>
+
+  <article class="panel day" style="--c:var(--d1)">
+    <div class="dayhead"><span class="tag"><span data-l="de">Do 5.11.</span><span data-l="en">Thu 5 Nov</span></span><h2><span data-l="de">Ankunft, Grosseinkauf, Kochen</span><span data-l="en">Arrival, big shop, cooking</span></h2></div>
+    <ol class="tl">
+      <li><time>14:00</time><div class="what"><span data-l="de"><b>Landung Gruppe A (6 Pers.)</b>, Mietwagen übernehmen. 6 Leute plus Gepäck passen auf zwei Autos.</span><span data-l="en"><b>Group A lands (6 people)</b>, pick up the rental cars. Six people plus luggage fit in two cars.</span></div></li>
+      <li><time>14:45</time><div class="what"><span data-l="de"><b>Grosseinkauf, Variante A: Porto Pi</b> (Carrefour-Hypermarkt im Einkaufszentrum, liegt auf dem Weg an der Ma-1). Auch für Karaoke-Mikrofon oder Kabel praktisch.</span><span data-l="en"><b>Big shop, option A: Porto Pi</b> (Carrefour hypermarket in the mall, right on the way along the Ma-1). Also handy for a karaoke mic or cables.</span><br><span class="drive"><span data-l="de">Flughafen → Porto Pi ca. 15 Min</span><span data-l="en">Airport → Porto Pi approx. 15 min</span></span><span class="drive"><span data-l="de">Porto Pi → Villa ca. 20 Min</span><span data-l="en">Porto Pi → villa approx. 20 min</span></span><br><span class="small muted"><span data-l="de">Variante B: direkt zum Eroski Santa Ponça, 5 Min von der Villa (Frischetheken, Lieferservice).</span><span data-l="en">Option B: straight to Eroski Santa Ponça, 5 min from the villa (fresh counters, delivery service).</span></span></div></li>
+      <li><time>16:45</time><div class="what"><span data-l="de"><b>Check-in Villa</b>, Zimmer verteilen, Kühlschrank füllen.</span><span data-l="en"><b>Villa check-in</b>, sort out rooms, fill the fridge.</span></div></li>
+      <li><time>17:15</time><div class="what"><span data-l="de"><b>Spaziergang Playa Santa Ponsa</b>, 2 Gehminuten. Sonnenuntergang ca. 17:35.</span><span data-l="en"><b>Walk to Playa Santa Ponsa</b>, 2 minutes away. Sunset approx. 17:35.</span></div></li>
+      <li><time>18:30</time><div class="what"><span data-l="de"><b>Gemeinsam kochen</b>: ein grosser Topf (Paella, Chili oder Pasta al forno), der sich für die Spätankommenden aufwärmen lässt. Danach Beisammensein und Trinken.</span><span data-l="en"><b>Cook together</b>: one big pot (paella, chilli or baked pasta) that reheats well for the late arrivals. Then drinks and hanging out.</span></div></li>
+      <li><time>22:15</time><div class="what"><span data-l="de"><b>Gruppe B (4 Pers.) landet 23:00.</b> Empfehlung: Taxi vom Taxistand am Flughafen, ca. 45–70 € (bei 4 Personen mit Koffern ein grösseres Taxi verlangen). So kann am Abend jeder trinken.</span><span data-l="en"><b>Group B (4 people) lands at 23:00.</b> Recommended: taxi from the airport rank, approx. €45–70 (ask for a larger taxi for four people with suitcases). That way everyone can drink in the evening.</span><br><span class="drive"><span data-l="de">Flughafen → Villa ca. 30–35 Min</span><span data-l="en">Airport → villa approx. 30–35 min</span></span><span class="drive sober"><span data-l="de">Alternative: 1 Fahrer bleibt nüchtern</span><span data-l="en">Alternative: 1 driver stays sober</span></span></div></li>
+      <li><time>23:45</time><div class="what"><span data-l="de"><b>Gruppe B kommt an</b>, Reste aufwärmen, anstossen.</span><span data-l="en"><b>Group B arrives</b>, reheat leftovers, cheers.</span></div></li>
+    </ol>
+  </article>
+
+  <article class="panel day" style="--c:var(--d2)">
+    <div class="dayhead"><span class="tag"><span data-l="de">Fr 6.11.</span><span data-l="en">Fri 6 Nov</span></span><h2><span data-l="de">Südwesten erkunden, Sangria, BBQ, Karaoke</span><span data-l="en">Explore the southwest, sangria, BBQ, karaoke</span></h2></div>
+    <ol class="tl">
+      <li><time>10:00</time><div class="what"><span data-l="de"><b>Frühstück</b> in der Villa, Bäckerei in Santa Ponsa.</span><span data-l="en"><b>Breakfast</b> at the villa, bakery in Santa Ponsa.</span></div></li>
+      <li><time>11:00</time><div class="what"><span data-l="de"><b>Port d'Andratx</b>: Hafenrunde, Fischerboote, Kaffee am Wasser.</span><span data-l="en"><b>Port d'Andratx</b>: harbour stroll, fishing boats, coffee by the water.</span><br><span class="drive">🚗 <span data-l="de">Villa → Port d'Andratx ca. 15 Min</span><span data-l="en">Villa → Port d'Andratx approx. 15 min</span></span></div></li>
+      <li><time>12:15</time><div class="what"><span data-l="de"><b>Sant Elm</b>: Blick auf die Insel Sa Dragonera, kurzer Küstenspaziergang.</span><span data-l="en"><b>Sant Elm</b>: view of Sa Dragonera island, short coastal walk.</span><br><span class="drive">🚗 <span data-l="de">Port d'Andratx → Sant Elm ca. 15 Min</span><span data-l="en">Port d'Andratx → Sant Elm approx. 15 min</span></span></div></li>
+      <li><time>13:30</time><div class="what"><span data-l="de"><b>Mittagessen</b> in Port d'Andratx oder Sant Elm (offenes Lokal vorher telefonisch bestätigen).</span><span data-l="en"><b>Lunch</b> in Port d'Andratx or Sant Elm (confirm an open place by phone first).</span></div></li>
+      <li><time>15:15</time><div class="what"><span data-l="de"><b>Fotostopp Camp de Mar</b> mit Blick auf die kleine Insel S'Illeta, dann zurück.</span><span data-l="en"><b>Photo stop at Camp de Mar</b> overlooking the islet S'Illeta, then back.</span><br><span class="drive">🚗 <span data-l="de">ca. 15 Min</span><span data-l="en">approx. 15 min</span></span><span class="drive"><span data-l="de">Camp de Mar → Villa ca. 10 Min</span><span data-l="en">Camp de Mar → villa approx. 10 min</span></span></div></li>
+      <li><time>16:00</time><div class="what"><span data-l="de"><b>Pause in der Villa</b>, Sangria-Zutaten vorbereiten, Grill vorbereiten.</span><span data-l="en"><b>Break at the villa</b>, prep sangria ingredients and the grill.</span></div></li>
+      <li><time>17:15</time><div class="what"><span data-l="de"><b>1 Person holt den Nachzügler</b> (Landung 18:00) und ist um ca. 19:00 zurück. Danach darf auch der Fahrer trinken. Alternative: Taxi, ca. 45–70 €.</span><span data-l="en"><b>One person picks up the latecomer</b> (lands 18:00), back around 19:00. After that the driver can drink too. Alternative: taxi, approx. €45–70.</span><br><span class="drive sober"><span data-l="de">Fahrer nüchtern bis ca. 19:00</span><span data-l="en">Driver sober until approx. 19:00</span></span></div></li>
+      <li><time>19:00</time><div class="what"><span data-l="de"><b>Sangria-Workshop</b> in der Villa: drei Teams, drei Rezepte (klassisch rot, Cava-Sangria, weisse Sangria), Blindverkostung, Siegerkrug. Profi-Variante: mobile Bar bestellen (siehe Services).</span><span data-l="en"><b>Sangria workshop</b> at the villa: three teams, three recipes (classic red, cava sangria, white sangria), blind tasting, winner's jug. Pro version: book a mobile bar (see Services).</span></div></li>
+      <li><time>20:30</time><div class="what"><span data-l="de"><b>BBQ</b>: Fleisch, Gemüsespiesse, Pimientos de Padrón.</span><span data-l="en"><b>BBQ</b>: meat, veggie skewers, pimientos de Padrón.</span></div></li>
+      <li><time>22:00</time><div class="what"><span data-l="de"><b>Karaoke</b>: Fernseher plus YouTube-Karaoke oder App, Bluetooth-Mikrofon. Lautstärke-Regeln der Villa beachten.</span><span data-l="en"><b>Karaoke</b>: TV plus YouTube karaoke or an app, Bluetooth mic. Respect the villa's noise rules.</span></div></li>
+    </ol>
+  </article>
+
+  <article class="panel day" style="--c:var(--d3)">
+    <div class="dayhead"><span class="tag"><span data-l="de">Sa 7.11.</span><span data-l="en">Sat 7 Nov</span></span><h2><span data-l="de">Wanderung, Bierkönig, Palma bei Nacht</span><span data-l="en">Hike, Bierkönig, Palma by night</span></h2></div>
+    <ol class="tl">
+      <li><time>09:30</time><div class="what"><span data-l="de"><b>Frühstück</b>, Wasser und Snacks einpacken.</span><span data-l="en"><b>Breakfast</b>, pack water and snacks.</span></div></li>
+      <li><time>10:15</time><div class="what"><span data-l="de"><b>Wanderung Cap Andritxol</b> ab Cala Fornells: Wachturm von 1580, Steilklippen, Badebucht Caló d'en Monjo. Rund 4,5 km, je nach Variante ca. 1:20–2:15 Std., steinig, feste Schuhe nötig.</span><span data-l="en"><b>Cap Andritxol hike</b> from Cala Fornells: watchtower from 1580, sea cliffs, Caló d'en Monjo cove. About 4.5 km, approx. 1:20–2:15 h depending on route, rocky, proper shoes needed.</span><br><span class="drive">🚗 <span data-l="de">Villa → Cala Fornells ca. 7 Min</span><span data-l="en">Villa → Cala Fornells approx. 7 min</span></span><br><span class="small muted"><span data-l="de"><b>Alternative bei Regen oder nassem Fels: Vall-Verda-Runde</b> ab Peguera (Carrer des Capdellà) über das Dorf Es Capdellà: ca. 12,9 km, gut 3 Std., ca. 150 Hm, leicht, gute Wege. Mandelwiesen, Pinienwald, Blick auf die Tramuntana; kein Meerblick, und einige Abschnitte führen an der Strasse entlang. Dann schon um 9:00 starten.</span><span data-l="en"><b>Alternative after rain or on wet rock: the Vall Verda loop</b> from Peguera (Carrer des Capdellà) via the village of Es Capdellà: approx. 12.9 km, a good 3 h, approx. 150 m of ascent, easy, good paths. Almond meadows, pine forest, views of the Tramuntana; no sea views, and some stretches run along the road. Start at 9:00 in that case.</span></span><br><span class="drive">🚗 <span data-l="de">Villa → Peguera 5 Min (zu Fuss ca. 30 Min)</span><span data-l="en">Villa → Peguera 5 min (on foot approx. 30 min)</span></span></div></li>
+      <li><time>13:00</time><div class="what"><span data-l="de"><b>Leichtes Mittagessen</b> in der Villa, kurzer Nachkauf im Supermarkt für Sonntag.</span><span data-l="en"><b>Light lunch</b> at the villa, quick supermarket top-up for Sunday.</span></div></li>
+      <li><time>15:00</time><div class="what"><span data-l="de"><b>Nach Palma ohne Autos</b>: TIB-Bus 103 ab Costa de la Calma, ca. 25 Min. Die Autos bleiben stehen.</span><span data-l="en"><b>To Palma without the cars</b>: TIB bus 103 from Costa de la Calma, approx. 25 min. The cars stay put.</span><br><span class="drive nocar"><span data-l="de">Bus 103 ca. 25 Min</span><span data-l="en">Bus 103 approx. 25 min</span></span></div></li>
+      <li><time>15:45</time><div class="what"><span data-l="de"><b>Altstadt</b>: Kathedrale La Seu von aussen, Parc de la Mar, Passeig des Born, Gassen von La Llotja.</span><span data-l="en"><b>Old town</b>: La Seu cathedral from outside, Parc de la Mar, Passeig des Born, the lanes of La Llotja.</span></div></li>
+      <li><time>17:30</time><div class="what"><span data-l="de"><b>Kurzer Abstecher Bierkönig</b>, Schinkenstrasse, Arenal: eine Runde, ein Mass, gut eine Stunde. Ganzjährig offen, ausserhalb der Saison aber ohne die grossen Bühnenshows. Ob am 7.11. Programm läuft: info@bierkoenig.com fragen.</span><span data-l="en"><b>Quick stop at Bierkönig</b>, Schinkenstrasse, Arenal: one round, one stein, about an hour. Open all year, but outside the season without the big stage shows. Ask info@bierkoenig.com whether anything is on on 7 Nov.</span><br><span class="drive nocar"><span data-l="de">3 Taxis Palma → Arenal ca. 15–20 Min</span><span data-l="en">3 taxis Palma → Arenal approx. 15–20 min</span></span></div></li>
+      <li><time>19:15</time><div class="what"><span data-l="de"><b>Zurück nach Palma</b> mit dem Taxi.</span><span data-l="en"><b>Back to Palma</b> by taxi.</span><br><span class="drive nocar"><span data-l="de">ca. 15–20 Min</span><span data-l="en">approx. 15–20 min</span></span></div></li>
+      <li><time>20:00</time><div class="what"><span data-l="de"><b>Abendessen La Bóveda</b>, Carrer de la Boteria 3: traditionelle Tapas, hinterer Gewölberaum passt für Gruppen. Reservieren.</span><span data-l="en"><b>Dinner at La Bóveda</b>, Carrer de la Boteria 3: traditional tapas, the vaulted back room suits groups. Book ahead.</span></div></li>
+      <li><time>22:00</time><div class="what"><span data-l="de"><b>Rock- &amp; Underground-Tour</b>: Agua Bar (Live, Jam-Sessions, Rock'n'Roll-Optik, 5 Min zu Fuss), dann per Taxi ins El Terreno zur Polka Bar (Rock, Klassiker) oder zum Biker-Rocktreff New Morrison Bar. Wer elektronisch weitermachen will: Sótano Club an der Plaça Gomila, samstags eher Underground.</span><span data-l="en"><b>Rock &amp; underground crawl</b>: Agua Bar (live music, jam sessions, rock'n'roll look, 5 min on foot), then by taxi to El Terreno for Polka Bar (rock, classics) or the biker rock hangout New Morrison Bar. For electronic music: Sótano Club on Plaça Gomila, Saturdays lean underground.</span></div></li>
+      <li><time><span data-l="de">ca. 01:30</span><span data-l="en">≈ 01:30</span></time><div class="what"><span data-l="de"><b>Rückfahrt</b>: vorbestellter Kleinbus oder 3 Taxis (Palma → Santa Ponsa tagsüber ca. 26–32 € pro Taxi, nachts mehr).</span><span data-l="en"><b>Ride home</b>: pre-booked minibus or 3 taxis (Palma → Santa Ponsa approx. €26–32 per taxi in daytime, more at night).</span><br><span class="drive nocar"><span data-l="de">Taxi ca. 20–25 Min</span><span data-l="en">Taxi approx. 20–25 min</span></span></div></li>
+    </ol>
+  </article>
+
+  <article class="panel day" style="--c:var(--d4)">
+    <div class="dayhead"><span class="tag"><span data-l="de">So 8.11.</span><span data-l="en">Sun 8 Nov</span></span><h2><span data-l="de">Mittag in Peguera, Weinprobe</span><span data-l="en">Lunch in Peguera, wine tasting</span></h2></div>
+    <ol class="tl">
+      <li><time>11:00</time><div class="what"><span data-l="de"><b>Ausschlafen</b>, Kaffee am Strand.</span><span data-l="en"><b>Sleep in</b>, coffee at the beach.</span></div></li>
+      <li><time>12:45</time><div class="what"><span data-l="de"><b>Nach Peguera</b>: zu Fuss entlang der Küste (ca. 2,5 km, gut 30 Min) oder 2–3 Taxis. Auto lohnt sich nicht.</span><span data-l="en"><b>To Peguera</b>: on foot along the coast (approx. 2.5 km, a good 30 min) or 2–3 taxis. Not worth taking the car.</span><br><span class="drive nocar"><span data-l="de">zu Fuss ca. 30–35 Min</span><span data-l="en">on foot approx. 30–35 min</span></span><span class="drive">🚗 5 Min</span></div></li>
+      <li><time>13:30</time><div class="what"><span data-l="de"><b>Mittagessen Rendezvous</b>, Avda. Peguera 42: ganzjährig geöffnet, grosse Terrasse mit Meerblick und eigenem Grill. Alternative direkt am Strand: Maria Eugenia (Paella, Meeresfrüchte).</span><span data-l="en"><b>Lunch at Rendezvous</b>, Avda. Peguera 42: open all year, large sea-view terrace with its own grill. Alternative right on the beach: Maria Eugenia (paella, seafood).</span></div></li>
+      <li><time>16:30</time><div class="what"><span data-l="de"><b>Weinprobe in der Villa</b> mit Sommelier (empfohlen, niemand muss fahren).</span><span data-l="en"><b>Wine tasting at the villa</b> with a sommelier (recommended, nobody has to drive).</span><br><span class="small muted"><span data-l="de">Alternative: Bodega Son Puig in Puigpunyent, nur nach Vereinbarung, mit Transfer.</span><span data-l="en">Alternative: Bodega Son Puig in Puigpunyent, by appointment only, with a transfer.</span></span><br><span class="drive">🚗 <span data-l="de">Villa → Puigpunyent ca. 30 Min</span><span data-l="en">Villa → Puigpunyent approx. 30 min</span></span></div></li>
+      <li><time><span data-l="de">abends</span><span data-l="en">evening</span></time><div class="what"><span data-l="de"><b>1 Person reist ab</b>: Taxi ca. 2¼ Std. vor Abflug bestellen (ca. 45–70 €). Kann bis dahin bei der Weinprobe mitmachen, und niemand muss dafür nüchtern bleiben.</span><span data-l="en"><b>One person leaves</b>: book a taxi about 2¼ h before the flight (approx. €45–70). They can join the tasting until then, and nobody has to stay sober for the drive.</span><br><span class="drive nocar"><span data-l="de">Taxi Villa → Flughafen ca. 30–35 Min</span><span data-l="en">Taxi villa → airport approx. 30–35 min</span></span></div></li>
+      <li><time>19:30</time><div class="what"><span data-l="de"><b>Resteessen</b>, Koffer packen. Die zwei Montags-Fahrer trinken ab jetzt nichts mehr.</span><span data-l="en"><b>Leftovers dinner</b>, pack bags. The two Monday drivers stop drinking from here.</span></div></li>
+    </ol>
+    <div class="note warn small" style="margin-top:10px"><span data-l="de"><b>Restalkohol:</b> In Spanien gilt 0,5 Promille (Fahranfänger 0,3). Wer Montag früh fährt, bleibt am Sonntagabend nüchtern.</span><span data-l="en"><b>Next-morning alcohol:</b> Spain's limit is 0.5 g/l (0.3 for new drivers). Whoever drives early on Monday stays sober on Sunday evening.</span></div>
+  </article>
+
+  <article class="panel day" style="--c:var(--d5)">
+    <div class="dayhead"><span class="tag"><span data-l="de">Mo 9.11.</span><span data-l="en">Mon 9 Nov</span></span><h2><span data-l="de">Abreise, Checkout 10:00</span><span data-l="en">Departure, checkout 10:00</span></h2></div>
+    <ol class="tl">
+      <li><time><span data-l="de">früh</span><span data-l="en">early</span></time><div class="what"><span data-l="de"><b>Früh-Gruppe (6 Pers.)</b>: 5 fahren mit Auto 1 und geben es am Flughafen ab, die 6. Person nimmt ein Taxi (oder ihr bucht für Auto 1 einen 7-Sitzer). Spätestens 2 Std. vor Abflug am Flughafen sein.</span><span data-l="en"><b>Early group (6 people)</b>: five take car 1 and return it at the airport, the sixth takes a taxi (or book a 7-seater for car 1). Be at the airport at least 2 h before departure.</span><br><span class="drive sober">🚗 <span data-l="de">Villa → Flughafen ca. 30–35 Min</span><span data-l="en">Villa → airport approx. 30–35 min</span></span></div></li>
+      <li><time>08:00</time><div class="what"><span data-l="de"><b>Aufräum-Team (4 Pers.)</b>: Geschirr, Müll trennen, Kühlschrank leeren, Grill reinigen, Schlüsselübergabe.</span><span data-l="en"><b>Clean-up team (4 people)</b>: dishes, separate the rubbish, empty the fridge, clean the grill, hand over keys.</span></div></li>
+      <li><time>10:00</time><div class="what"><span data-l="de"><b>Checkout</b>, dann mit Auto 2 zum Flughafen und Auto dort abgeben. Danach Zeit für ein Frühstück am Flughafen.</span><span data-l="en"><b>Checkout</b>, then drive car 2 to the airport and return it there. Time for breakfast at the airport afterwards.</span><br><span class="drive sober">🚗 <span data-l="de">Villa → Flughafen ca. 30–35 Min</span><span data-l="en">Villa → airport approx. 30–35 min</span></span></div></li>
+    </ol>
+  </article>
+</section>
+
+<!-- KARTE / MAP -->
+<section class="page" id="karte" role="tabpanel" hidden>
+  <div>
+    <h2><span data-l="de">Südwesten Mallorcas</span><span data-l="en">Southwest Mallorca</span></h2>
+    <p class="muted small" style="margin:0"><span data-l="de">Schematische Karte, Routen vereinfacht. Tage antippen, um sie ein- oder auszublenden. Gestrichelt: ohne eigenes Auto (Bus, Taxi, zu Fuss).</span><span data-l="en">Schematic map with simplified routes. Tap a day to show or hide it. Dashed: no own car (bus, taxi, on foot).</span></p>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="mapbox"><svg id="map" viewBox="0 0 860 500" role="img" aria-label="Map of southwest Mallorca with trip stops and routes"></svg></div>
+  <div class="panel">
+    <h3><span data-l="de">Orte auf der Karte</span><span data-l="en">Places on the map</span></h3>
+    <ul class="maplist" id="maplist" style="margin-top:8px"></ul>
+  </div>
+  <div class="panel">
+    <h3><span data-l="de">Fahrzeiten ab der Villa</span><span data-l="en">Drive times from the villa</span></h3>
+    <div class="tscroll"><table>
+      <thead><tr><th><span data-l="de">Ziel</span><span data-l="en">Destination</span></th><th class="num"><span data-l="de">Fahrzeit</span><span data-l="en">Drive</span></th><th><span data-l="de">Wann</span><span data-l="en">When</span></th></tr></thead>
+      <tbody>
+        <tr><td>Eroski Santa Ponça</td><td class="num">5 min</td><td><span data-l="de">Nachkauf</span><span data-l="en">top-ups</span></td></tr>
+        <tr><td>Peguera (Lidl, Rendezvous)</td><td class="num">5 min</td><td><span data-l="de">So (zu Fuss ca. 30 Min)</span><span data-l="en">Sun (on foot approx. 30 min)</span></td></tr>
+        <tr><td><span data-l="de">Cala Fornells, Start Cap Andritxol</span><span data-l="en">Cala Fornells, Cap Andritxol trailhead</span></td><td class="num">7 min</td><td><span data-l="de">Sa</span><span data-l="en">Sat</span></td></tr>
+        <tr><td><span data-l="de">Peguera, Start Vall-Verda-Runde</span><span data-l="en">Peguera, Vall Verda loop start</span></td><td class="num">5 min</td><td><span data-l="de">Sa (Alternative, zu Fuss ca. 30 Min)</span><span data-l="en">Sat (alternative, on foot approx. 30 min)</span></td></tr>
+        <tr><td>Camp de Mar</td><td class="num">10 min</td><td><span data-l="de">Fr</span><span data-l="en">Fri</span></td></tr>
+        <tr><td>Port d'Andratx</td><td class="num">15 min</td><td><span data-l="de">Fr</span><span data-l="en">Fri</span></td></tr>
+        <tr><td>Sant Elm</td><td class="num">25 min</td><td><span data-l="de">Fr</span><span data-l="en">Fri</span></td></tr>
+        <tr><td><span data-l="de">Palma Altstadt</span><span data-l="en">Palma old town</span></td><td class="num">20–25 min</td><td><span data-l="de">Sa (Bus 103 ca. 25 Min)</span><span data-l="en">Sat (bus 103 approx. 25 min)</span></td></tr>
+        <tr><td>Porto Pi (Carrefour)</td><td class="num">20 min</td><td><span data-l="de">Do</span><span data-l="en">Thu</span></td></tr>
+        <tr><td><span data-l="de">MediaMarkt Ocimax, Palma Nord</span><span data-l="en">MediaMarkt Ocimax, north Palma</span></td><td class="num">25–30 min</td><td><span data-l="de">bei Bedarf</span><span data-l="en">if needed</span></td></tr>
+        <tr><td>Bodega Son Puig, Puigpunyent</td><td class="num">≈ 30 min</td><td><span data-l="de">So (Alternative)</span><span data-l="en">Sun (alternative)</span></td></tr>
+        <tr><td><span data-l="de">Flughafen Palma</span><span data-l="en">Palma airport</span></td><td class="num">30–35 min</td><td><span data-l="de">Do, Fr, So, Mo</span><span data-l="en">Thu, Fri, Sun, Mon</span></td></tr>
+        <tr><td><span data-l="de">Bierkönig, Arenal</span><span data-l="en">Bierkönig, Arenal</span></td><td class="num">≈ 35 min</td><td><span data-l="de">Sa, per Taxi ab Palma (15–20 Min)</span><span data-l="en">Sat, by taxi from Palma (15–20 min)</span></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- LOKALE / VENUES -->
+<section class="page" id="lokale" role="tabpanel" hidden>
+  <div class="note warn small"><span data-l="de">Nach Saisonende schliessen viele Lokale. Bei allen Gruppen-Reservierungen für 11 Personen vorher anrufen und Öffnungszeiten bestätigen.</span><span data-l="en">Many places close after the season. For every group booking of 11, call ahead and confirm opening hours.</span></div>
+
+  <h2 style="margin-top:4px"><span data-l="de">Restaurants</span><span data-l="en">Restaurants</span></h2>
+  <div class="grid2">
+    <div class="panel venue">
+      <span><span class="pill open"><span data-l="de">ganzjährig</span><span data-l="en">all year</span></span><span class="pill day" style="background:var(--d4)"><span data-l="de">So Mittag</span><span data-l="en">Sun lunch</span></span></span>
+      <h3>Rendezvous, Peguera</h3>
+      <span class="where">Avda. Peguera 42 · Tel. 971 686 747</span>
+      <p class="small" style="margin:0"><span data-l="de">Laut Mallorca Magazin ganzjährig 10–1 Uhr geöffnet. Riesige Terrasse mit Meerblick, eigener Grill, von Pizza über gegrillten Tintenfisch bis Mittagsmenü, eher günstig.</span><span data-l="en">Open all year 10:00–01:00 according to Mallorca Magazin. Huge sea-view terrace, its own grill, everything from pizza to grilled squid and a set lunch, fairly cheap.</span></p>
+    </div>
+    <div class="panel venue">
+      <span><span class="pill check"><span data-l="de">Öffnung prüfen</span><span data-l="en">check hours</span></span><span class="pill day" style="background:var(--d4)"><span data-l="de">So Alternative</span><span data-l="en">Sun alternative</span></span></span>
+      <h3>Maria Eugenia, Peguera</h3>
+      <span class="where">Carrer Torà 1</span>
+      <p class="small" style="margin:0"><span data-l="de">Terrasse mit Strandblick, auch bei Wind geschützt. Paella (auch schwarze), Muscheln, Oktopus, Sangria.</span><span data-l="en">Beach-view terrace, sheltered even when windy. Paella (including black), mussels, octopus, sangria.</span></p>
+    </div>
+    <div class="panel venue">
+      <span><span class="pill check"><span data-l="de">reservieren</span><span data-l="en">book ahead</span></span><span class="pill day" style="background:var(--d3)"><span data-l="de">Sa Abend</span><span data-l="en">Sat dinner</span></span></span>
+      <h3>La Bóveda, Palma</h3>
+      <span class="where">Carrer de la Boteria 3 · La Llotja</span>
+      <p class="small" style="margin:0"><span data-l="de">Eine der bekanntesten Tapas-Adressen der Stadt, rustikal mit Fässern als Tischen. Der hintere Gewölberaum eignet sich für grössere Gruppen. Jamón ibérico, Pa amb oli, Knoblauchgarnelen, Hauswein und Sangria.</span><span data-l="en">One of the city's best-known tapas spots, rustic with barrels as tables. The vaulted back room suits larger groups. Jamón ibérico, pa amb oli, garlic prawns, house wine and sangria.</span></p>
+    </div>
+    <div class="panel venue">
+      <span><span class="pill check"><span data-l="de">Öffnung prüfen</span><span data-l="en">check hours</span></span><span class="pill day" style="background:var(--d2)"><span data-l="de">Fr Mittag</span><span data-l="en">Fri lunch</span></span></span>
+      <h3>Miramar de Giuliano, Port d'Andratx</h3>
+      <span class="where"><span data-l="de">Uferpromenade, seit 1927</span><span data-l="en">Seafront, since 1927</span></span>
+      <p class="small" style="margin:0"><span data-l="de">Fisch, Meeresfrüchte, Paella, mallorquinische Gerichte mit italienischem Einschlag; laut SeeMallorca täglich geöffnet. Weil im Hafen viele Lokale November bis März schliessen: unbedingt anrufen.</span><span data-l="en">Fish, seafood, paella, Mallorcan dishes with an Italian touch; open daily according to SeeMallorca. Many harbour restaurants close November to March, so do call.</span></p>
+    </div>
+    <div class="panel venue">
+      <span><span class="pill check"><span data-l="de">Öffnung prüfen</span><span data-l="en">check hours</span></span><span class="pill day" style="background:var(--d2)"><span data-l="de">Plan B</span><span data-l="en">Plan B</span></span></span>
+      <h3>Verdemar, Costa de la Calma</h3>
+      <span class="where">Carrer de Ramon de Montcada 14 · <span data-l="de">zu Fuss</span><span data-l="en">walkable</span></span>
+      <p class="small" style="margin:0"><span data-l="de">Grosse Terrasse direkt am Wasser, Paella Mixta, Pizza, Cocktails; ausdrücklich gruppentauglich. Gut als Schlechtwetter-Option ohne Auto.</span><span data-l="en">Large terrace right on the water, paella mixta, pizza, cocktails; explicitly group-friendly. A good bad-weather option without a car.</span></p>
+    </div>
+  </div>
+
+  <h2 style="margin-top:8px"><span data-l="de">Bierkönig (Samstag)</span><span data-l="en">Bierkönig (Saturday)</span></h2>
+  <div class="panel venue">
+    <span><span class="pill open"><span data-l="de">365 Tage offen</span><span data-l="en">open 365 days</span></span><span class="pill check"><span data-l="de">Winterprogramm erfragen</span><span data-l="en">ask about winter programme</span></span></span>
+    <h3>Bierkönig, Arenal</h3>
+    <span class="where"><span data-l="de">Schinkenstrasse, Playa de Palma · info@bierkoenig.com</span><span data-l="en">Schinkenstrasse, Playa de Palma · info@bierkoenig.com</span></span>
+    <p class="small" style="margin:0"><span data-l="de">Laut offizieller Website 365 Tage im Jahr geöffnet, täglich ab 10 Uhr; ein fester Innenbereich ermöglicht den Ganzjahresbetrieb. Das Closing (22.–25.10.) beendet die Hauptsaison mit den grossen Shows. In der Nebensaison vermietet der Bierkönig einzelne Bereiche auch für private Feiern, eine Option für eure Gruppe. Im November ist rundherum an der Playa vieles zu, also wirklich nur als kurzer Abstecher.</span><span data-l="en">Open 365 days a year according to the official website, daily from 10:00; a permanent indoor area makes year-round opening possible. The closing (22–25 Oct) ends the main season with the big shows. In the off-season the Bierkönig also rents out individual areas for private parties, an option for your group. In November much of the surrounding Playa is closed, so keep it to a short stop.</span></p>
+  </div>
+
+  <h2 style="margin-top:8px"><span data-l="de">Bars in Palma (Samstag)</span><span data-l="en">Bars in Palma (Saturday)</span></h2>
+  <div class="grid2">
+    <div class="panel venue">
+      <span><span class="pill day" style="background:var(--d3)">Rock · Live</span></span>
+      <h3>Agua Bar</h3>
+      <span class="where">Carrer de Jaume Ferrer 6</span>
+      <p class="small" style="margin:0"><span data-l="de">Musikbar mit Live-Konzerten, Jam-Sessions und Open Mic, Rock'n'Roll-Einrichtung, Guinness vom Fass. Gruppentauglich, keine Küche.</span><span data-l="en">Music bar with live gigs, jam sessions and open mic, rock'n'roll interior, Guinness on tap. Good for groups, no kitchen.</span></p>
+    </div>
+    <div class="panel venue">
+      <span><span class="pill day" style="background:var(--d3)">Rock · <span data-l="de">Kult</span><span data-l="en">classic</span></span></span>
+      <h3>Polka Bar</h3>
+      <span class="where">Avinguda de Joan Miró 16, El Terreno</span>
+      <p class="small" style="margin:0"><span data-l="de">Seit Jahrzehnten feste Grösse, Mosaike und viel Charakter. Rock und Klassiker, Gruppen ausdrücklich willkommen. Live-Musik eher sonntags.</span><span data-l="en">A fixture for decades, mosaics and plenty of character. Rock and classics, groups explicitly welcome. Live music mostly on Sundays.</span></p>
+    </div>
+    <div class="panel venue">
+      <span><span class="pill day" style="background:var(--d3)">Rock · Metal</span></span>
+      <h3>New Morrison Bar</h3>
+      <span class="where">Carrer Joan Bauzà 43, Llevant</span>
+      <p class="small" style="margin:0"><span data-l="de">Biker-Treff mit Rock und Heavy Metal, Krüge mit Totenkopf, Billard und Darts, günstige Preise. Für Gruppen ausgelegt.</span><span data-l="en">Biker hangout with rock and heavy metal, skull tankards, pool and darts, low prices. Made for groups.</span></p>
+    </div>
+    <div class="panel venue">
+      <span><span class="pill day" style="background:var(--d3)">Indie · 80s</span><span class="pill check"><span data-l="de">Live-Lizenz prüfen</span><span data-l="en">check live licence</span></span></span>
+      <h3>Maraca Club</h3>
+      <span class="where">Carrer Poeta Francesc Fiol i Joan 1</span>
+      <p class="small" style="margin:0"><span data-l="de">Pub oben, Konzertsaal im Keller: Rock, Indie, Alternative, 80er, DJ-Abende, Jukebox.</span><span data-l="en">Pub upstairs, gig room in the basement: rock, indie, alternative, 80s, DJ nights, jukebox.</span></p>
+    </div>
+    <div class="panel venue">
+      <span><span class="pill day" style="background:var(--d3)">Underground · Electro</span></span>
+      <h3>Sótano Club</h3>
+      <span class="where">Plaça Gomila 2</span>
+      <p class="small" style="margin:0"><span data-l="de">Im Keller beim ehemaligen Tunnel Rock Club. Freitags kommerzieller, samstags bewusst Underground (Progressive, Minimal, House).</span><span data-l="en">In a basement near the former Tunnel Rock Club. More commercial on Fridays, deliberately underground on Saturdays (progressive, minimal, house).</span></p>
+    </div>
+    <div class="panel venue">
+      <span><span class="pill day" style="background:var(--d3)">Jazz · Rooftop</span></span>
+      <h3>Blue Jazz Club</h3>
+      <span class="where">Passeig de Mallorca 6, Hotel Saratoga</span>
+      <p class="small" style="margin:0"><span data-l="de">Ruhigerer Gegenpol: Live-Jazz mit Rundumblick über Palma, oft ohne Ticket, Preise im oberen Bereich.</span><span data-l="en">The calmer counterpoint: live jazz with a panoramic view over Palma, often no ticket needed, upper price range.</span></p>
+    </div>
+  </div>
+
+  <h2 style="margin-top:8px"><span data-l="de">Bars in Laufweite / Peguera</span><span data-l="en">Bars within walking distance / Peguera</span></h2>
+  <div class="grid2">
+    <div class="panel venue">
+      <h3>SipHaus, Costa de la Calma</h3>
+      <span class="where">Carrer de Santa Ponça 19 · <span data-l="de">zu Fuss</span><span data-l="en">walkable</span></span>
+      <p class="small" style="margin:0"><span data-l="de">Kleine, persönlich geführte Cocktailbar mit Sangria, Espresso Martini, Käse- und Wurstplatten. Für Gruppen geeignet.</span><span data-l="en">Small, owner-run cocktail bar with sangria, espresso martini, cheese and charcuterie boards. Suits groups.</span></p>
+    </div>
+    <div class="panel venue">
+      <h3>Bei Juliette &amp; Holger, Peguera</h3>
+      <span class="where">Carrer Sebel·lí 3</span>
+      <p class="small" style="margin:0"><span data-l="de">Sangria ist hier das Herzstück: selbst angesetzt mit Wein eines mallorquinischen Winzers, trocken, lieblich oder grün. Gut, um vor dem Workshop zu probieren oder nach Rezepttipps zu fragen.</span><span data-l="en">Sangria is the heart of the place: homemade with wine from a Mallorcan producer, dry, sweet or green. Good for a tasting before the workshop or asking for recipe tips.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="page" id="services" role="tabpanel" hidden>
+  <div class="panel">
+    <h2><span data-l="de">Supermärkte nahe der Villa</span><span data-l="en">Supermarkets near the villa</span></h2>
+    <div class="tscroll"><table>
+      <thead><tr><th><span data-l="de">Markt</span><span data-l="en">Shop</span></th><th><span data-l="de">Lage</span><span data-l="en">Location</span></th><th class="num"><span data-l="de">Fahrt</span><span data-l="en">Drive</span></th><th><span data-l="de">Gut für</span><span data-l="en">Good for</span></th></tr></thead>
+      <tbody>
+        <tr><td><b>Spar</b></td><td>Carrer de Ramon de Montcada, Costa de la Calma</td><td class="num"><span data-l="de">zu Fuss</span><span data-l="en">on foot</span></td><td><span data-l="de">Brot, Eis, Nachschub</span><span data-l="en">bread, ice, top-ups</span></td></tr>
+        <tr><td><b>Eroski Santa Ponça</b></td><td>Av. Rei Jaume I / Gran Via Puig des Castellet</td><td class="num">5 min</td><td><span data-l="de">Grosseinkauf, Fleisch- und Fischtheke, Grillhähnchen, Lieferservice, Gratis-Parkplatz</span><span data-l="en">big shop, meat and fish counters, rotisserie chicken, delivery, free parking</span></td></tr>
+        <tr><td><b>Lidl Peguera</b></td><td>Peguera</td><td class="num">5 min</td><td><span data-l="de">Günstiger Grosseinkauf, Getränke</span><span data-l="en">cheap big shop, drinks</span></td></tr>
+        <tr><td><b>Müllers Markt</b></td><td>Santa Ponsa</td><td class="num">5 min</td><td><span data-l="de">Deutsche Produkte</span><span data-l="en">German products</span></td></tr>
+        <tr><td><b>Carrefour Porto Pi</b></td><td>Av. Gabriel Roca 54, Palma</td><td class="num">20 min</td><td><span data-l="de">Hypermarkt auf dem Weg vom Flughafen; So geschlossen</span><span data-l="en">hypermarket on the way from the airport; closed Sundays</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="small muted" style="margin:10px 0 0"><span data-l="de">Ein neuer, grosser Lidl an der Avenida Miguel Unamuno in Santa Ponsa war im Juli 2026 noch im Bau. Sonntagsöffnung einzelner Filialen vor Ort prüfen.</span><span data-l="en">A large new Lidl on Avenida Miguel Unamuno in Santa Ponsa was still under construction in July 2026. Check Sunday opening of individual stores locally.</span></p>
+  </div>
+
+  <div class="panel">
+    <h2><span data-l="de">Elektronikmarkt</span><span data-l="en">Electronics</span></h2>
+    <p class="small" style="margin:0 0 8px"><span data-l="de">Direkt bei der Villa gibt es keinen grossen Elektronikmarkt. Die nächsten Optionen:</span><span data-l="en">There's no big electronics store right by the villa. Nearest options:</span></p>
+    <ul class="clean small" data-l="de">
+      <li><b>Porto Pi</b>, Palma (ca. 20 Min): Einkaufszentrum mit 140 Läden und Carrefour, Mo–Sa 9:30–21:30, So zu. Liegt am Donnerstag ohnehin auf dem Weg.</li>
+      <li><b>MediaMarkt Ocimax</b>, Carrer del Bisbe Pere de Puigdorfila 1, Palma Nord (ca. 25–30 Min): volles Sortiment, kostenlose Parkplätze.</li>
+      <li><b>FNAC Palma</b>, Carrer de Sant Miquel 73, Altstadt: lässt sich am Samstag zu Fuss mit dem Palma-Bummel verbinden.</li>
+    </ul>
+    <ul class="clean small" data-l="en">
+      <li><b>Porto Pi</b>, Palma (approx. 20 min): mall with 140 shops and Carrefour, Mon–Sat 9:30–21:30, closed Sundays. On the way on Thursday anyway.</li>
+      <li><b>MediaMarkt Ocimax</b>, Carrer del Bisbe Pere de Puigdorfila 1, north Palma (approx. 25–30 min): full range, free parking.</li>
+      <li><b>FNAC Palma</b>, Carrer de Sant Miquel 73, old town: easy to combine with the Saturday stroll on foot.</li>
+    </ul>
+    <p class="small muted" style="margin:8px 0 0"><span data-l="de">Tipp Karaoke: Ein Bluetooth-Karaoke-Mikrofon von zu Hause mitbringen spart die Fahrt.</span><span data-l="en">Karaoke tip: bringing a Bluetooth karaoke mic from home saves the trip.</span></p>
+  </div>
+
+  <div class="panel">
+    <h2><span data-l="de">Mobiler Whirlpool</span><span data-l="en">Mobile hot tub</span></h2>
+    <p class="small" style="margin:0 0 8px"><span data-l="de">Einen Verleih, der Whirlpools für ein paar Tage an Villen liefert, habe ich auf Mallorca nicht gefunden. Die Anbieter verkaufen und installieren fest. Realistische Wege:</span><span data-l="en">I couldn't find a service on Mallorca that rents hot tubs to villas for a few days. The suppliers sell and install permanently. Realistic options:</span></p>
+    <ul class="clean small" data-l="de">
+      <li><b>Flowspa Mallorca</b>, Carrer de les Gavines 44, Peguera (5 Min): liefert und nimmt Whirlpools in Betrieb, auch Modelle für 6+ Personen. Am ehesten nach einer Kurzmiete fragen.</li>
+      <li><b>Mallorca Whirlpool</b>, Llucmajor: Verkauf, Lieferung, Installation, viele Modelle ab Lager.</li>
+      <li><b>Aufblasbarer Whirlpool</b> selbst kaufen: braucht Strom, ein bis zwei Tage Aufheizen und das Okay des Vermieters. Bei 4 Tagen Aufenthalt knapp.</li>
+      <li><b>Spa-Tagespass</b> in einem Hotel (z. B. über daypass.com) oder den Vermieter fragen, ob die Villa einen beheizbaren Pool hat.</li>
+    </ul>
+    <ul class="clean small" data-l="en">
+      <li><b>Flowspa Mallorca</b>, Carrer de les Gavines 44, Peguera (5 min): delivers and commissions hot tubs, including models for 6+ people. The best bet to ask about a short-term rental.</li>
+      <li><b>Mallorca Whirlpool</b>, Llucmajor: sales, delivery, installation, many models in stock.</li>
+      <li><b>Buy an inflatable hot tub</b>: needs power, one to two days to heat up and the landlord's OK. Tight for a 4-day stay.</li>
+      <li><b>Spa day pass</b> at a hotel (e.g. via daypass.com), or ask the landlord whether the villa pool can be heated.</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2><span data-l="de">Weinprobe</span><span data-l="en">Wine tasting</span></h2>
+    <div class="grid2" style="margin-top:8px">
+      <div>
+        <span class="pill open"><span data-l="de">Empfehlung für Sonntag</span><span data-l="en">recommended for Sunday</span></span>
+        <h3 style="margin-top:6px"><span data-l="de">In der Villa: Wine Tasting Mallorca</span><span data-l="en">At the villa: Wine Tasting Mallorca</span></h3>
+        <p class="small" style="margin:0"><span data-l="de">Sommelier aus Pollença, Verkostung auf Wunsch in Villa oder Finca, Auswahl nach eurem Geschmack, mind. 5 Weine mit lokalen Häppchen, ca. 2,5 Std. Für Gruppen über 8 Personen individuell anfragen. Die Anfahrt aus dem Norden ist lang, also früh buchen.</span><span data-l="en">Sommelier from Pollença, tastings at your villa or finca on request, selection tailored to your taste, at least 5 wines with local bites, approx. 2.5 h. Groups over 8 by individual request. The drive from the north is long, so book early.</span></p>
+      </div>
+      <div>
+        <span class="pill check"><span data-l="de">nur nach Vereinbarung</span><span data-l="en">by appointment only</span></span>
+        <h3 style="margin-top:6px"><span data-l="de">Weingut: Bodega Son Puig</span><span data-l="en">Winery: Bodega Son Puig</span></h3>
+        <p class="small" style="margin:0"><span data-l="de">Familienweingut in Puigpunyent, nur eigene Trauben (u. a. Prensal Blanc, Giró Ros, Callet). Persönliche Führung mit Verkostung, auf Wunsch hausgemachtes Mittagessen im Garten. Keine festen Öffnungszeiten: Sonntagstermin anfragen. Ca. 30 Min ab Villa, also mit Transfer.</span><span data-l="en">Family winery in Puigpunyent, estate-grown grapes only (incl. Prensal Blanc, Giró Ros, Callet). Personal tour with tasting, homemade lunch in the garden on request. No fixed hours: ask about a Sunday slot. Approx. 30 min from the villa, so use a transfer.</span></p>
+        <p class="small muted" style="margin:6px 0 0"><span data-l="de">Nachbar-Option: Bodega Son Vich de Superna (Ctra. Esporles km 8), 2- und 3-Stunden-Touren, Gruppen willkommen.</span><span data-l="en">Nearby option: Bodega Son Vich de Superna (Ctra. Esporles km 8), 2- and 3-hour tours, groups welcome.</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2><span data-l="de">Sangria-Workshop</span><span data-l="en">Sangria workshop</span></h2>
+    <ul class="clean small" data-l="de">
+      <li><b>Selbst gemacht (günstig):</b> drei Teams, drei Rezepte, Blindverkostung. Zutaten beim Grosseinkauf: Rotwein, Cava, Weisswein, Brandy, Orangenlikör, Orangen, Zitronen, Pfirsiche, Zimt, Zucker, viel Eis.</li>
+      <li><b>Mit Profi:</b> Mallorca Cocktails (Nicole und Oliver) bringt eine mobile Bar mit Barkeeper zu Villen auf der ganzen Insel. Angebot anfragen.</li>
+      <li><b>Lokal fragen:</b> Bei Juliette &amp; Holger in Peguera setzen ihre Sangria selbst an; SipHaus ist zu Fuss erreichbar. Beide eignen sich, um nach einer kleinen Verkostung oder Rezepttipps zu fragen.</li>
+    </ul>
+    <ul class="clean small" data-l="en">
+      <li><b>DIY (cheap):</b> three teams, three recipes, blind tasting. Shopping list: red wine, cava, white wine, brandy, orange liqueur, oranges, lemons, peaches, cinnamon, sugar, lots of ice.</li>
+      <li><b>With a pro:</b> Mallorca Cocktails (Nicole and Oliver) brings a mobile bar with a bartender to villas all over the island. Ask for a quote.</li>
+      <li><b>Ask locally:</b> Bei Juliette &amp; Holger in Peguera make their own sangria; SipHaus is walkable. Both are worth asking for a small tasting or recipe tips.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section class="page budget" id="budget" role="tabpanel" hidden>
+  <div class="panel">
+    <h2><span data-l="de">Budget-Rechner</span><span data-l="en">Budget calculator</span></h2>
+    <p class="small muted" style="margin:0 0 12px"><span data-l="de">Schätzwerte, ohne Villa, Flüge und Mietwagen-Grundpreis. Beträge anpassen, Optionen umstellen, die Summe rechnet mit.</span><span data-l="en">Estimates, excluding villa, flights and the base car-rental price. Change amounts or options and the total updates.</span></p>
+    <div class="totals">
+      <div><div class="lbl"><span data-l="de">Gesamt</span><span data-l="en">Total</span></div><div class="big mono" id="b-total">–</div></div>
+      <div><div class="lbl"><span data-l="de">pro Person</span><span data-l="en">per person</span> (<span id="b-n">11</span>)</div><div class="big mono" id="b-pp">–</div></div>
+      <div><label class="lbl" for="persons"><span data-l="de">Personen</span><span data-l="en">People</span></label><br><input type="number" id="persons" min="1" value="11"></div>
+    </div>
+    <div class="bar" id="b-bar" style="margin-top:14px" aria-hidden="true"></div>
+  </div>
+  <div class="panel">
+    <div class="tscroll"><table>
+      <thead><tr><th><span data-l="de">Posten</span><span data-l="en">Item</span></th><th>Option</th><th class="num"><span data-l="de">Betrag</span><span data-l="en">Amount</span></th><th class="num"><span data-l="de">Summe</span><span data-l="en">Subtotal</span></th></tr></thead>
+      <tbody id="b-rows"></tbody>
+    </table></div>
+    <p class="small muted" style="margin:10px 0 0"><span data-l="de">„pP“ = pro Person, sonst Pauschale für die Gruppe. Taxi Flughafen–Santa Ponsa laut Transfer-Anbietern ca. 45–70 €; Palma–Santa Ponsa tagsüber ca. 26–32 €. Taxis Palma–Arenal sowie Restaurant- und Barpreise sind eigene Schätzungen. Touristensteuer: prüfen, ob sie im Villapreis enthalten ist.</span><span data-l="en">"pp" = per person, otherwise a flat amount for the group. Taxi airport–Santa Ponsa approx. €45–70 according to transfer providers; Palma–Santa Ponsa approx. €26–32 in daytime. Palma–Arenal taxis, restaurant and bar prices are my own estimates. Tourist tax: check whether it's included in the villa price.</span></p>
+  </div>
+</section>
+
+<!-- WETTER / WEATHER -->
+<section class="page" id="wetter" role="tabpanel" hidden>
+  <div class="panel">
+    <h2><span data-l="de">Wetter Anfang November</span><span data-l="en">Weather in early November</span></h2>
+    <div class="wx" style="margin-top:12px">
+      <div><span class="eyebrow"><span data-l="de">Tag</span><span data-l="en">Day</span></span><strong class="mono">~19 °C</strong><span class="small muted"><span data-l="de">im Schnitt, an guten Tagen 20–23 °C</span><span data-l="en">on average, 20–23 °C on good days</span></span></div>
+      <div><span class="eyebrow"><span data-l="de">Nacht</span><span data-l="en">Night</span></span><strong class="mono">~10–13 °C</strong><span class="small muted"><span data-l="de">abends spürbar frischer</span><span data-l="en">noticeably cooler in the evening</span></span></div>
+      <div><span class="eyebrow"><span data-l="de">Meer</span><span data-l="en">Sea</span></span><strong class="mono">~19 °C</strong><span class="small muted"><span data-l="de">kurzes Bad für Mutige</span><span data-l="en">a quick dip for the brave</span></span></div>
+      <div><span class="eyebrow"><span data-l="de">Regentage</span><span data-l="en">Rain days</span></span><strong class="mono">~7</strong><span class="small muted"><span data-l="de">im ganzen Monat</span><span data-l="en">across the month</span></span></div>
+      <div><span class="eyebrow"><span data-l="de">Sonne</span><span data-l="en">Sun</span></span><strong class="mono"><span data-l="de">~5 Std.</span><span data-l="en">~5 h</span></strong><span class="small muted"><span data-l="de">pro Tag; Sonnenuntergang ca. 17:35</span><span data-l="en">per day; sunset approx. 17:35</span></span></div>
+    </div>
+    <p class="small" style="margin:14px 0 0"><span data-l="de">Die Spannweite ist gross: Am 5.11.2024 meldete Santa Ponsa 19–23 °C, eine Woche später gab es Starkregen bei knapp 20 °C. Ab etwa 7 Tagen vorher den Wetterbericht prüfen und bei Regen Freitag und Samstag tauschen.</span><span data-l="en">The range is wide: on 5 Nov 2024 Santa Ponsa saw 19–23 °C, a week later heavy rain at just under 20 °C. Check the forecast from about 7 days out and swap Friday and Saturday if it rains.</span></p>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <h3><span data-l="de">Schlechtwetter-Plan</span><span data-l="en">Bad-weather plan</span></h3>
+      <ul class="clean small" data-l="de">
+        <li>Palma am Nachmittag: Kathedrale von innen, Markthalle Olivar, Porto Pi.</li>
+        <li>Verdemar oder SipHaus zu Fuss statt Ausflug.</li>
+        <li>Bei nassem Fels statt Cap Andritxol (steinig, teils steil) die Vall-Verda-Runde ab Peguera gehen: leicht, gute Wege.</li>
+        <li>Sangria, Karaoke und Weinprobe sind ohnehin drinnen planbar.</li>
+      </ul>
+      <ul class="clean small" data-l="en">
+        <li>Palma in the afternoon: cathedral interior, Olivar market hall, Porto Pi.</li>
+        <li>Verdemar or SipHaus on foot instead of an outing.</li>
+        <li>If the rock is wet, swap Cap Andritxol (rocky, steep in places) for the Vall Verda loop from Peguera: easy, good paths.</li>
+        <li>Sangria, karaoke and wine tasting work indoors anyway.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3><span data-l="de">Packliste</span><span data-l="en">Packing list</span></h3>
+      <ul class="clean small" data-l="de">
+        <li>Leichte Jacke und Regenjacke, Pulli für die Abende</li>
+        <li>Wanderschuhe mit Profil, Trinkflasche</li>
+        <li>Badesachen und Handtuch für einen kurzen Sprung</li>
+        <li>Sonnencreme (LSF 20 reicht), Sonnenbrille</li>
+        <li>Bluetooth-Mikrofon oder Lautsprecher für Karaoke</li>
+        <li>Grillzange, Feuerzeug, Korkenzieher (falls die Villa keine hat)</li>
+      </ul>
+      <ul class="clean small" data-l="en">
+        <li>Light jacket and rain jacket, jumper for the evenings</li>
+        <li>Hiking shoes with grip, water bottle</li>
+        <li>Swimwear and towel for a quick dip</li>
+        <li>Sunscreen (SPF 20 is enough), sunglasses</li>
+        <li>Bluetooth mic or speaker for karaoke</li>
+        <li>Grill tongs, lighter, corkscrew (in case the villa has none)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- QUELLEN / SOURCES -->
+<section class="page" id="quellen" role="tabpanel" hidden>
+  <div class="panel small">
+    <h2><span data-l="de">Quellen</span><span data-l="en">Sources</span></h2>
+    <p class="muted" style="margin:0 0 8px"><span data-l="de">Stand der Recherche: 14. Oktober 2026. Öffnungszeiten im November vorher telefonisch bestätigen.</span><span data-l="en">Research as of 14 October 2026. Confirm November opening hours by phone beforehand.</span></p>
+    <ul class="clean">
+      <li><a href="https://www.bierkoenig.com/en/" target="_blank" rel="noopener">Bierkönig (official site)</a> · <a href="https://www.mallorca.com/de/gastronomie/nachtleben/bierkoenig" target="_blank" rel="noopener">mallorca.com: Bierkönig</a> · <a href="https://air-mallorca.de/bierkoenig-in-den-wintermonaten" target="_blank" rel="noopener">Air Mallorca: Bierkönig im Winter</a> · <a href="https://www.mallorcamagazin.com/nachrichten/lokales/2026/08/31/156771/ballermann-2026-megapark-bierkonig-und-verkunden-ihre-closing-termine-auf-mallorca.html" target="_blank" rel="noopener">Mallorca Magazin: Closing 2026</a></li>
+      <li><a href="https://www.mallorca.com/de/wetter/mallorca-wetter-november" target="_blank" rel="noopener">mallorca.com: Wetter November</a> · <a href="https://www.mallorca.com/de/wetter/wassertemperatur-mallorca-november" target="_blank" rel="noopener">Wassertemperatur</a> · <a href="https://www.mallorcamagazin.com/nachrichten/wetter/2024/11/05/129096/santa-ponsa-empfangt-den-november-mit-mildem-wetter-und-leicht-bedecktem-himmel.html" target="_blank" rel="noopener">Santa Ponsa 5.11.2024</a></li>
+      <li><a href="https://www.mallorcamagazin.com/gastronomie/wohin/restaurants/rendezvous-restaurant-peguera-auf-mallorca.html" target="_blank" rel="noopener">Rendezvous Peguera</a> · <a href="https://www.mallorca.com/de/verzeichnis/firma/restaurant-maria-eugenia-peguera-iezuzkoc" target="_blank" rel="noopener">Maria Eugenia</a> · <a href="https://www.mallorca.com/en/directory/business/restaurante-verdemar-costa-de-la-calma-2jo2wink" target="_blank" rel="noopener">Verdemar</a></li>
+      <li><a href="https://www.seemallorca.com/restaurants/la-boveda-restaurant-748262" target="_blank" rel="noopener">La Bóveda</a> · <a href="https://www.seemallorca.com/port-d-andratx" target="_blank" rel="noopener">Port d'Andratx</a> · <a href="https://www.seemallorca.com/restaurants/miramar-de-giuliano-restaurant-port-d-andratx-706713" target="_blank" rel="noopener">Miramar de Giuliano</a></li>
+      <li><a href="https://www.mallorca.com/en/directory/business/agua-bar-palma" target="_blank" rel="noopener">Agua Bar</a> · <a href="https://www.mallorca.com/en/directory/business/polka-bar-palma-3u-qiup8" target="_blank" rel="noopener">Polka Bar</a> · <a href="https://www.mallorca.com/es/directorio/empresa/new-morrison-bar-palma-vntmbogm" target="_blank" rel="noopener">New Morrison Bar</a> · <a href="https://www.mallorca.com/de/verzeichnis/firma/maraca-club-palma-balearic-islands-palma-mwuezu90" target="_blank" rel="noopener">Maraca Club</a> · <a href="https://www.mallorca.com/en/directory/business/sotano-club-palma-mc2od8de" target="_blank" rel="noopener">Sótano Club</a> · <a href="https://www.mallorca.com/de/gastronomie/nachtleben/blue-jazz-club" target="_blank" rel="noopener">Blue Jazz Club</a></li>
+      <li><a href="https://www.mallorca.com/de/verzeichnis/firma/siphaus-mallorca-rotes-velles-xliq8dv0" target="_blank" rel="noopener">SipHaus</a> · <a href="https://www.mallorca.com/de/verzeichnis/firma/bei-juliette-holger-peguera" target="_blank" rel="noopener">Bei Juliette &amp; Holger</a> · <a href="https://www.mallorca.com/de/verzeichnis/firma/mallorca-cocktails-badia-gran-o5pbtvuk" target="_blank" rel="noopener">Mallorca Cocktails</a></li>
+      <li><a href="https://planetoutdoor.de/touren/wandern/wandern-spanien-rundtour-am-cap-andritxol" target="_blank" rel="noopener">Planet Outdoor: Cap Andritxol</a> · <a href="https://www.ich-geh-wandern.de/vorbei-an-der-calo-den-monjo-zum-torre-de-cap-andritxol" target="_blank" rel="noopener">Cala Fornells → Torre de Cap Andritxol</a> · <a href="https://www.ich-geh-wandern.de/wanderung-von-peguera-durchs-vall-verda-nach-es-capdella" target="_blank" rel="noopener">Peguera → Vall Verda → Es Capdellà</a></li>
+      <li><a href="https://www.mallorca.com/en/food-drink/wineries/son-puig" target="_blank" rel="noopener">Bodega Son Puig</a> · <a href="https://www.mallorca.com/de/verzeichnis/firma/bodega-son-vich-de-superna-puigpunyent" target="_blank" rel="noopener">Son Vich de Superna</a> · <a href="https://www.mallorca.com/de/verzeichnis/firma/wine-tasting-mallorca-pollenca" target="_blank" rel="noopener">Wine Tasting Mallorca</a></li>
+      <li><a href="https://www.mallorca.com/en/directory/business/flowspa-mallorca-peguera" target="_blank" rel="noopener">Flowspa Mallorca</a> · <a href="https://www.mallorca.com/en/directory/business/mallorca-whirlpool-llucmajor" target="_blank" rel="noopener">Mallorca Whirlpool</a></li>
+      <li><a href="https://www.mallorca.com/de/verzeichnis/firma/eroski-santa-ponca-santa-ponsa-spc3v6ok" target="_blank" rel="noopener">Eroski Santa Ponça</a> · <a href="https://www.mallorca.com/de/verzeichnis/firma/spar-costa-de-la-calma-4tyjstm8" target="_blank" rel="noopener">Spar</a> · <a href="https://www.mallorcamagazin.com/nachrichten/wirtschaft/2021/03/18/88749/neuer-lidl-auf-mallorca-eroffnet.html" target="_blank" rel="noopener">Lidl Peguera</a> · <a href="https://www.mallorca.com/de/verzeichnis/supermarkt" target="_blank" rel="noopener">mallorca.com: Supermärkte</a></li>
+      <li><a href="https://www.mallorca.com/es/directorio/empresa/mediamarkt-palma" target="_blank" rel="noopener">MediaMarkt Ocimax</a> · <a href="https://seemallorca.com/shops/porto-pi-shopping-mall-de" target="_blank" rel="noopener">Porto Pi</a></li>
+      <li><a href="https://www.suntransfers.com/de/flughafen-mallorca-nach-santa-ponca" target="_blank" rel="noopener">Suntransfers: Taxi</a> · <a href="https://www.rome2rio.com/s/Palma/Santa-Ponsa" target="_blank" rel="noopener">Rome2rio: Palma → Santa Ponsa</a> · <a href="https://www.imperial-properties.com/en/ImperialPropertiesBlog/car-free-calvia-resident-guide-tib-bus-network" target="_blank" rel="noopener">TIB bus 103</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="wrap"><span data-l="de">Plan mit Schätzwerten. Öffnungszeiten, Preise und Fahrzeiten vor Ort prüfen.</span><span data-l="en">Plan based on estimates. Check opening hours, prices and drive times locally.</span></footer>
+
+<script>
+(function(){
+  const root=document.documentElement;
+  let LANG='de';
+  const T=o=>typeof o==='string'?o:(o[LANG]||o.de);
+
+  /* ---------- Tabs ---------- */
+  const tabs=[...document.querySelectorAll('[role=tab]')];
+  const pages=[...document.querySelectorAll('section.page')];
+  function show(id){
+    if(!pages.some(p=>p.id===id)) id='ueberblick';
+    pages.forEach(p=>p.hidden=p.id!==id);
+    tabs.forEach(t=>t.setAttribute('aria-selected',t.dataset.p===id?'true':'false'));
+    try{localStorage.setItem('mall-tab',id)}catch(e){}
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>{show(t.dataset.p);window.scrollTo({top:0})}));
+  let start=(location.hash||'').slice(1);
+  if(!start){try{start=localStorage.getItem('mall-tab')||''}catch(e){}}
+  show(start||'ueberblick');
+
+  /* ---------- Map ---------- */
+  const LON0=2.31, LAT0=39.66, K=2275, C=0.771;
+  const P=([lon,lat])=>[(lon-LON0)*C*K,(LAT0-lat)*K];
+  const pts=a=>a.map(p=>P(p).map(v=>v.toFixed(1)).join(',')).join(' ');
+  const coast=[[2.63,39.75],[2.58,39.725],[2.545,39.703],[2.505,39.688],[2.475,39.655],[2.44,39.635],[2.40,39.61],[2.365,39.592],[2.345,39.580],[2.352,39.565],[2.368,39.553],[2.383,39.549],[2.394,39.546],[2.384,39.540],[2.366,39.533],[2.378,39.523],[2.395,39.521],[2.407,39.530],[2.418,39.536],[2.424,39.527],[2.428,39.519],[2.436,39.528],[2.443,39.533],[2.452,39.536],[2.460,39.532],[2.462,39.523],[2.458,39.516],[2.468,39.513],[2.478,39.511],[2.470,39.505],[2.459,39.500],[2.462,39.493],[2.476,39.485],[2.490,39.478],[2.500,39.468],[2.515,39.456],[2.523,39.462],[2.522,39.478],[2.530,39.495],[2.538,39.508],[2.548,39.521],[2.570,39.528],[2.595,39.538],[2.615,39.552],[2.632,39.560],[2.648,39.565],[2.670,39.560],[2.700,39.545],[2.718,39.533],[2.740,39.515],[2.752,39.502],[2.738,39.475],[2.760,39.43],[2.79,39.365],[3.6,39.3],[3.6,40.1],[2.7,40.0]];
+  const island=[[2.35,39.58],[2.38,39.54],[2.45,39.535],[2.48,39.51],[2.52,39.46],[2.54,39.51],[2.61,39.55],[2.65,39.57],[2.71,39.53],[2.75,39.50],[2.79,39.365],[2.92,39.36],[2.99,39.31],[3.05,39.26],[3.15,39.32],[3.24,39.37],[3.27,39.42],[3.34,39.54],[3.38,39.60],[3.47,39.71],[3.36,39.78],[3.27,39.74],[3.16,39.77],[3.14,39.84],[3.20,39.88],[3.09,39.90],[3.21,39.96],[3.10,39.92],[2.80,39.85],[2.69,39.80],[2.63,39.75],[2.51,39.69],[2.48,39.65]];
+
+  const places=[
+    {id:'V',n:{de:'Villa, Costa de la Calma',en:'Villa, Costa de la Calma'},c:[2.4735,39.5155],d:0,big:1},
+    {id:'1',n:{de:'Flughafen Palma (PMI)',en:'Palma airport (PMI)'},c:[2.7388,39.5517],d:1},
+    {id:'2',n:{de:'Porto Pi / Carrefour',en:'Porto Pi / Carrefour'},c:[2.625,39.556],d:1},
+    {id:'3',n:{de:'Eroski Santa Ponça',en:'Eroski Santa Ponça'},c:[2.481,39.519],d:1},
+    {id:'4',n:{de:'Port d’Andratx',en:'Port d’Andratx'},c:[2.388,39.545],d:2},
+    {id:'5',n:{de:'Sant Elm (Blick Sa Dragonera)',en:'Sant Elm (Sa Dragonera view)'},c:[2.351,39.578],d:2},
+    {id:'6',n:{de:'Camp de Mar / S’Illeta',en:'Camp de Mar / S’Illeta'},c:[2.420,39.537],d:2},
+    {id:'7',n:{de:'Cala Fornells, Start Wanderung',en:'Cala Fornells, hike start'},c:[2.440,39.535],d:3},
+    {id:'8',n:{de:'Torre de Cap Andritxol',en:'Torre de Cap Andritxol'},c:[2.427,39.522],d:3},
+    {id:'9',n:{de:'La Bóveda, Palma',en:'La Bóveda, Palma'},c:[2.646,39.568],d:3},
+    {id:'10',n:{de:'Agua Bar, Palma',en:'Agua Bar, Palma'},c:[2.646,39.574],d:3},
+    {id:'11',n:{de:'Polka Bar, El Terreno',en:'Polka Bar, El Terreno'},c:[2.629,39.567],d:3},
+    {id:'12',n:{de:'New Morrison Bar',en:'New Morrison Bar'},c:[2.667,39.578],d:3},
+    {id:'13',n:{de:'Bierkönig, Arenal',en:'Bierkönig, Arenal'},c:[2.749,39.508],d:3},
+    {id:'14',n:{de:'Rendezvous, Peguera',en:'Rendezvous, Peguera'},c:[2.451,39.539],d:4},
+    {id:'15',n:{de:'Bodega Son Puig (Alternative)',en:'Bodega Son Puig (alternative)'},c:[2.528,39.612],d:4},
+    {id:'16',n:{de:'MediaMarkt Ocimax',en:'MediaMarkt Ocimax'},c:[2.637,39.594],d:0},
+    {id:'17',n:{de:'Lidl Peguera',en:'Lidl Peguera'},c:[2.445,39.543],d:0},
+    {id:'18',n:{de:'Es Capdellà, Vall-Verda-Runde (Alternative)',en:'Es Capdellà, Vall Verda loop (alternative)'},c:[2.466,39.578],d:3}
+  ];
+  const days=[
+    {k:1,label:{de:'Do 5.11.',en:'Thu 5 Nov'},v:'--d1',routes:[
+      {p:[[2.7388,39.5517],[2.70,39.578],[2.66,39.588],[2.632,39.570],[2.625,39.556]]},
+      {p:[[2.625,39.556],[2.59,39.548],[2.55,39.538],[2.51,39.532],[2.488,39.523],[2.4735,39.5155]]},
+      {p:[[2.4735,39.5155],[2.50,39.533],[2.56,39.542],[2.62,39.560],[2.68,39.582],[2.7388,39.5517]],dash:1,off:12}
+    ]},
+    {k:2,label:{de:'Fr 6.11.',en:'Fri 6 Nov'},v:'--d2',routes:[
+      {p:[[2.4735,39.5155],[2.455,39.540],[2.43,39.552],[2.405,39.552],[2.388,39.545]]},
+      {p:[[2.388,39.545],[2.39,39.565],[2.37,39.578],[2.351,39.578]]},
+      {p:[[2.351,39.578],[2.39,39.575],[2.415,39.570],[2.425,39.552],[2.420,39.537]]},
+      {p:[[2.420,39.537],[2.44,39.543],[2.46,39.536],[2.4735,39.5155]]},
+      {p:[[2.4735,39.5155],[2.51,39.531],[2.56,39.540],[2.62,39.556],[2.68,39.575],[2.7388,39.5517]],dash:1,off:-12}
+    ]},
+    {k:3,label:{de:'Sa 7.11.',en:'Sat 7 Nov'},v:'--d3',routes:[
+      {p:[[2.4735,39.5155],[2.455,39.533],[2.440,39.535]]},
+      {p:[[2.440,39.535],[2.432,39.528],[2.427,39.522]],dash:1},
+      {p:[[2.452,39.540],[2.455,39.553],[2.458,39.566],[2.466,39.578],[2.472,39.566],[2.464,39.551],[2.452,39.540]],dash:1,alt:1},
+      {p:[[2.4735,39.5155],[2.50,39.540],[2.56,39.552],[2.61,39.565],[2.646,39.568]],dash:1},
+      {p:[[2.646,39.568],[2.69,39.560],[2.725,39.535],[2.749,39.508]],dash:1},
+      {p:[[2.646,39.574],[2.629,39.567],[2.667,39.578]],dash:1}
+    ]},
+    {k:4,label:{de:'So 8.11.',en:'Sun 8 Nov'},v:'--d4',routes:[
+      {p:[[2.4735,39.5155],[2.462,39.526],[2.455,39.536],[2.451,39.539]],dash:1},
+      {p:[[2.4735,39.5155],[2.49,39.545],[2.506,39.566],[2.515,39.590],[2.528,39.612]],dash:1,alt:1},
+      {p:[[2.4735,39.5155],[2.52,39.522],[2.58,39.528],[2.64,39.548],[2.70,39.552],[2.7388,39.5517]],dash:1,off:8}
+    ]},
+    {k:5,label:{de:'Mo 9.11.',en:'Mon 9 Nov'},v:'--d5',routes:[
+      {p:[[2.4735,39.5155],[2.51,39.528],[2.57,39.535],[2.63,39.553],[2.69,39.565],[2.7388,39.5517]]}
+    ]}
+  ];
+  const svg=document.getElementById('map');
+  const NS='http://www.w3.org/2000/svg';
+  const el=(t,a,parent)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(parent||svg).appendChild(e);return e;};
+  el('rect',{x:0,y:0,width:860,height:500,fill:'var(--sea)'});
+  el('polygon',{points:pts(coast),fill:'var(--land)',stroke:'var(--landline)','stroke-width':1.2,'stroke-linejoin':'round'});
+  const labels=[];
+  const lab=(t,c,o)=>{const [x,y]=P(c);const e=el('text',Object.assign({x,y,fill:'var(--muted)','font-size':12,'font-family':'IBM Plex Mono, monospace','text-anchor':'middle'},o||{}));labels.push([e,t]);};
+  lab({de:'Serra de Tramuntana',en:'Serra de Tramuntana'},[2.50,39.645],{'font-style':'italic'});
+  lab({de:'PALMA',en:'PALMA'},[2.655,39.592],{'font-size':13,'letter-spacing':'2'});
+  lab({de:'Bucht von Palma',en:'Bay of Palma'},[2.64,39.50],{'font-style':'italic',fill:'var(--accent)'});
+  lab({de:'Mittelmeer',en:'Mediterranean'},[2.38,39.47],{'font-style':'italic',fill:'var(--accent)'});
+  lab({de:'Calvià',en:'Calvià'},[2.506,39.572]);
+  lab({de:'Andratx',en:'Andratx'},[2.418,39.582]);
+  lab({de:'Arenal',en:'Arenal'},[2.770,39.520]);
+  lab({de:'Sa Dragonera',en:'Sa Dragonera'},[2.32,39.598],{'font-size':11});
+  (()=>{const [x,y]=P([2.322,39.585]);el('ellipse',{cx:x,cy:y,rx:14,ry:5,transform:`rotate(-40 ${x} ${y})`,fill:'var(--land)',stroke:'var(--landline)'});})();
+
+  const routeG=el('g',{});
+  const groups={};
+  days.forEach(d=>{
+    const g=el('g',{'data-day':d.k},routeG);groups[d.k]=g;
+    d.routes.forEach(r=>{
+      el('polyline',{points:pts(r.p),fill:'none',stroke:`var(${d.v})`,'stroke-width':r.alt?2.5:3.5,'stroke-linecap':'round','stroke-linejoin':'round','stroke-dasharray':r.dash?'2 7':'none',opacity:r.alt?.75:1,transform:r.off?`translate(0 ${r.off*0.25})`:''},g);
+    });
+  });
+  const pinG=el('g',{});
+  const dayColor=d=>d===0?'var(--accent)':`var(--d${d})`;
+  places.forEach(p=>{
+    const [x,y]=P(p.c);
+    const g=el('g',{'data-day':p.d},pinG);
+    if(p.big){
+      el('rect',{x:x-11,y:y-11,width:22,height:22,rx:5,fill:'var(--fg)',stroke:'var(--surface)','stroke-width':2},g);
+      const t=el('text',{x,y:y+4.5,'text-anchor':'middle','font-size':12,'font-weight':700,fill:'var(--surface)','font-family':'IBM Plex Mono, monospace'},g);t.textContent='V';
+    }else{
+      el('circle',{cx:x,cy:y,r:9,fill:dayColor(p.d),stroke:'var(--surface)','stroke-width':1.6},g);
+      const t=el('text',{x,y:y+3.6,'text-anchor':'middle','font-size':p.id.length>1?9:10,'font-weight':500,fill:'#fff','font-family':'IBM Plex Mono, monospace'},g);t.textContent=p.id;
+    }
+  });
+  const IX=700,IY=380,IS=110;
+  const ip=([lon,lat])=>[IX+(lon-2.30)*C*IS,IY+(40.0-lat)*IS];
+  const ig=el('g',{});
+  el('rect',{x:IX-8,y:IY-8,width:C*IS*1.22+16,height:IS*0.76+16,rx:8,fill:'var(--surface)',stroke:'var(--line)',opacity:.92},ig);
+  el('polygon',{points:island.map(p=>ip(p).map(v=>v.toFixed(1)).join(',')).join(' '),fill:'var(--land)',stroke:'var(--landline)'},ig);
+  const [ax,ay]=ip([2.31,39.66]),[bx,by]=ip([2.80,39.44]);
+  el('rect',{x:ax,y:ay,width:bx-ax,height:by-ay,fill:'none',stroke:'var(--accent)','stroke-width':1.5},ig);
+  const it=el('text',{x:IX,y:IY+IS*0.76+4,'font-size':10,fill:'var(--muted)','font-family':'IBM Plex Mono, monospace'},ig);it.textContent='Mallorca';
+  const kmPx=(1/(111.32*C))*C*K;
+  const sx=24,sy=476;
+  el('line',{x1:sx,y1:sy,x2:sx+kmPx*5,y2:sy,stroke:'var(--fg)','stroke-width':2});
+  el('line',{x1:sx,y1:sy-4,x2:sx,y2:sy+4,stroke:'var(--fg)','stroke-width':2});
+  el('line',{x1:sx+kmPx*5,y1:sy-4,x2:sx+kmPx*5,y2:sy+4,stroke:'var(--fg)','stroke-width':2});
+  const st=el('text',{x:sx+kmPx*5+8,y:sy+4,'font-size':12,fill:'var(--fg)','font-family':'IBM Plex Mono, monospace'});st.textContent='5 km';
+
+  const legend=document.getElementById('legend');
+  const on={1:1,2:1,3:1,4:1,5:1};
+  const legendBtns=[];
+  days.forEach(d=>{
+    const b=document.createElement('button');b.type='button';b.style.setProperty('--c',`var(${d.v})`);
+    b.setAttribute('aria-pressed','true');
+    b.addEventListener('click',()=>{on[d.k]=!on[d.k];b.setAttribute('aria-pressed',on[d.k]?'true':'false');refresh();});
+    legend.appendChild(b);legendBtns.push([b,d]);
+  });
+  function refresh(){
+    Object.keys(groups).forEach(k=>groups[k].style.display=on[k]?'':'none');
+    pinG.querySelectorAll('g').forEach(g=>{const d=+g.dataset.day;g.style.opacity=(d<=0||on[d])?1:.25;});
+  }
+  const ml=document.getElementById('maplist');
+  function renderMapText(){
+    labels.forEach(([e,t])=>e.textContent=T(t));
+    legendBtns.forEach(([b,d])=>{b.innerHTML=`<i></i>${T(d.label)}`;});
+    ml.innerHTML='';
+    places.forEach(p=>{
+      const li=document.createElement('li');
+      const col=p.big?'var(--fg)':dayColor(p.d);
+      li.innerHTML=`<span class="pin" style="--c:${col};${p.big?'border-radius:5px;color:var(--surface)':''}">${p.id}</span><span>${T(p.n)}</span>`;
+      ml.appendChild(li);
+    });
+  }
+
+  /* ---------- Budget ---------- */
+  const rows=[
+    {k:'food',n:{de:'Grosseinkauf Lebensmittel & Getränke (4 Tage)',en:'Groceries & drinks (4 days)'},opts:[{l:{de:'normal',en:'normal'},v:60,pp:1},{l:{de:'grosszügig',en:'generous'},v:80,pp:1}]},
+    {k:'fuel',n:{de:'Benzin 2 Autos',en:'Fuel, 2 cars'},opts:[{l:{de:'Pauschale',en:'flat'},v:70}]},
+    {k:'thu',n:{de:'Do 23 Uhr: 4 Personen ab Flughafen',en:'Thu 23:00: 4 people from the airport'},opts:[{l:{de:'Taxi',en:'taxi'},v:65},{l:{de:'nüchterner Fahrer',en:'sober driver'},v:0}]},
+    {k:'fri',n:{de:'Fr 18 Uhr: 1 Person ab Flughafen',en:'Fri 18:00: 1 person from the airport'},opts:[{l:{de:'Abholung mit Auto',en:'pick-up by car'},v:0},{l:{de:'Taxi',en:'taxi'},v:55}]},
+    {k:'flunch',n:{de:'Fr Mittagessen Port d’Andratx',en:'Fri lunch, Port d’Andratx'},opts:[{l:{de:'Restaurant',en:'restaurant'},v:35,pp:1},{l:{de:'Tapas/leicht',en:'tapas/light'},v:22,pp:1}]},
+    {k:'sangria',n:{de:'Fr Sangria-Workshop',en:'Fri sangria workshop'},opts:[{l:{de:'selbst gemacht (Extra-Zutaten)',en:'DIY (extra ingredients)'},v:70},{l:{de:'mobile Bar (Schätzung)',en:'mobile bar (estimate)'},v:450}]},
+    {k:'karaoke',n:{de:'Karaoke-Mikrofon',en:'Karaoke mic'},opts:[{l:{de:'kaufen',en:'buy'},v:35},{l:{de:'mitbringen',en:'bring from home'},v:0}]},
+    {k:'palma',n:{de:'Sa Villa ↔ Palma',en:'Sat villa ↔ Palma'},opts:[{l:{de:'Bus hin + 3 Taxis zurück',en:'bus there + 3 taxis back'},v:180},{l:{de:'Kleinbus hin & zurück (Schätzung)',en:'minibus both ways (estimate)'},v:280}]},
+    {k:'arenal',n:{de:'Sa Abstecher Bierkönig: Taxis & Getränke',en:'Sat Bierkönig stop: taxis & drinks'},opts:[{l:{de:'3 Taxis hin/zurück + 1 Mass pP (Schätzung)',en:'3 taxis both ways + 1 stein pp (estimate)'},v:30,pp:1},{l:{de:'ohne Abstecher',en:'skip it'},v:0,pp:1}]},
+    {k:'sdinner',n:{de:'Sa Abendessen La Bóveda',en:'Sat dinner, La Bóveda'},opts:[{l:{de:'Tapas & Wein',en:'tapas & wine'},v:40,pp:1}]},
+    {k:'bars',n:{de:'Sa Bars Palma',en:'Sat bars, Palma'},opts:[{l:{de:'normal',en:'normal'},v:30,pp:1},{l:{de:'lange Nacht',en:'long night'},v:50,pp:1}]},
+    {k:'sunlunch',n:{de:'So Mittagessen Peguera',en:'Sun lunch, Peguera'},opts:[{l:{de:'Rendezvous',en:'Rendezvous'},v:28,pp:1}]},
+    {k:'wine',n:{de:'So Weinprobe',en:'Sun wine tasting'},opts:[{l:{de:'Sommelier in der Villa (Schätzung)',en:'sommelier at the villa (estimate)'},v:55,pp:1},{l:{de:'Bodega + Transfer (Schätzung)',en:'winery + transfer (estimate)'},v:70,pp:1},{l:{de:'selbst organisiert',en:'self-organised'},v:20,pp:1}]},
+    {k:'sundep',n:{de:'So Abend: Taxi abreisende Person',en:'Sun evening: taxi for the person leaving'},opts:[{l:{de:'Taxi',en:'taxi'},v:60}]},
+    {k:'mon',n:{de:'Mo früh: 6. Person der Früh-Gruppe',en:'Mon early: 6th person of the early group'},opts:[{l:{de:'Taxi',en:'taxi'},v:60},{l:{de:'Aufpreis 7-Sitzer (Schätzung)',en:'7-seater surcharge (estimate)'},v:100}]},
+    {k:'tub',n:{de:'Whirlpool',en:'Hot tub'},opts:[{l:{de:'ohne',en:'none'},v:0},{l:{de:'aufblasbar kaufen (Schätzung)',en:'buy inflatable (estimate)'},v:550}]}
+  ];
+  const tb=document.getElementById('b-rows');
+  const persons=document.getElementById('persons');
+  const palette=['--d1','--d2','--d3','--d4','--accent','--d5'];
+  rows.forEach(r=>{
+    const tr=document.createElement('tr');
+    const optCell=r.opts.length>1?`<select id="o-${r.k}"></select>`:`<span class="small muted" id="ol-${r.k}"></span>`;
+    tr.innerHTML=`<td id="n-${r.k}"></td><td>${optCell}</td><td class="num"><input type="number" min="0" id="v-${r.k}"> <span class="small muted" id="u-${r.k}"></span></td><td class="num" id="s-${r.k}"></td>`;
+    tb.appendChild(tr);
+    r.cur=r.opts[0];
+    document.getElementById('v-'+r.k).value=r.opts[0].v;
+    const s=document.getElementById('o-'+r.k);
+    if(s){
+      r.opts.forEach((o,j)=>{const op=document.createElement('option');op.value=j;s.appendChild(op);});
+      s.addEventListener('change',()=>{r.cur=r.opts[+s.value];document.getElementById('v-'+r.k).value=r.cur.v;calc();});
+    }
+    document.getElementById('v-'+r.k).addEventListener('input',calc);
+  });
+  function renderBudgetText(){
+    rows.forEach(r=>{
+      document.getElementById('n-'+r.k).textContent=T(r.n);
+      const s=document.getElementById('o-'+r.k);
+      if(s){[...s.options].forEach((op,j)=>op.textContent=T(r.opts[j].l));s.setAttribute('aria-label','Option: '+T(r.n));}
+      else document.getElementById('ol-'+r.k).textContent=T(r.opts[0].l);
+      document.getElementById('v-'+r.k).setAttribute('aria-label',T(r.n));
+    });
+    calc();
+  }
+  const fmt=n=>new Intl.NumberFormat(LANG==='en'?'en-GB':'de-CH',{maximumFractionDigits:0}).format(Math.round(n))+' €';
+  function calc(){
+    const n=Math.max(1,+persons.value||1);
+    let total=0;const parts=[];
+    rows.forEach(r=>{
+      const v=+document.getElementById('v-'+r.k).value||0;
+      const s=r.cur.pp?v*n:v;
+      document.getElementById('u-'+r.k).textContent=r.cur.pp?(LANG==='en'?'pp':'pP'):'';
+      document.getElementById('s-'+r.k).textContent=fmt(s);
+      total+=s;parts.push(s);
+    });
+    document.getElementById('b-total').textContent=fmt(total);
+    document.getElementById('b-pp').textContent=fmt(total/n);
+    document.getElementById('b-n').textContent=n;
+    document.getElementById('ov-total').textContent=fmt(total);
+    document.getElementById('ov-pp').textContent=fmt(total/n);
+    const bar=document.getElementById('b-bar');bar.innerHTML='';
+    parts.forEach((s,i)=>{if(!s)return;const sp=document.createElement('span');sp.style.width=(s/total*100)+'%';sp.style.background=`var(${palette[i%palette.length]})`;sp.title=T(rows[i].n);bar.appendChild(sp);});
+  }
+  persons.addEventListener('input',calc);
+
+  /* ---------- Sprache / Language ---------- */
+  const langBtns=[...document.querySelectorAll('.langsw button')];
+  function setLang(l){
+    LANG=l==='en'?'en':'de';
+    root.setAttribute('data-lang',LANG);
+    root.lang=LANG;
+    langBtns.forEach(b=>b.setAttribute('aria-pressed',b.dataset.set===LANG?'true':'false'));
+    renderMapText();renderBudgetText();refresh();
+    try{localStorage.setItem('mall-lang',LANG)}catch(e){}
+  }
+  langBtns.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.set)));
+  let initLang='de';try{initLang=localStorage.getItem('mall-lang')||'de'}catch(e){}
+  setLang(initLang);
+})();
+</script>
+
+</body></html>
