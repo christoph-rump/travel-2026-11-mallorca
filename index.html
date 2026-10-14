@@ -90,7 +90,7 @@ td.num,th.num{text-align:right;font-family:var(--font-mono);font-variant-numeric
 .drive.sober{color:var(--warn-fg);background:var(--warn-bg);border-color:transparent}
 
 .mapbox{background:var(--sea);border-radius:12px;overflow:hidden;position:relative;border:1px solid var(--line)}
-.mapbox svg{display:block;width:100%;height:auto}
+.mapbox > #map{display:block;width:100%;height:auto}
 .legend{display:flex;flex-wrap:wrap;gap:8px}
 .legend button{font:inherit;font-size:14px;display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
 .legend button i{width:14px;height:4px;border-radius:2px;background:var(--c);display:inline-block}
@@ -100,6 +100,9 @@ td.num,th.num{text-align:right;font-family:var(--font-mono);font-variant-numeric
 .mapkey svg{flex:0 0 auto}
 /* Satellitenkarte */
 .mapbox.sat{height:min(72vh,600px);min-height:340px}
+@media (max-width:600px){.mapbox.sat{height:58vh;min-height:300px}}
+.leaflet-attribution-flag{display:none!important}
+.leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}
 .mapbox.sat #map{display:none}
 #lmap{position:absolute;inset:0}
 .leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}
@@ -888,6 +891,7 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
   function initSat(){
     mapbox.classList.add('sat');lmapEl.hidden=false;if(satNote)satNote.hidden=true;
     const m=L.map(lmapEl,{scrollWheelZoom:false,zoomSnap:.5});
+    m.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
     L.tileLayer(SAT.img,{maxZoom:18,attribution:'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'}).addTo(m);
     L.tileLayer(SAT.ref,{maxZoom:18,opacity:.8}).addTo(m);
     days.forEach(d=>{
