@@ -6,8 +6,8 @@
 /* Layout: schmale Lesespalte mit Reiter-Navigation; jede "Seite" ist ein eigener Abschnitt, Karte als zentrales Bildelement */
 :root{
   --bg:#f3f5f4; --surface:#ffffff; --fg:#1d2a2c; --muted:#5b6b6d; --line:#d5dedd;
-  --sea:#cfe3e6; --land:#ecebe2; --landline:#b9b6a6; --accent:#0e6e74;
-  --d1:#5f7d1f; --d2:#b8323f; --d3:#2f5d9b; --d4:#7a3b78; --d5:#6a6f72;
+  --sea:#cfe3e6; --sea2:#b3d1d8; --relief:#d5d9c0; --surf:#f6faf9; --land:#ecebe2; --landline:#b9b6a6; --accent:#0e6e74;
+  --d1:#5f7d1f; --d2:#b8323f; --d3:#2f5d9b; --d4:#7a3b78; --d5:#6a6f72; --air:#c77700;
   --warn-bg:#fff2dc; --warn-fg:#7a4b00; --ok-bg:#e3f2ea; --ok-fg:#1f5d3c; --info-bg:#e2eef0; --info-fg:#164c52; --bad:#a3242f;
   --font-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --font-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
@@ -15,13 +15,13 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#121a1c; --surface:#1a2427; --fg:#e4ecea; --muted:#9aaeae; --line:#2e3d40;
-  --sea:#17323a; --land:#2a2f2b; --landline:#4a5148; --accent:#4fc1c4;
-  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae;
+  --sea:#17323a; --sea2:#0e2228; --relief:#383f33; --surf:#2b4b53; --land:#2a2f2b; --landline:#4a5148; --accent:#4fc1c4;
+  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae; --air:#f2a93b;
   --warn-bg:#3a2d12; --warn-fg:#f3cf8a; --ok-bg:#16332a; --ok-fg:#9ad8b6; --info-bg:#163036; --info-fg:#a6dde0; --bad:#ff8a93; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121a1c; --surface:#1a2427; --fg:#e4ecea; --muted:#9aaeae; --line:#2e3d40;
-  --sea:#17323a; --land:#2a2f2b; --landline:#4a5148; --accent:#4fc1c4;
-  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae;
+  --sea:#17323a; --sea2:#0e2228; --relief:#383f33; --surf:#2b4b53; --land:#2a2f2b; --landline:#4a5148; --accent:#4fc1c4;
+  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae; --air:#f2a93b;
   --warn-bg:#3a2d12; --warn-fg:#f3cf8a; --ok-bg:#16332a; --ok-fg:#9ad8b6; --info-bg:#163036; --info-fg:#a6dde0; --bad:#ff8a93; color-scheme:dark}
 
 /* Sprachumschaltung */
@@ -95,6 +95,44 @@ td.num,th.num{text-align:right;font-family:var(--font-mono);font-variant-numeric
 .legend button{font:inherit;font-size:14px;display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:5px 12px;cursor:pointer}
 .legend button i{width:14px;height:4px;border-radius:2px;background:var(--c);display:inline-block}
 .legend button[aria-pressed="false"]{opacity:.45}
+.mapkey{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:13px;color:var(--muted);margin:0;padding:0;list-style:none}
+.mapkey li{display:flex;align-items:center;gap:7px}
+.mapkey svg{flex:0 0 auto}
+/* Satellitenkarte */
+.mapbox.sat{height:min(72vh,600px);min-height:340px}
+.mapbox.sat #map{display:none}
+#lmap{position:absolute;inset:0}
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}
+.leaflet-container{overflow:hidden;background:#16272d;font-family:var(--font-body);-webkit-tap-highlight-color:transparent}
+.leaflet-container img,.leaflet-container .leaflet-tile{max-width:none!important;max-height:none!important}
+.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{user-select:none;-webkit-user-drag:none}
+.leaflet-tile{visibility:hidden}.leaflet-tile-loaded{visibility:inherit}
+.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}
+.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}
+.leaflet-zoom-animated{transform-origin:0 0}
+.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform .25s cubic-bezier(0,0,.25,1)}
+.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{transition:none}
+.leaflet-grab{cursor:grab}.leaflet-dragging .leaflet-grab{cursor:move}
+.leaflet-marker-icon,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}
+.leaflet-marker-icon.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive{pointer-events:auto}
+.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}
+.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}
+.leaflet-control{position:relative;z-index:800;pointer-events:auto;float:left;clear:both}
+.leaflet-right .leaflet-control{float:right}
+.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:0}
+.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:0}
+.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.5);border-radius:6px;overflow:hidden}
+.leaflet-bar a{display:block;width:30px;height:30px;line-height:30px;text-align:center;text-decoration:none;background:#fff;color:#1d2a2c;border-bottom:1px solid #d5dedd;font:600 18px/30px var(--font-mono)}
+.leaflet-bar a:last-child{border-bottom:none}
+.leaflet-control-attribution{background:rgba(255,255,255,.82);color:#333;font-size:10.5px;line-height:1.4;padding:1px 6px}
+.leaflet-control-attribution a{color:#0e6e74}
+.lpin{background:none;border:0}
+.lp{display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--pc);color:#fff;font:500 10px/1 var(--font-mono);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+.lp.opt{background:#fff;color:#1d2a2c;border:2px dashed var(--pc)}
+.lp.big{border-radius:6px;background:#1d2a2c;font-weight:700;font-size:12px}
+.ltime{background:none;border:0}
+.ltime span{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;background:rgba(255,255,255,.94);color:#1d2a2c;border:1.5px solid;border-radius:999px;padding:2px 9px;font:500 11px/1.4 var(--font-mono);box-shadow:0 1px 4px rgba(0,0,0,.4)}
+#lmap.all-days .ltime{display:none}
 .maplist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:4px 18px;font-size:14px;margin:0;padding:0;list-style:none}
 .maplist li{display:flex;gap:8px;align-items:baseline}
 .maplist .pin{flex:0 0 22px;height:22px;border-radius:50%;color:#fff;font-family:var(--font-mono);font-size:11px;display:inline-flex;align-items:center;justify-content:center;background:var(--c)}
@@ -163,17 +201,19 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
   <div class="panel">
     <h2><span data-l="de">Wer kommt und geht wann</span><span data-l="en">Who arrives and leaves when</span></h2>
     <div class="arrivals" style="margin-top:12px">
-      <div class="arr"><span class="mono"><span data-l="de">Do 5.11. · ca. 14:00</span><span data-l="en">Thu 5 Nov · approx. 14:00</span></span><strong><span data-l="de">6 Personen</span><span data-l="en">6 people</span></strong><span class="small muted"><span data-l="de">Holen die 2 Mietwagen, machen den Grosseinkauf</span><span data-l="en">Pick up both rental cars, do the big shop</span></span></div>
-      <div class="arr"><span class="mono"><span data-l="de">Do 5.11. · ca. 23:00</span><span data-l="en">Thu 5 Nov · approx. 23:00</span></span><strong><span data-l="de">4 Personen</span><span data-l="en">4 people</span></strong><span class="small muted"><span data-l="de">Abholung mit eigenem Auto, 1 Fahrer bleibt bis Mitternacht nüchtern</span><span data-l="en">Picked up in our own car; one driver stays sober until midnight</span></span></div>
-      <div class="arr"><span class="mono"><span data-l="de">Fr 6.11. · ca. 18:00</span><span data-l="en">Fri 6 Nov · approx. 18:00</span></span><strong><span data-l="de">1 Person</span><span data-l="en">1 person</span></strong><span class="small muted"><span data-l="de">Abholung vor Sangria-Start oder Taxi</span><span data-l="en">Pick-up before sangria starts, or taxi</span></span></div>
-      <div class="arr out"><span class="mono"><span data-l="de">So 8.11. · abends</span><span data-l="en">Sun 8 Nov · evening</span></span><strong><span data-l="de">1 Person reist ab</span><span data-l="en">1 person leaves</span></strong><span class="small muted"><span data-l="de">Wird mit dem eigenen Auto zum Flughafen gebracht</span><span data-l="en">Driven to the airport in one of our cars</span></span></div>
-      <div class="arr out"><span class="mono"><span data-l="de">Mo 9.11. · früh</span><span data-l="en">Mon 9 Nov · early</span></span><strong><span data-l="de">6 Personen</span><span data-l="en">6 people</span></strong><span class="small muted"><span data-l="de">Auto 1 (5 Plätze) wird am Flughafen abgegeben; Auto 2 bringt die 6. Person und fährt zurück</span><span data-l="en">Car 1 (5 seats) is returned at the airport; car 2 takes the sixth person and drives back</span></span></div>
-      <div class="arr out"><span class="mono"><span data-l="de">Mo 9.11. · Checkout 10:00</span><span data-l="en">Mon 9 Nov · checkout 10:00</span></span><strong><span data-l="de">4 Personen</span><span data-l="en">4 people</span></strong><span class="small muted"><span data-l="de">Aufräum-Team behält Auto 2 und gibt es am Flughafen ab</span><span data-l="en">Clean-up team keeps car 2 and returns it at the airport</span></span></div>
+      <div class="arr"><span class="mono"><span data-l="de">Do 5.11. · Landung 11:20</span><span data-l="en">Thu 5 Nov · lands 11:20</span></span><strong><span data-l="de">Flug 1</span><span data-l="en">Flight 1</span></strong><span class="small muted"><span data-l="de">Nimmt Mietwagen 1, fährt vor zum Supermarkt und wartet dort auf Flug 2</span><span data-l="en">Takes rental car 1, drives ahead to the supermarket and waits there for flight 2</span></span></div>
+      <div class="arr"><span class="mono"><span data-l="de">Do 5.11. · Landung 12:45</span><span data-l="en">Thu 5 Nov · lands 12:45</span></span><strong><span data-l="de">Flug 2</span><span data-l="en">Flight 2</span></strong><span class="small muted"><span data-l="de">Nimmt Mietwagen 2 und stösst in Porto Pi dazu</span><span data-l="en">Takes rental car 2 and joins at Porto Pi</span></span></div>
+      <div class="arr"><span class="mono"><span data-l="de">Do 5.11. · Landung 22:40</span><span data-l="en">Thu 5 Nov · lands 22:40</span></span><strong><span data-l="de">4 Personen</span><span data-l="en">4 people</span></strong><span class="small muted"><span data-l="de">Abholung mit Auto 2, 1 Fahrer bleibt bis Mitternacht nüchtern</span><span data-l="en">Picked up in car 2; one driver stays sober until midnight</span></span></div>
+      <div class="arr"><span class="mono"><span data-l="de">Fr 6.11. · Landung 17:30</span><span data-l="en">Fri 6 Nov · lands 17:30</span></span><strong><span data-l="de">1 Person</span><span data-l="en">1 person</span></strong><span class="small muted"><span data-l="de">Abholung, zurück vor dem Sangria-Start</span><span data-l="en">Picked up, back before the sangria starts</span></span></div>
+      <div class="arr out"><span class="mono"><span data-l="de">So 8.11. · Abflug 18:20</span><span data-l="en">Sun 8 Nov · departs 18:20</span></span><strong><span data-l="de">1 Person</span><span data-l="en">1 person</span></strong><span class="small muted"><span data-l="de">Abfahrt 15:45 mit dem Auto</span><span data-l="en">Leaves the villa at 15:45 by car</span></span></div>
+      <div class="arr out"><span class="mono"><span data-l="de">Mo 9.11. · Abflug 08:00</span><span data-l="en">Mon 9 Nov · departs 08:00</span></span><strong><span data-l="de">Gruppe 1</span><span data-l="en">Group 1</span></strong><span class="small muted"><span data-l="de">Abfahrt 05:15 mit Auto 1, Rückgabe am Flughafen</span><span data-l="en">Leaves at 05:15 in car 1, returned at the airport</span></span></div>
+      <div class="arr out"><span class="mono"><span data-l="de">Mo 9.11. · Abflug 11:10</span><span data-l="en">Mon 9 Nov · departs 11:10</span></span><strong><span data-l="de">Gruppe 2</span><span data-l="en">Group 2</span></strong><span class="small muted"><span data-l="de">Abfahrt 08:30 mit Auto 2, ein Fahrer aus Gruppe 3 fährt zurück</span><span data-l="en">Leaves at 08:30 in car 2; a driver from group 3 drives back</span></span></div>
+      <div class="arr out"><span class="mono"><span data-l="de">Mo 9.11. · Checkout 10:00</span><span data-l="en">Mon 9 Nov · checkout 10:00</span></span><strong><span data-l="de">Gruppe 3</span><span data-l="en">Group 3</span></strong><span class="small muted"><span data-l="de">Kein Flug: räumt auf, checkt aus und behält Auto 2</span><span data-l="en">No flight: cleans up, checks out and keeps car 2</span></span></div>
     </div>
   </div>
 
   <div class="note warn"><b data-l="de">Sonntag einkaufen ist schwierig.</b><b data-l="en">Shopping on Sunday is hard.</b> <span data-l="de">Die meisten grossen Supermärkte (Mercadona, Lidl, Eroski) haben sonntags zu, auch Porto Pi. Beim Grosseinkauf am Donnerstag also bis Montagmorgen planen, Nachkauf am Samstag.</span><span data-l="en">Most big supermarkets (Mercadona, Lidl, Eroski) are closed on Sundays, and so is Porto Pi. Plan the Thursday shop through to Monday morning and top up on Saturday.</span></div>
-  <div class="note warn"><b data-l="de">Montag: 6 Personen, 5 Sitze.</b><b data-l="en">Monday: 6 people, 5 seats.</b> <span data-l="de">Die Früh-Gruppe passt nicht in ein Auto. Standard: Ein Fahrer aus dem Aufräum-Team bringt die 6. Person mit Auto 2 zum Flughafen und fährt zurück zur Villa (ca. 1 Std. hin und zurück). Alternativen: Taxi oder ein Auto jetzt auf einen 7-Sitzer umbuchen.</span><span data-l="en">The early group doesn't fit in one car. Default: a driver from the clean-up team takes the sixth person to the airport in car 2 and drives back to the villa (approx. 1 h round trip). Alternatives: taxi, or upgrade one car to a 7-seater now.</span></div>
+  <div class="note warn"><b data-l="de">Montag früh:</b><b data-l="en">Early Monday:</b> <span data-l="de">Auto 1 wird um ca. 06:00 am Flughafen abgegeben. Beim Vermieter vorab klären, wo der Schlüssel hinkommt, falls der Schalter noch geschlossen ist, und alle Fahrer im Mietvertrag eintragen lassen.</span><span data-l="en">Car 1 is returned at the airport around 06:00. Check with the rental company where to leave the key if the desk is still closed, and have every driver added to the rental contract.</span></div>
   <div class="note warn"><b data-l="de">Port d'Andratx im Winter:</b><b data-l="en">Port d'Andratx in winter:</b> <span data-l="de">Viele Restaurants dort schliessen zwischen November und März. Mittagstisch am Freitag vorher telefonisch bestätigen.</span><span data-l="en">Many restaurants there close between November and March. Confirm Friday's lunch spot by phone beforehand.</span></div>
 
   <div class="grid2">
@@ -181,13 +221,13 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
       <h3><span data-l="de">Logik gegen lange Fahrten</span><span data-l="en">Keeping drives short</span></h3>
       <ul class="clean" data-l="de">
         <li>Alles mit Alkohol findet in der Villa oder zu Fuss statt.</li>
-        <li>Flughafen-Fahrten standardmässig mit eigenem Auto: Do 22–24 Uhr, Fr 17–19 Uhr, So abends, Mo früh und Mo ab 10 Uhr.</li>
+        <li>Flughafen-Fahrten standardmässig mit eigenem Auto: Do 22:10, Fr 16:50, So 15:45, Mo 05:15 und 08:30.</li>
         <li>Einzige Ausnahme ist der Samstag: Palma ohne eigene Autos, Bus 103 hin, Taxis zurück.</li>
         <li>Autofahrten tagsüber kurz: Wanderung 5–7 Min, Südwest-Runde mit Etappen von 10–15 Min.</li>
       </ul>
       <ul class="clean" data-l="en">
         <li>Anything involving alcohol happens at the villa or on foot.</li>
-        <li>Airport runs by our own cars by default: Thu 22–24, Fri 17–19, Sun evening, Mon early and Mon from 10:00.</li>
+        <li>Airport runs by our own cars by default: Thu 22:10, Fri 16:50, Sun 15:45, Mon 05:15 and 08:30.</li>
         <li>The only exception is Saturday: Palma without our own cars, bus 103 there, taxis back.</li>
         <li>Short daytime drives: hike 5–7 min, southwest loop in 10–15 min legs.</li>
       </ul>
@@ -198,16 +238,16 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
         <li>Sa 20:00 La Bóveda, Palma (hinterer Gewölberaum für Gruppen)</li>
         <li>Sa Nacht: Kleinbus oder Taxis Palma → Villa</li>
         <li>So 13:30 Rendezvous, Peguera (Terrasse mit Meerblick)</li>
-        <li>So 16:30 Weinprobe in der Villa (ab 4 Pers., Wine Industry Mallorca anfragen)</li>
-        <li>Optional: ein Auto auf 7-Sitzer umbuchen (spart am Montag eine Fahrt)</li>
+        <li>So 17:00 Weinprobe in der Villa (ab 4 Pers., Wine Industry Mallorca anfragen)</li>
+        <li>Mietwagen: alle Fahrer eintragen lassen, Schlüsselrückgabe Mo ca. 06:00 klären</li>
         <li>Fr 13:30 Mittagessen Port d'Andratx (nach Telefon-Check)</li>
       </ul>
       <ul class="clean" data-l="en">
         <li>Sat 20:00 La Bóveda, Palma (vaulted back room for groups)</li>
         <li>Sat night: minibus or taxis Palma → villa</li>
         <li>Sun 13:30 Rendezvous, Peguera (sea-view terrace)</li>
-        <li>Sun 16:30 wine tasting at the villa (from 4 people, enquire with Wine Industry Mallorca)</li>
-        <li>Optional: upgrade one car to a 7-seater (saves a trip on Monday)</li>
+        <li>Sun 17:00 wine tasting at the villa (from 4 people, enquire with Wine Industry Mallorca)</li>
+        <li>Rental cars: add every driver, sort out key return on Mon around 06:00</li>
         <li>Fri 13:30 lunch in Port d'Andratx (after a phone check)</li>
       </ul>
     </div>
@@ -226,13 +266,16 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
   <article class="panel day" style="--c:var(--d1)">
     <div class="dayhead"><span class="tag"><span data-l="de">Do 5.11.</span><span data-l="en">Thu 5 Nov</span></span><h2><span data-l="de">Ankunft, Grosseinkauf, Kochen</span><span data-l="en">Arrival, big shop, cooking</span></h2></div>
     <ol class="tl">
-      <li><time>14:00</time><div class="what"><span data-l="de"><b>Landung Gruppe A (6 Pers.)</b>, Mietwagen übernehmen. 6 Leute plus Gepäck passen auf zwei Autos.</span><span data-l="en"><b>Group A lands (6 people)</b>, pick up the rental cars. Six people plus luggage fit in two cars.</span></div></li>
-      <li><time>14:45</time><div class="what"><span data-l="de"><b>Grosseinkauf, Variante A: Porto Pi</b> (Carrefour-Hypermarkt im Einkaufszentrum, liegt auf dem Weg an der Ma-1). Auch für Karaoke-Mikrofon oder Kabel praktisch.</span><span data-l="en"><b>Big shop, option A: Porto Pi</b> (Carrefour hypermarket in the mall, right on the way along the Ma-1). Also handy for a karaoke mic or cables.</span><br><span class="drive"><span data-l="de">Flughafen → Porto Pi ca. 15 Min</span><span data-l="en">Airport → Porto Pi approx. 15 min</span></span><span class="drive"><span data-l="de">Porto Pi → Villa ca. 20 Min</span><span data-l="en">Porto Pi → villa approx. 20 min</span></span><br><span class="small muted"><span data-l="de">Variante B: direkt zum Eroski Santa Ponça, 5 Min von der Villa (Frischetheken, Lieferservice).</span><span data-l="en">Option B: straight to Eroski Santa Ponça, 5 min from the villa (fresh counters, delivery service).</span></span></div></li>
-      <li><time>16:45</time><div class="what"><span data-l="de"><b>Check-in Villa</b>, Zimmer verteilen, Kühlschrank füllen.</span><span data-l="en"><b>Villa check-in</b>, sort out rooms, fill the fridge.</span></div></li>
+      <li><time>11:20</time><div class="what"><span data-l="de"><b>Landung Flug 1.</b> Mietwagen 1 übernehmen; alle, die fahren, müssen im Mietvertrag stehen.</span><span data-l="en"><b>Flight 1 lands.</b> Pick up rental car 1; everyone who drives must be on the rental contract.</span></div></li>
+      <li><time>12:00</time><div class="what"><span data-l="de"><b>Auto 1 fährt vor zum Grosseinkauf in Porto Pi</b> (Carrefour-Hypermarkt im Einkaufszentrum, liegt auf dem Weg an der Ma-1), fängt schon mit dem Einkauf an und wartet dort auf Flug 2. Auch für Karaoke-Mikrofon oder Kabel praktisch.</span><span data-l="en"><b>Car 1 drives ahead to Porto Pi for the big shop</b> (Carrefour hypermarket in the mall, on the way along the Ma-1), starts shopping and waits there for flight 2. Also handy for a karaoke mic or cables.</span><br><span class="drive"><span data-l="de">🚗 Flughafen → Porto Pi ca. 15 Min</span><span data-l="en">🚗 Airport → Porto Pi approx. 15 min</span></span><br><span class="small muted"><span data-l="de">Variante B: Treffpunkt Eroski Santa Ponça, 5 Min von der Villa (Frischetheken, Lieferservice).</span><span data-l="en">Option B: meet at Eroski Santa Ponça, 5 min from the villa (fresh counters, delivery service).</span></span></div></li>
+      <li><time>12:45</time><div class="what"><span data-l="de"><b>Landung Flug 2.</b> Flug 2 übernimmt Mietwagen 2 selbst (mindestens eine Person aus Flug 2 muss im Mietvertrag stehen) und fährt gegen 13:15 nach Porto Pi.</span><span data-l="en"><b>Flight 2 lands.</b> Flight 2 picks up rental car 2 themselves (at least one person on flight 2 must be on the rental contract) and drives to Porto Pi around 13:15.</span><br><span class="drive"><span data-l="de">🚗 Flughafen → Porto Pi ca. 15 Min</span><span data-l="en">🚗 Airport → Porto Pi approx. 15 min</span></span></div></li>
+      <li><time>13:30</time><div class="what"><span data-l="de"><b>Treffen in Porto Pi</b>: Einkauf gemeinsam fertig machen, auf beide Autos verteilen, Kaffee im Einkaufszentrum.</span><span data-l="en"><b>Meet at Porto Pi</b>: finish the shop together, split it between both cars, coffee in the mall.</span></div></li>
+      <li><time>14:00</time><div class="what"><span data-l="de"><b>Beide Autos fahren zur Villa.</b></span><span data-l="en"><b>Both cars drive to the villa.</b></span><br><span class="drive"><span data-l="de">🚗 Porto Pi → Villa ca. 20 Min</span><span data-l="en">🚗 Porto Pi → villa approx. 20 min</span></span></div></li>
+      <li><time>ca. 14:20</time><div class="what"><span data-l="de"><b>Ankunft Villa</b>, Kühlschrank füllen, kleiner Mittagssnack. Check-in-Zeit beim Vermieter prüfen; ist sie später, erst Gepäck abstellen oder an den Strand.</span><span data-l="en"><b>Arrive at the villa</b>, fill the fridge, light lunch. Check the check-in time with the landlord; if it is later, drop the bags first or head to the beach.</span></div></li>
       <li><time>17:15</time><div class="what"><span data-l="de"><b>Spaziergang Playa Santa Ponsa</b>, 2 Gehminuten. Sonnenuntergang ca. 17:35.</span><span data-l="en"><b>Walk to Playa Santa Ponsa</b>, 2 minutes away. Sunset approx. 17:35.</span></div></li>
       <li><time>18:30</time><div class="what"><span data-l="de"><b>Gemeinsam kochen</b>: ein grosser Topf (Paella, Chili oder Pasta al forno), der sich für die Spätankommenden aufwärmen lässt. Danach Beisammensein und Trinken.</span><span data-l="en"><b>Cook together</b>: one big pot (paella, chilli or baked pasta) that reheats well for the late arrivals. Then drinks and hanging out.</span></div></li>
-      <li><time>22:15</time><div class="what"><span data-l="de"><b>Gruppe B (4 Pers.) landet 23:00.</b> Ein Fahrer holt sie mit dem Auto ab (Fahrer plus 4 Personen = 5 Plätze; bei viel Gepäck mit beiden Autos). Alternative: Taxi, Kosten siehe Budget.</span><span data-l="en"><b>Group B (4 people) lands at 23:00.</b> One driver picks them up by car (driver plus 4 people = 5 seats; take both cars if there's a lot of luggage). Alternative: taxi, costs in the Budget tab.</span><br><span class="drive">🚗 <span data-l="de">Villa ↔ Flughafen je ca. 30–35 Min</span><span data-l="en">Villa ↔ airport approx. 30–35 min each way</span></span><span class="drive sober"><span data-l="de">Fahrer nüchtern bis ca. 24:00</span><span data-l="en">Driver sober until approx. 24:00</span></span></div></li>
-      <li><time>23:45</time><div class="what"><span data-l="de"><b>Gruppe B kommt an</b>, Reste aufwärmen, anstossen.</span><span data-l="en"><b>Group B arrives</b>, reheat leftovers, cheers.</span></div></li>
+      <li><time>22:10</time><div class="what"><span data-l="de"><b>Flug 3 (4 Pers.) landet 22:40.</b> Ein Fahrer holt sie mit Auto 2 ab (Fahrer plus 4 Personen = 5 Plätze; bei viel Gepäck mit beiden Autos). Alternative: Taxi, Kosten siehe Budget.</span><span data-l="en"><b>Flight 3 (4 people) lands at 22:40.</b> One driver picks them up in car 2 (driver plus 4 people = 5 seats; take both cars if there is a lot of luggage). Alternative: taxi, costs in the Budget tab.</span><br><span class="drive"><span data-l="de">🚗 Villa ↔ Flughafen je ca. 30–35 Min</span><span data-l="en">🚗 Villa ↔ airport approx. 30–35 min each way</span></span><span class="drive sober"><span data-l="de">Fahrer nüchtern bis ca. 24:00</span><span data-l="en">Driver sober until approx. 24:00</span></span></div></li>
+      <li><time>23:45</time><div class="what"><span data-l="de"><b>Flug 3 kommt an</b>, Reste aufwärmen, anstossen.</span><span data-l="en"><b>Flight 3 arrives</b>, reheat leftovers, cheers.</span></div></li>
     </ol>
   </article>
 
@@ -245,7 +288,7 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
       <li><time>13:30</time><div class="what"><span data-l="de"><b>Mittagessen</b> in Port d'Andratx oder Sant Elm (offenes Lokal vorher telefonisch bestätigen).</span><span data-l="en"><b>Lunch</b> in Port d'Andratx or Sant Elm (confirm an open place by phone first).</span></div></li>
       <li><time>15:15</time><div class="what"><span data-l="de"><b>Fotostopp Camp de Mar</b> mit Blick auf die kleine Insel S'Illeta, dann zurück.</span><span data-l="en"><b>Photo stop at Camp de Mar</b> overlooking the islet S'Illeta, then back.</span><br><span class="drive">🚗 <span data-l="de">ca. 15 Min</span><span data-l="en">approx. 15 min</span></span><span class="drive"><span data-l="de">Camp de Mar → Villa ca. 10 Min</span><span data-l="en">Camp de Mar → villa approx. 10 min</span></span></div></li>
       <li><time>16:00</time><div class="what"><span data-l="de"><b>Pause in der Villa</b>, Sangria-Zutaten vorbereiten, Grill vorbereiten.</span><span data-l="en"><b>Break at the villa</b>, prep sangria ingredients and the grill.</span></div></li>
-      <li><time>17:15</time><div class="what"><span data-l="de"><b>1 Person holt den Nachzügler</b> (Landung 18:00) und ist um ca. 19:00 zurück. Danach darf auch der Fahrer trinken. Alternative: Taxi, Kosten siehe Budget.</span><span data-l="en"><b>One person picks up the latecomer</b> (lands 18:00), back around 19:00. After that the driver can drink too. Alternative: taxi, costs in the Budget tab.</span><br><span class="drive sober"><span data-l="de">Fahrer nüchtern bis ca. 19:00</span><span data-l="en">Driver sober until approx. 19:00</span></span></div></li>
+      <li><time>16:50</time><div class="what"><span data-l="de"><b>1 Person holt den Nachzügler ab</b> (Landung 17:30) und ist gegen 18:30 zurück, rechtzeitig vor dem Sangria-Start. Danach darf auch der Fahrer trinken. Alternative: Taxi, Kosten siehe Budget.</span><span data-l="en"><b>One person picks up the latecomer</b> (lands 17:30), back around 18:30, in time for the sangria start. After that the driver can drink too. Alternative: taxi, costs in the Budget tab.</span><br><span class="drive"><span data-l="de">🚗 Villa ↔ Flughafen je ca. 30–35 Min</span><span data-l="en">🚗 Villa ↔ airport approx. 30–35 min each way</span></span><span class="drive sober"><span data-l="de">Fahrer nüchtern bis ca. 18:30</span><span data-l="en">Driver sober until approx. 18:30</span></span></div></li>
       <li><time>19:00</time><div class="what"><span data-l="de"><b>Sangria-Workshop</b> in der Villa: drei Teams, drei Rezepte (klassisch rot, Cava-Sangria, weisse Sangria), Blindverkostung, Siegerkrug. Profi-Variante: mobile Bar bestellen (siehe Services).</span><span data-l="en"><b>Sangria workshop</b> at the villa: three teams, three recipes (classic red, cava sangria, white sangria), blind tasting, winner's jug. Pro version: book a mobile bar (see Services).</span></div></li>
       <li><time>20:30</time><div class="what"><span data-l="de"><b>BBQ</b>: Fleisch, Gemüsespiesse, Pimientos de Padrón.</span><span data-l="en"><b>BBQ</b>: meat, veggie skewers, pimientos de Padrón.</span></div></li>
       <li><time>22:00</time><div class="what"><span data-l="de"><b>Karaoke</b>: Fernseher plus YouTube-Karaoke oder App, Bluetooth-Mikrofon. Lautstärke-Regeln der Villa beachten.</span><span data-l="en"><b>Karaoke</b>: TV plus YouTube karaoke or an app, Bluetooth mic. Respect the villa's noise rules.</span></div></li>
@@ -274,8 +317,8 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
       <li><time>10:00</time><div class="what"><span data-l="de"><b>Ausschlafen und Frühstück in der Villa</b>, wann immer jeder auftaucht. Wer mag, nimmt den Kaffee mit an den Strand.</span><span data-l="en"><b>Sleep in, breakfast at the villa</b> whenever people surface. Take your coffee down to the beach if you like.</span></div></li>
       <li><time>12:45</time><div class="what"><span data-l="de"><b>Nach Peguera</b>: zu Fuss entlang der Küste (ca. 2,5 km, gut 30 Min) oder 2–3 Taxis. Auto lohnt sich nicht.</span><span data-l="en"><b>To Peguera</b>: on foot along the coast (approx. 2.5 km, a good 30 min) or 2–3 taxis. Not worth taking the car.</span><br><span class="drive nocar"><span data-l="de">zu Fuss ca. 30–35 Min</span><span data-l="en">on foot approx. 30–35 min</span></span><span class="drive">🚗 5 Min</span></div></li>
       <li><time>13:30</time><div class="what"><span data-l="de"><b>Mittagessen Rendezvous</b>, Avda. Peguera 42: ganzjährig geöffnet, grosse Terrasse mit Meerblick und eigenem Grill. Alternative direkt am Strand: Maria Eugenia (Paella, Meeresfrüchte).</span><span data-l="en"><b>Lunch at Rendezvous</b>, Avda. Peguera 42: open all year, large sea-view terrace with its own grill. Alternative right on the beach: Maria Eugenia (paella, seafood).</span></div></li>
-      <li><time>16:30</time><div class="what"><span data-l="de"><b>Weinprobe in der Villa</b> mit Sommelier, z. B. Wine Industry Mallorca: ab 4 Erwachsenen, ca. 2 Std., niemand muss fahren. Mit macht, wer Lust hat.</span><span data-l="en"><b>Wine tasting at the villa</b> with a sommelier, e.g. Wine Industry Mallorca: from 4 adults, approx. 2 h, nobody has to drive. Whoever fancies it joins.</span><br><span class="small muted"><span data-l="de">Alternative: Bodega Son Puig in Puigpunyent, nur nach Vereinbarung, mit Transfer.</span><span data-l="en">Alternative: Bodega Son Puig in Puigpunyent, by appointment only, with a transfer.</span></span><br><span class="drive">🚗 <span data-l="de">Villa → Puigpunyent ca. 30 Min</span><span data-l="en">Villa → Puigpunyent approx. 30 min</span></span></div></li>
-      <li><time><span data-l="de">abends</span><span data-l="en">evening</span></time><div class="what"><span data-l="de"><b>1 Person reist ab</b>: wird mit dem Auto zum Flughafen gebracht, Abfahrt ca. 2¼ Std. vor Abflug. Alternative: Taxi, Kosten siehe Budget.</span><span data-l="en"><b>One person leaves</b>: driven to the airport by car, leaving about 2¼ h before the flight. Alternative: taxi, costs in the Budget tab.</span><br><span class="drive">🚗 <span data-l="de">Villa ↔ Flughafen je ca. 30–35 Min</span><span data-l="en">Villa ↔ airport approx. 30–35 min each way</span></span></div></li>
+      <li><time>15:45</time><div class="what"><span data-l="de"><b>1 Person fliegt um 18:20</b> und wird mit dem Auto zum Flughafen gebracht; der Fahrer ist gegen 16:55 zurück. Nach dem Mittagessen also rechtzeitig zur Villa (oder direkt in Peguera abholen). Alternative: Taxi, Kosten siehe Budget.</span><span data-l="en"><b>One person flies at 18:20</b> and is driven to the airport; the driver is back around 16:55. So head back to the villa in time after lunch (or pick them up in Peguera). Alternative: taxi, costs in the Budget tab.</span><br><span class="drive"><span data-l="de">🚗 Villa ↔ Flughafen je ca. 30–35 Min</span><span data-l="en">🚗 Villa ↔ airport approx. 30–35 min each way</span></span></div></li>
+      <li><time>17:00</time><div class="what"><span data-l="de"><b>Weinprobe in der Villa</b> mit Sommelier, z. B. Wine Industry Mallorca: ab 4 Erwachsenen, ca. 2 Std., niemand muss fahren. Mit macht, wer Lust hat.</span><span data-l="en"><b>Wine tasting at the villa</b> with a sommelier, e.g. Wine Industry Mallorca: from 4 adults, approx. 2 h, nobody has to drive. Whoever fancies it joins.</span><br><span class="small muted"><span data-l="de">Alternative: Bodega Son Puig in Puigpunyent, nur nach Vereinbarung, mit Transfer.</span><span data-l="en">Alternative: Bodega Son Puig in Puigpunyent, by appointment only, with a transfer.</span></span><br><span class="drive"><span data-l="de">🚗 Villa → Puigpunyent ca. 30 Min</span><span data-l="en">🚗 Villa → Puigpunyent approx. 30 min</span></span></div></li>
       <li><time>19:30</time><div class="what"><span data-l="de"><b>Resteessen</b>, Koffer packen.</span><span data-l="en"><b>Leftovers dinner</b>, pack bags.</span></div></li>
     </ol>
     <div class="note warn small" style="margin-top:10px"><span data-l="de"><b>Promillegrenze:</b> In Spanien gilt 0,5 Promille (Fahranfänger 0,3).</span><span data-l="en"><b>Alcohol limit:</b> Spain's limit is 0.5 g/l (0.3 for new drivers).</span></div>
@@ -284,9 +327,10 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
   <article class="panel day" style="--c:var(--d5)">
     <div class="dayhead"><span class="tag"><span data-l="de">Mo 9.11.</span><span data-l="en">Mon 9 Nov</span></span><h2><span data-l="de">Abreise, Checkout 10:00</span><span data-l="en">Departure, checkout 10:00</span></h2></div>
     <ol class="tl">
-      <li><time><span data-l="de">früh</span><span data-l="en">early</span></time><div class="what"><span data-l="de"><b>Früh-Gruppe (6 Pers.)</b>: 5 fahren mit Auto 1 und geben es am Flughafen ab. Ein Fahrer aus dem Aufräum-Team bringt die 6. Person mit Auto 2 und fährt zurück zur Villa (ca. 1 Std. hin und zurück). Alternative: Taxi oder 7-Sitzer. Spätestens 2 Std. vor Abflug am Flughafen sein.</span><span data-l="en"><b>Early group (6 people)</b>: five take car 1 and return it at the airport. A driver from the clean-up team takes the sixth person in car 2 and drives back to the villa (approx. 1 h round trip). Alternative: taxi or a 7-seater. Be at the airport at least 2 h before departure.</span><br><span class="drive sober">🚗 <span data-l="de">Villa → Flughafen ca. 30–35 Min</span><span data-l="en">Villa → airport approx. 30–35 min</span></span></div></li>
-      <li><time>08:00</time><div class="what"><span data-l="de"><b>Aufräum-Team (4 Pers.)</b>: Geschirr, Müll trennen, Kühlschrank leeren, Grill reinigen, Schlüsselübergabe.</span><span data-l="en"><b>Clean-up team (4 people)</b>: dishes, separate the rubbish, empty the fridge, clean the grill, hand over keys.</span></div></li>
-      <li><time>10:00</time><div class="what"><span data-l="de"><b>Checkout</b>, dann mit Auto 2 zum Flughafen und Auto dort abgeben. Danach Zeit für ein Frühstück am Flughafen.</span><span data-l="en"><b>Checkout</b>, then drive car 2 to the airport and return it there. Time for breakfast at the airport afterwards.</span><br><span class="drive sober">🚗 <span data-l="de">Villa → Flughafen ca. 30–35 Min</span><span data-l="en">Villa → airport approx. 30–35 min</span></span></div></li>
+      <li><time>05:15</time><div class="what"><span data-l="de"><b>Gruppe 1 (Abflug 08:00)</b> fährt mit Auto 1 zum Flughafen und gibt es dort ab. Ankunft am Flughafen ca. 05:50.</span><span data-l="en"><b>Group 1 (departs 08:00)</b> drives car 1 to the airport and returns it there. Arrival at the airport approx. 05:50.</span><br><span class="drive"><span data-l="de">🚗 Villa → Flughafen ca. 30–35 Min</span><span data-l="en">🚗 Villa → airport approx. 30–35 min</span></span></div></li>
+      <li><time>08:00</time><div class="what"><span data-l="de"><b>Gruppe 3 räumt auf</b>: Geschirr, Müll trennen, Kühlschrank leeren, Grill reinigen.</span><span data-l="en"><b>Group 3 cleans up</b>: dishes, separate the rubbish, empty the fridge, clean the grill.</span></div></li>
+      <li><time>08:30</time><div class="what"><span data-l="de"><b>Gruppe 2 (Abflug 11:10)</b>: Ein Fahrer aus Gruppe 3 bringt sie mit Auto 2 zum Flughafen und ist gegen 09:40 zurück. Ankunft am Flughafen ca. 09:05.</span><span data-l="en"><b>Group 2 (departs 11:10)</b>: a driver from group 3 takes them to the airport in car 2 and is back around 09:40. Arrival at the airport approx. 09:05.</span><br><span class="drive"><span data-l="de">🚗 Villa ↔ Flughafen je ca. 30–35 Min</span><span data-l="en">🚗 Villa ↔ airport approx. 30–35 min each way</span></span></div></li>
+      <li><time>10:00</time><div class="what"><span data-l="de"><b>Checkout</b> und Schlüsselübergabe. Gruppe 3 hat keinen Flug und behält Auto 2; Rückgabe je nach Mietvertrag.</span><span data-l="en"><b>Checkout</b> and key handover. Group 3 has no flight and keeps car 2; return it according to the rental contract.</span></div></li>
     </ol>
   </article>
 </section>
@@ -295,10 +339,18 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
 <section class="page" id="karte" role="tabpanel" hidden>
   <div>
     <h2><span data-l="de">Südwesten Mallorcas</span><span data-l="en">Southwest Mallorca</span></h2>
-    <p class="muted small" style="margin:0"><span data-l="de">Schematische Karte, Routen vereinfacht. Einen Tag antippen, um nur diesen zu zeigen; „Alle Tage“ zeigt alles. Gestrichelt: ohne eigenes Auto (Bus, Taxi, zu Fuss), dünn: Alternative.</span><span data-l="en">Schematic map with simplified routes. Tap a day to show only that day; "All days" shows everything. Dashed: no own car (bus, taxi, on foot), thin: alternative.</span></p>
+    <p class="muted small" style="margin:0"><span data-l="de">Schematische Karte, Routen vereinfacht. Einen Tag antippen, um nur diesen zu zeigen; „Alle Tage“ zeigt alles. Wie man jeweils unterwegs ist (Auto, Bus, Taxi, zu Fuss), steht im Tagesplan.</span><span data-l="en">Schematic map with simplified routes. Tap a day to show only that day; "All days" shows everything. How you get around each time (car, bus, taxi, on foot) is in the day plan.</span></p>
   </div>
   <div class="legend" id="legend"></div>
-  <div class="mapbox"><svg id="map" viewBox="0 0 860 500" role="img" aria-label="Map of southwest Mallorca with trip stops and routes"></svg></div>
+  <ul class="mapkey" aria-label="Legende / Key">
+    <li><svg width="30" height="8" aria-hidden="true"><line x1="2" y1="4" x2="28" y2="4" stroke="var(--d3)" stroke-width="3.6" stroke-linecap="round"/></svg><span data-l="de">Tagesprogramm (Farbe des Tages)</span><span data-l="en">Day programme (day colour)</span></li>
+    <li><svg width="30" height="8" aria-hidden="true"><line x1="2" y1="4" x2="28" y2="4" stroke="var(--air)" stroke-width="3.6" stroke-linecap="round"/></svg><span data-l="de">Fahrt von/zum Flughafen</span><span data-l="en">Airport run</span></li>
+    <li><svg width="30" height="8" aria-hidden="true"><line x1="2" y1="4" x2="28" y2="4" stroke="var(--d3)" stroke-width="2.6" stroke-dasharray="7 6"/></svg><span data-l="de">optional, Vorschlag oder Alternative</span><span data-l="en">optional, suggestion or alternative</span></li>
+    <li><svg width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="8" fill="var(--surface)" stroke="var(--d3)" stroke-width="2" stroke-dasharray="3 2"/></svg><span data-l="de">Ort optional</span><span data-l="en">optional place</span></li>
+    <li><span aria-hidden="true">🚗 🚌 🚕 🚶</span><span data-l="de">Auto, Bus, Taxi, zu Fuss; Alternativen in Klammern. Uhrzeiten und Dauer stehen an den Routen, wenn ein einzelner Tag gewählt ist.</span><span data-l="en">Car, bus, taxi, on foot; alternatives in brackets. Times and durations appear on the routes when a single day is selected.</span></li>
+  </ul>
+  <div class="mapbox" id="mapbox"><svg id="map" viewBox="0 0 860 500" role="img" aria-label="Map of southwest Mallorca with trip stops and routes"></svg><div id="lmap" hidden></div></div>
+  <p class="small muted" id="satnote" style="margin:-12px 0 0"><span data-l="de">Satellitenbild: erscheint automatisch, wenn die Seite ausserhalb von Claude geöffnet wird, z. B. über GitHub Pages oder lokal im Browser.</span><span data-l="en">Satellite view: appears automatically when the page is opened outside Claude, e.g. via GitHub Pages or locally in a browser.</span></p>
   <div class="panel">
     <h3><span data-l="de">Orte auf der Karte</span><span data-l="en">Places on the map</span></h3>
     <ul class="maplist" id="maplist" style="margin-top:8px"></ul>
@@ -535,11 +587,13 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
     <div class="tscroll"><table>
       <thead><tr><th><span data-l="de">Fahrt</span><span data-l="en">Trip</span></th><th><span data-l="de">Standard</span><span data-l="en">Default</span></th><th><span data-l="de">Alternative</span><span data-l="en">Alternative</span></th><th class="num"><span data-l="de">Typische Kosten</span><span data-l="en">Typical cost</span></th></tr></thead>
       <tbody>
-        <tr><td><span data-l="de">Do 23:00 · 4 Pers. + Gepäck</span><span data-l="en">Thu 23:00 · 4 people + luggage</span></td><td><span data-l="de">Auto, 1 Fahrer</span><span data-l="en">car, 1 driver</span></td><td><span data-l="de">Taxi (grösseres Fahrzeug) / vorgebuchter Van</span><span data-l="en">taxi (larger vehicle) / pre-booked van</span></td><td class="num">45–70 € / ≈ 135 €</td></tr>
-        <tr><td><span data-l="de">Fr 18:00 · 1 Pers.</span><span data-l="en">Fri 18:00 · 1 person</span></td><td><span data-l="de">Auto</span><span data-l="en">car</span></td><td>Taxi</td><td class="num">45–70 €</td></tr>
-        <tr><td><span data-l="de">So abends · 1 Pers.</span><span data-l="en">Sun evening · 1 person</span></td><td><span data-l="de">Auto</span><span data-l="en">car</span></td><td>Taxi</td><td class="num">45–70 €</td></tr>
-        <tr><td><span data-l="de">Mo früh · 6. Person</span><span data-l="en">Mon early · 6th person</span></td><td><span data-l="de">Auto 2 hin und zurück</span><span data-l="en">car 2 there and back</span></td><td><span data-l="de">Taxi / 7-Sitzer</span><span data-l="en">taxi / 7-seater</span></td><td class="num"><span data-l="de">45–70 € / Aufpreis erfragen</span><span data-l="en">€45–70 / ask for surcharge</span></td></tr>
-        <tr><td><span data-l="de">Mo 10:00 · Aufräum-Team</span><span data-l="en">Mon 10:00 · clean-up team</span></td><td><span data-l="de">Auto 2, Rückgabe am Flughafen</span><span data-l="en">car 2, returned at the airport</span></td><td>–</td><td class="num">–</td></tr>
+        <tr><td><span data-l="de">Do 11:20 / 12:45 · Ankunft</span><span data-l="en">Thu 11:20 / 12:45 · arrival</span></td><td><span data-l="de">Mietwagen ab Flughafen</span><span data-l="en">rental cars from the airport</span></td><td>–</td><td class="num">–</td></tr>
+        <tr><td><span data-l="de">Do 22:40 · 4 Pers. + Gepäck</span><span data-l="en">Thu 22:40 · 4 people + luggage</span></td><td><span data-l="de">Auto 2, 1 Fahrer</span><span data-l="en">car 2, 1 driver</span></td><td><span data-l="de">Taxi (grösseres Fahrzeug) / vorgebuchter Van</span><span data-l="en">taxi (larger vehicle) / pre-booked van</span></td><td class="num">45–70 € / ≈ 135 €</td></tr>
+        <tr><td><span data-l="de">Fr 17:30 · 1 Pers.</span><span data-l="en">Fri 17:30 · 1 person</span></td><td><span data-l="de">Auto</span><span data-l="en">car</span></td><td>Taxi</td><td class="num">45–70 €</td></tr>
+        <tr><td><span data-l="de">So 18:20 Abflug · 1 Pers.</span><span data-l="en">Sun 18:20 departure · 1 person</span></td><td><span data-l="de">Auto, Abfahrt 15:45</span><span data-l="en">car, leaves 15:45</span></td><td>Taxi</td><td class="num">45–70 €</td></tr>
+        <tr><td><span data-l="de">Mo 08:00 Abflug · Gruppe 1</span><span data-l="en">Mon 08:00 departure · group 1</span></td><td><span data-l="de">Auto 1, Rückgabe am Flughafen</span><span data-l="en">car 1, returned at the airport</span></td><td>Taxi</td><td class="num">45–70 €</td></tr>
+        <tr><td><span data-l="de">Mo 11:10 Abflug · Gruppe 2</span><span data-l="en">Mon 11:10 departure · group 2</span></td><td><span data-l="de">Auto 2 hin und zurück</span><span data-l="en">car 2 there and back</span></td><td>Taxi</td><td class="num">45–70 €</td></tr>
+        <tr><td><span data-l="de">Mo 10:00 · Gruppe 3</span><span data-l="en">Mon 10:00 · group 3</span></td><td><span data-l="de">behält Auto 2</span><span data-l="en">keeps car 2</span></td><td>–</td><td class="num">–</td></tr>
       </tbody>
     </table></div>
     <p class="small muted" style="margin:10px 0 0"><span data-l="de">Taxi mit Taxameter Flughafen–Santa Ponsa laut Transfer-Anbietern ca. 45–70 € je nach Tageszeit und Gepäck. Vorgebuchte Privattransfers: Limousine für 3 ab ca. 80 €, Van für 4–8 ca. 135 € (Beispielangebote 2026). Der Bus A11 fährt direkt Flughafen–Santa Ponsa in ca. 1 Std., ist aber eine Saisonlinie: Fahrplan für November prüfen.</span><span data-l="en">Metered taxi airport–Santa Ponsa approx. €45–70 depending on time of day and luggage, according to transfer providers. Pre-booked private transfers: sedan for 3 from approx. €80, van for 4–8 approx. €135 (sample 2026 quotes). Bus A11 runs directly airport–Santa Ponsa in approx. 1 h, but it's a seasonal line: check the November timetable.</span></p>
@@ -636,6 +690,7 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
     pages.forEach(p=>p.hidden=p.id!==id);
     tabs.forEach(t=>t.setAttribute('aria-selected',t.dataset.p===id?'true':'false'));
     try{localStorage.setItem('mall-tab',id)}catch(e){}
+    if(window.__onTab)window.__onTab(id);
   }
   tabs.forEach(t=>t.addEventListener('click',()=>{show(t.dataset.p);window.scrollTo({top:0})}));
   let start=(location.hash||'').slice(1);
@@ -651,95 +706,154 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
 
   const places=[
     {id:'V',n:{de:'Villa, Costa de la Calma',en:'Villa, Costa de la Calma'},c:[2.4735,39.5155],d:0,big:1},
-    {id:'1',n:{de:'Flughafen Palma (PMI)',en:'Palma airport (PMI)'},c:[2.7388,39.5517],d:1},
-    {id:'2',n:{de:'Porto Pi / Carrefour',en:'Porto Pi / Carrefour'},c:[2.625,39.556],d:1},
-    {id:'3',n:{de:'Eroski Santa Ponça',en:'Eroski Santa Ponça'},c:[2.481,39.519],d:1},
+    {id:'1',n:{de:'Flughafen Palma (PMI)',en:'Palma airport (PMI)'},c:[2.7388,39.5517],d:0,air:1},
+    {id:'2',n:{de:'Porto Pi / Carrefour (Grosseinkauf)',en:'Porto Pi / Carrefour (big shop)'},c:[2.625,39.556],d:1},
+    {id:'3',n:{de:'Eroski Santa Ponça (Einkauf, Variante B)',en:'Eroski Santa Ponça (shop, option B)'},c:[2.481,39.519],d:1,opt:1},
     {id:'4',n:{de:'Port d’Andratx',en:'Port d’Andratx'},c:[2.388,39.545],d:2},
     {id:'5',n:{de:'Sant Elm (Blick Sa Dragonera)',en:'Sant Elm (Sa Dragonera view)'},c:[2.351,39.578],d:2},
     {id:'6',n:{de:'Camp de Mar / S’Illeta',en:'Camp de Mar / S’Illeta'},c:[2.420,39.537],d:2},
     {id:'7',n:{de:'Cala Fornells, Start Wanderung',en:'Cala Fornells, hike start'},c:[2.440,39.535],d:3},
     {id:'8',n:{de:'Torre de Cap Andritxol',en:'Torre de Cap Andritxol'},c:[2.427,39.522],d:3},
-    {id:'9',n:{de:'La Bóveda, Palma',en:'La Bóveda, Palma'},c:[2.646,39.568],d:3},
+    {id:'18',n:{de:'Es Capdellà, Vall-Verda-Runde (Alternative)',en:'Es Capdellà, Vall Verda loop (alternative)'},c:[2.466,39.578],d:3,opt:1},
+    {id:'9',n:{de:'La Bóveda, Palma (Abendessen)',en:'La Bóveda, Palma (dinner)'},c:[2.646,39.568],d:3},
     {id:'10',n:{de:'Agua Bar, Palma',en:'Agua Bar, Palma'},c:[2.646,39.574],d:3},
     {id:'11',n:{de:'Polka Bar, El Terreno',en:'Polka Bar, El Terreno'},c:[2.629,39.567],d:3},
-    {id:'12',n:{de:'New Morrison Bar',en:'New Morrison Bar'},c:[2.667,39.578],d:3},
-    {id:'13',n:{de:'Bierkönig, Arenal (optional)',en:'Bierkönig, Arenal (optional)'},c:[2.749,39.508],d:3},
-    {id:'14',n:{de:'Rendezvous, Peguera',en:'Rendezvous, Peguera'},c:[2.451,39.539],d:4},
-    {id:'15',n:{de:'Bodega Son Puig (Alternative)',en:'Bodega Son Puig (alternative)'},c:[2.528,39.612],d:4},
-    {id:'16',n:{de:'MediaMarkt Ocimax',en:'MediaMarkt Ocimax'},c:[2.637,39.594],d:0},
-    {id:'17',n:{de:'Lidl Peguera',en:'Lidl Peguera'},c:[2.445,39.543],d:0},
-    {id:'18',n:{de:'Es Capdellà, Vall-Verda-Runde (Alternative)',en:'Es Capdellà, Vall Verda loop (alternative)'},c:[2.466,39.578],d:3},
-    {id:'19',n:{de:'Castell de Bellver (Vorschlag)',en:'Castell de Bellver (suggestion)'},c:[2.6195,39.5636],d:3}
+    {id:'12',n:{de:'New Morrison Bar (Alternative)',en:'New Morrison Bar (alternative)'},c:[2.667,39.578],d:3,opt:1},
+    {id:'19',n:{de:'Castell de Bellver (Vorschlag)',en:'Castell de Bellver (suggestion)'},c:[2.613,39.561],d:3,opt:1},
+    {id:'13',n:{de:'Bierkönig, Arenal (optional)',en:'Bierkönig, Arenal (optional)'},c:[2.749,39.508],d:3,opt:1},
+    {id:'14',n:{de:'Rendezvous, Peguera (Mittagessen)',en:'Rendezvous, Peguera (lunch)'},c:[2.451,39.539],d:4},
+    {id:'15',n:{de:'Bodega Son Puig (Alternative)',en:'Bodega Son Puig (alternative)'},c:[2.528,39.612],d:4,opt:1},
+    {id:'16',n:{de:'MediaMarkt Ocimax (bei Bedarf)',en:'MediaMarkt Ocimax (if needed)'},c:[2.637,39.594],d:0},
+    {id:'17',n:{de:'Lidl Peguera (Nachkauf)',en:'Lidl Peguera (top-ups)'},c:[2.445,39.543],d:0}
   ];
+  const V=[2.4735,39.5155], AP=[2.7388,39.5517];
+  const toAir=[V,[2.51,39.530],[2.57,39.537],[2.63,39.556],[2.69,39.570],AP];
+  const L2=(de,en)=>({de,en});
   const days=[
-    {k:1,label:{de:'Do 5.11.',en:'Thu 5 Nov'},v:'--d1',routes:[
-      {p:[[2.7388,39.5517],[2.70,39.578],[2.66,39.588],[2.632,39.570],[2.625,39.556]]},
-      {p:[[2.625,39.556],[2.59,39.548],[2.55,39.538],[2.51,39.532],[2.488,39.523],[2.4735,39.5155]]},
-      {p:[[2.4735,39.5155],[2.50,39.533],[2.56,39.542],[2.62,39.560],[2.68,39.582],[2.7388,39.5517]],off:12}
+    {k:1,label:L2('Do 5.11.','Thu 5 Nov'),v:'--d1',routes:[
+      {p:[AP,[2.70,39.568],[2.665,39.578],[2.638,39.570],[2.625,39.556]],air:1,lp:.3,lb:L2('12:00 · 🚗 15 Min (Auto 1)','12:00 · 🚗 15 min (car 1)')},
+      {p:[[2.625,39.556],[2.59,39.548],[2.55,39.538],[2.51,39.532],[2.488,39.523],V],la:[2.545,39.556],lb:L2('14:00 · 🚗 20 Min (beide Autos)','14:00 · 🚗 20 min (both cars)')},
+      {p:[AP,[2.70,39.568],[2.665,39.578],[2.638,39.570],[2.625,39.556]],air:1,off:-4,la:[2.705,39.598],lb:L2('13:15 · 🚗 15 Min (Auto 2)','13:15 · 🚗 15 min (car 2)')},
+      {p:toAir,air:1,off:3,la:[2.66,39.528],lb:L2('22:10 · 🚗 30–35 Min (🚕)','22:10 · 🚗 30–35 min (🚕)')}
     ]},
-    {k:2,label:{de:'Fr 6.11.',en:'Fri 6 Nov'},v:'--d2',routes:[
-      {p:[[2.4735,39.5155],[2.455,39.540],[2.43,39.552],[2.405,39.552],[2.388,39.545]]},
-      {p:[[2.388,39.545],[2.39,39.565],[2.37,39.578],[2.351,39.578]]},
-      {p:[[2.351,39.578],[2.39,39.575],[2.415,39.570],[2.425,39.552],[2.420,39.537]]},
-      {p:[[2.420,39.537],[2.44,39.543],[2.46,39.536],[2.4735,39.5155]]},
-      {p:[[2.4735,39.5155],[2.51,39.531],[2.56,39.540],[2.62,39.556],[2.68,39.575],[2.7388,39.5517]],off:-12}
+    {k:2,label:L2('Fr 6.11.','Fri 6 Nov'),v:'--d2',routes:[
+      {p:[V,[2.455,39.540],[2.43,39.552],[2.405,39.552],[2.388,39.545]],la:[2.425,39.560],lb:L2('11:00 · 🚗 15 Min','11:00 · 🚗 15 min')},
+      {p:[[2.388,39.545],[2.39,39.565],[2.37,39.578],[2.351,39.578]],la:[2.375,39.612],lb:L2('12:15 · 🚗 15 Min','12:15 · 🚗 15 min')},
+      {p:[[2.351,39.578],[2.39,39.575],[2.415,39.570],[2.425,39.552],[2.420,39.537]],la:[2.445,39.600],lb:L2('15:15 · 🚗 15 Min','15:15 · 🚗 15 min')},
+      {p:[[2.420,39.537],[2.44,39.543],[2.46,39.536],V],la:[2.425,39.507],lb:L2('🚗 10 Min','🚗 10 min')},
+      {p:toAir,air:1,lp:.5,lb:L2('16:50 · 🚗 30–35 Min (🚕)','16:50 · 🚗 30–35 min (🚕)')}
     ]},
-    {k:3,label:{de:'Sa 7.11.',en:'Sat 7 Nov'},v:'--d3',routes:[
-      {p:[[2.4735,39.5155],[2.455,39.533],[2.440,39.535]]},
-      {p:[[2.440,39.535],[2.432,39.528],[2.427,39.522]],dash:1},
-      {p:[[2.452,39.540],[2.455,39.553],[2.458,39.566],[2.466,39.578],[2.472,39.566],[2.464,39.551],[2.452,39.540]],dash:1,alt:1},
-      {p:[[2.4735,39.5155],[2.50,39.540],[2.56,39.552],[2.61,39.565],[2.646,39.568]],dash:1},
-      {p:[[2.646,39.568],[2.69,39.560],[2.725,39.535],[2.749,39.508]],dash:1,alt:1},
-      {p:[[2.646,39.568],[2.632,39.563],[2.6195,39.5636],[2.629,39.567]],dash:1,alt:1},
-      {p:[[2.646,39.574],[2.629,39.567],[2.667,39.578]],dash:1}
+    {k:3,label:L2('Sa 7.11.','Sat 7 Nov'),v:'--d3',routes:[
+      {p:[V,[2.455,39.533],[2.440,39.535]],la:[2.478,39.496],lb:L2('10:15 · 🚗 7 Min','10:15 · 🚗 7 min')},
+      {p:[[2.440,39.535],[2.432,39.528],[2.427,39.522]],la:[2.395,39.505],lb:L2('10:30 · 🚶 1:20–2:15 Std.','10:30 · 🚶 1:20–2:15 h')},
+      {p:[[2.452,39.540],[2.455,39.553],[2.458,39.566],[2.466,39.578],[2.472,39.566],[2.464,39.551],[2.452,39.540]],opt:1,la:[2.475,39.602],lb:L2('Alt. 9:00 · 🚶 ca. 3 Std. (🚗 5 Min)','Alt. 9:00 · 🚶 ≈3 h (🚗 5 min)')},
+      {p:[V,[2.50,39.540],[2.56,39.552],[2.61,39.565],[2.646,39.568]],lp:.42,lb:L2('15:00 · 🚌 25 Min · zurück 🚕','15:00 · 🚌 25 min · back 🚕')},
+      {p:[[2.646,39.568],[2.646,39.574],[2.629,39.567]],la:[2.628,39.586],lb:L2('22:00 · 🚶 5 Min, dann 🚕','22:00 · 🚶 5 min, then 🚕')},
+      {p:[[2.646,39.574],[2.667,39.578]],opt:1,la:[2.705,39.578],lb:L2('🚕 10 Min','🚕 10 min')},
+      {p:[[2.646,39.568],[2.628,39.560],[2.613,39.561],[2.629,39.567]],opt:1,la:[2.62,39.524],lb:L2('16:30 · 🚕 10 Min (🚶 zurück)','16:30 · 🚕 10 min (🚶 back)')},
+      {p:[[2.646,39.568],[2.69,39.560],[2.725,39.535],[2.749,39.508]],opt:1,lp:.62,lb:L2('opt. 18:00 · 🚕 15–20 Min','opt. 18:00 · 🚕 15–20 min')}
     ]},
-    {k:4,label:{de:'So 8.11.',en:'Sun 8 Nov'},v:'--d4',routes:[
-      {p:[[2.4735,39.5155],[2.462,39.526],[2.455,39.536],[2.451,39.539]],dash:1},
-      {p:[[2.4735,39.5155],[2.49,39.545],[2.506,39.566],[2.515,39.590],[2.528,39.612]],dash:1,alt:1},
-      {p:[[2.4735,39.5155],[2.52,39.522],[2.58,39.528],[2.64,39.548],[2.70,39.552],[2.7388,39.5517]],off:8}
+    {k:4,label:L2('So 8.11.','Sun 8 Nov'),v:'--d4',routes:[
+      {p:[V,[2.462,39.526],[2.455,39.536],[2.451,39.539]],la:[2.415,39.558],lb:L2('12:45 · 🚶 30 Min (🚕 5 Min)','12:45 · 🚶 30 min (🚕 5 min)')},
+      {p:[V,[2.49,39.545],[2.506,39.566],[2.515,39.590],[2.528,39.612]],opt:1,la:[2.578,39.633],lb:L2('Alt. · 🚗 30 Min (Transfer)','Alt. · 🚗 30 min (transfer)')},
+      {p:toAir,air:1,lp:.55,lb:L2('15:45 · 🚗 30–35 Min (🚕)','15:45 · 🚗 30–35 min (🚕)')}
     ]},
-    {k:5,label:{de:'Mo 9.11.',en:'Mon 9 Nov'},v:'--d5',routes:[
-      {p:[[2.4735,39.5155],[2.51,39.528],[2.57,39.535],[2.63,39.553],[2.69,39.565],[2.7388,39.5517]]}
+    {k:5,label:L2('Mo 9.11.','Mon 9 Nov'),v:'--d5',routes:[
+      {p:toAir,air:1,lp:.3,lb:L2('05:15 · 🚗 30–35 Min (Flug 08:00)','05:15 · 🚗 30–35 min (flight 08:00)')},
+      {p:toAir,air:1,off:3,la:[2.66,39.535],lb:L2('08:30 · 🚗 hin & zurück (Flug 11:10)','08:30 · 🚗 there & back (flight 11:10)')}
     ]}
   ];
+  // Position eines Etiketts: feste Koordinate oder Anteil entlang der Linie
+  function labelLL(r){
+    if(r.la) return r.la;
+    const f=r.lp??.5, seg=[];let tot=0;
+    for(let i=1;i<r.p.length;i++){const a=P(r.p[i-1]),b=P(r.p[i]);const l=Math.hypot(b[0]-a[0],b[1]-a[1]);seg.push(l);tot+=l;}
+    let need=tot*f;
+    for(let i=0;i<seg.length;i++){if(need<=seg[i]||i===seg.length-1){const t=seg[i]?Math.min(1,need/seg[i]):0;const a=r.p[i],b=r.p[i+1];return [a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];}need-=seg[i];}
+    return r.p[0];
+  }
+
   const svg=document.getElementById('map');
   const NS='http://www.w3.org/2000/svg';
   const el=(t,a,parent)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(parent||svg).appendChild(e);return e;};
-  el('rect',{x:0,y:0,width:860,height:500,fill:'var(--sea)'});
+  // Definitionen: Meer-Verlauf, Schatten, Relief-Weichzeichner, Land-Clip
+  const defs=el('defs',{});
+  const rg=el('radialGradient',{id:'seaGrad',cx:'45%',cy:'45%',r:'75%'},defs);
+  el('stop',{offset:'0%',style:'stop-color:var(--sea)'},rg);el('stop',{offset:'100%',style:'stop-color:var(--sea2)'},rg);
+  const fs=el('filter',{id:'pinShadow',x:'-50%',y:'-50%',width:'200%',height:'200%'},defs);
+  el('feDropShadow',{dx:0,dy:1.2,stdDeviation:1.4,'flood-opacity':.35},fs);
+  const fb=el('filter',{id:'soft',x:'-20%',y:'-20%',width:'140%',height:'140%'},defs);
+  el('feGaussianBlur',{stdDeviation:18},fb);
+  const cp=el('clipPath',{id:'landClip'},defs);el('polygon',{points:pts(coast)},cp);
+
+  el('rect',{x:0,y:0,width:860,height:500,fill:'url(#seaGrad)'});
+  el('polygon',{points:pts(coast),fill:'none',stroke:'var(--surf)','stroke-width':7,'stroke-linejoin':'round',opacity:.7});
   el('polygon',{points:pts(coast),fill:'var(--land)',stroke:'var(--landline)','stroke-width':1.2,'stroke-linejoin':'round'});
+  // Gebirgsrelief der Tramuntana, weich und auf Land beschnitten
+  const relief=el('g',{'clip-path':'url(#landClip)'});
+  [[2.40,39.62,120,38,-28],[2.50,39.66,150,40,-25],[2.53,39.60,70,26,-20],[2.45,39.585,60,20,-30],[2.60,39.68,140,40,-22]].forEach(([lo,la,rx,ry,rot])=>{const [x,y]=P([lo,la]);el('ellipse',{cx:x,cy:y,rx,ry,transform:`rotate(${rot} ${x} ${y})`,fill:'var(--relief)',filter:'url(#soft)'},relief);});
+
   const labels=[];
   const lab=(t,c,o)=>{const [x,y]=P(c);const e=el('text',Object.assign({x,y,fill:'var(--muted)','font-size':12,'font-family':'IBM Plex Mono, monospace','text-anchor':'middle'},o||{}));labels.push([e,t]);};
-  lab({de:'Serra de Tramuntana',en:'Serra de Tramuntana'},[2.50,39.645],{'font-style':'italic'});
-  lab({de:'PALMA',en:'PALMA'},[2.655,39.592],{'font-size':13,'letter-spacing':'2'});
-  lab({de:'Bucht von Palma',en:'Bay of Palma'},[2.64,39.50],{'font-style':'italic',fill:'var(--accent)'});
-  lab({de:'Mittelmeer',en:'Mediterranean'},[2.38,39.47],{'font-style':'italic',fill:'var(--accent)'});
-  lab({de:'Calvià',en:'Calvià'},[2.506,39.572]);
-  lab({de:'Andratx',en:'Andratx'},[2.418,39.582]);
-  lab({de:'Arenal',en:'Arenal'},[2.770,39.520]);
-  lab({de:'Sa Dragonera',en:'Sa Dragonera'},[2.32,39.598],{'font-size':11});
+  lab(L2('Serra de Tramuntana','Serra de Tramuntana'),[2.53,39.648],{'font-style':'italic','letter-spacing':'1'});
+  lab(L2('PALMA','PALMA'),[2.668,39.606],{'font-size':13,'letter-spacing':'3','font-weight':500});
+  lab(L2('Bucht von Palma','Bay of Palma'),[2.64,39.49],{'font-style':'italic',fill:'var(--accent)'});
+  lab(L2('Mittelmeer','Mediterranean'),[2.38,39.465],{'font-style':'italic',fill:'var(--accent)'});
+  lab(L2('Calvià','Calvià'),[2.506,39.574]);
+  lab(L2('Andratx','Andratx'),[2.402,39.577]);
+  lab(L2('Arenal','Arenal'),[2.775,39.522]);
+  lab(L2('Sa Dragonera','Sa Dragonera'),[2.318,39.600],{'font-size':11});
   (()=>{const [x,y]=P([2.322,39.585]);el('ellipse',{cx:x,cy:y,rx:14,ry:5,transform:`rotate(-40 ${x} ${y})`,fill:'var(--land)',stroke:'var(--landline)'});})();
 
   const routeG=el('g',{});
-  const groups={};
+  const lblLayer=el('g',{});
+  const groups={}, lblGroups={}, lblItems=[];
   days.forEach(d=>{
     const g=el('g',{'data-day':d.k},routeG);groups[d.k]=g;
-    d.routes.forEach(r=>{
-      el('polyline',{points:pts(r.p),fill:'none',stroke:`var(${d.v})`,'stroke-width':r.alt?2.5:3.5,'stroke-linecap':'round','stroke-linejoin':'round','stroke-dasharray':r.dash?'2 7':'none',opacity:r.alt?.75:1,transform:r.off?`translate(0 ${r.off*0.25})`:''},g);
+    const lg=el('g',{'data-day':d.k},lblLayer);lblGroups[d.k]=lg;
+    [...d.routes].sort((a,b)=>(b.air?1:0)-(a.air?1:0)).forEach(r=>{
+      const col=r.air?'var(--air)':`var(${d.v})`;
+      const tf=r.off?`translate(0 ${r.off})`:'';
+      el('polyline',{points:pts(r.p),fill:'none',stroke:'var(--surface)','stroke-width':r.opt?4.6:6,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.85,transform:tf},g);
+      el('polyline',{points:pts(r.p),fill:'none',stroke:col,'stroke-width':r.opt?2.6:3.6,'stroke-linecap':r.opt?'butt':'round','stroke-linejoin':'round','stroke-dasharray':r.opt?'7 6':'none',transform:tf},g);
+      if(r.lb){
+        const [x,y]=P(labelLL(r));
+        const lg2=el('g',{transform:`translate(${x.toFixed(1)} ${(y+(r.off||0)).toFixed(1)})`},lg);
+        const rect=el('rect',{x:0,y:-10,height:20,rx:10,fill:'var(--surface)',stroke:col,'stroke-width':1.4,'stroke-dasharray':r.opt?'4 3':'none',filter:'url(#pinShadow)'},lg2);
+        const tx=el('text',{x:0,y:4,'text-anchor':'middle','font-size':11,'font-weight':500,fill:'var(--fg)','font-family':'IBM Plex Mono, monospace'},lg2);
+        lblItems.push({r,rect,tx});
+      }
     });
   });
+  const mctx=document.createElement('canvas').getContext('2d');
+  function layoutLabels(){
+    mctx.font='500 11px "IBM Plex Mono", ui-monospace, monospace';
+    lblItems.forEach(({r,rect,tx})=>{
+      const s=T(r.lb);if(tx.textContent!==s)tx.textContent=s;
+      let w=0;try{w=tx.getComputedTextLength();}catch(e){}
+      if(!w){const em=(s.match(/\p{Extended_Pictographic}/gu)||[]).length;w=mctx.measureText(s).width+em*6;}
+      w=Math.ceil(w)+18;rect.setAttribute('x',(-w/2).toFixed(1));rect.setAttribute('width',w);
+    });
+  }
   const pinG=el('g',{});
   const dayColor=d=>d===0?'var(--accent)':`var(--d${d})`;
+  const pinColor=p=>p.air?'var(--air)':dayColor(p.d);
   places.forEach(p=>{
     const [x,y]=P(p.c);
-    const g=el('g',{'data-day':p.d},pinG);
+    const g=el('g',{'data-day':p.d,filter:'url(#pinShadow)'},pinG);
     if(p.big){
       el('rect',{x:x-11,y:y-11,width:22,height:22,rx:5,fill:'var(--fg)',stroke:'var(--surface)','stroke-width':2},g);
       const t=el('text',{x,y:y+4.5,'text-anchor':'middle','font-size':12,'font-weight':700,fill:'var(--surface)','font-family':'IBM Plex Mono, monospace'},g);t.textContent='V';
+    }else if(p.opt){
+      el('circle',{cx:x,cy:y,r:9,fill:'var(--surface)',stroke:pinColor(p),'stroke-width':2,'stroke-dasharray':'3 2'},g);
+      const t=el('text',{x,y:y+3.6,'text-anchor':'middle','font-size':p.id.length>1?9:10,'font-weight':500,fill:pinColor(p),'font-family':'IBM Plex Mono, monospace'},g);t.textContent=p.id;
     }else{
-      el('circle',{cx:x,cy:y,r:9,fill:dayColor(p.d),stroke:'var(--surface)','stroke-width':1.6},g);
+      el('circle',{cx:x,cy:y,r:9,fill:pinColor(p),stroke:'var(--surface)','stroke-width':1.6},g);
       const t=el('text',{x,y:y+3.6,'text-anchor':'middle','font-size':p.id.length>1?9:10,'font-weight':500,fill:'#fff','font-family':'IBM Plex Mono, monospace'},g);t.textContent=p.id;
     }
   });
+  // Etiketten über den Punkten
+  svg.appendChild(lblLayer);
   const IX=700,IY=380,IS=110;
   const ip=([lon,lat])=>[IX+(lon-2.30)*C*IS,IY+(40.0-lat)*IS];
   const ig=el('g',{});
@@ -755,6 +869,54 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
   el('line',{x1:sx+kmPx*5,y1:sy-4,x2:sx+kmPx*5,y2:sy+4,stroke:'var(--fg)','stroke-width':2});
   const st=el('text',{x:sx+kmPx*5+8,y:sy+4,'font-size':12,fill:'var(--fg)','font-family':'IBM Plex Mono, monospace'});st.textContent='5 km';
 
+  /* ---------- Satellitenkarte (nur wo Kartenkacheln geladen werden dürfen) ---------- */
+  const SAT={img:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+             ref:'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}'};
+  const SC={1:'#b9e35e',2:'#ff7a85',3:'#82bcff',4:'#ea9fe9',5:'#d7dbdd',air:'#ffb13d',acc:'#4fc1c4'};
+  const mapbox=document.getElementById('mapbox'), lmapEl=document.getElementById('lmap'), satNote=document.getElementById('satnote');
+  let satOK=false, satMap=null, satGroups={}, satPins=[], satLabels=[];
+  (function probe(){
+    const img=new Image();let done=false;
+    const tm=setTimeout(()=>{done=true;},6000);
+    img.onload=()=>{if(done)return;done=true;clearTimeout(tm);satOK=true;
+      const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';s.onload=maybeInitSat;document.head.appendChild(s);};
+    img.onerror=()=>{done=true;clearTimeout(tm);};
+    img.src=SAT.img.replace('{z}','10').replace('{y}','389').replace('{x}','519');
+  })();
+  function mapVisible(){const pg=document.getElementById('karte');return pg&&!pg.hidden;}
+  function maybeInitSat(){if(satOK&&window.L&&!satMap&&mapVisible())initSat();}
+  function initSat(){
+    mapbox.classList.add('sat');lmapEl.hidden=false;if(satNote)satNote.hidden=true;
+    const m=L.map(lmapEl,{scrollWheelZoom:false,zoomSnap:.5});
+    L.tileLayer(SAT.img,{maxZoom:18,attribution:'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'}).addTo(m);
+    L.tileLayer(SAT.ref,{maxZoom:18,opacity:.8}).addTo(m);
+    days.forEach(d=>{
+      const g=L.layerGroup();
+      [...d.routes].sort((a,b)=>(b.air?1:0)-(a.air?1:0)).forEach(r=>{
+        const ll=r.p.map(([lo,la])=>[la,lo]);const col=r.air?SC.air:SC[d.k];
+        L.polyline(ll,{color:'#0b1418',weight:r.opt?5:7,opacity:.5,interactive:false}).addTo(g);
+        L.polyline(ll,{color:col,weight:r.opt?2.8:4,opacity:1,dashArray:r.opt?'8 7':null,lineCap:r.opt?'butt':'round',interactive:false}).addTo(g);
+        if(r.lb){const pos=labelLL(r);const mk=L.marker([pos[1],pos[0]],{interactive:false,keyboard:false,icon:satLabelIcon(r,col)}).addTo(g);satLabels.push({mk,r,col});}
+      });
+      satGroups[d.k]=g;
+    });
+    places.forEach(p=>{
+      const col=p.big?'#1d2a2c':(p.air?SC.air:(p.d===0?SC.acc:SC[p.d]));
+      const html=p.big?'<span class="lp big">V</span>':`<span class="lp${p.opt?' opt':''}" style="--pc:${col}">${p.id}</span>`;
+      const mk=L.marker([p.c[1],p.c[0]],{keyboard:false,title:T(p.n),icon:L.divIcon({className:'lpin',html,iconSize:[22,22],iconAnchor:[11,11]})}).addTo(m);
+      satPins.push({mk,p});
+    });
+    satMap=m;refresh();
+  }
+  function satLabelIcon(r,col){return L.divIcon({className:'ltime',iconSize:[0,0],html:`<span style="border-color:${col};${r.opt?'border-style:dashed;':''}">${T(r.lb)}</span>`});}
+  function fitSat(){
+    if(!satMap)return;
+    const pts2=[];
+    days.forEach(d=>{if(sel===0||sel===d.k)d.routes.forEach(r=>r.p.forEach(([lo,la])=>pts2.push([la,lo])));});
+    if(pts2.length)satMap.fitBounds(pts2,{padding:[40,40],maxZoom:14});
+  }
+  window.__onTab=id=>{if(id!=='karte')return;layoutLabels();if(!satMap)maybeInitSat();else{satMap.invalidateSize();fitSat();}};
+
   const legend=document.getElementById('legend');
   let sel=1; // ein Tag aktiv, Start Donnerstag; 0 = alle Tage
   const legendBtns=[];
@@ -768,24 +930,36 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
   legend.appendChild(allBtn);
   function refresh(){
     const on=k=>sel===0||sel===k;
-    Object.keys(groups).forEach(k=>groups[k].style.display=on(+k)?'':'none');
+    Object.keys(groups).forEach(k=>{groups[k].style.display=on(+k)?'':'none';lblGroups[k].style.display=(sel===+k)?'':'none';});
     pinG.querySelectorAll('g').forEach(g=>{const d=+g.dataset.day;g.style.opacity=(d<=0||on(d))?1:.2;});
     legendBtns.forEach(([b,d])=>b.setAttribute('aria-pressed',sel===d.k?'true':'false'));
     allBtn.setAttribute('aria-pressed',sel===0?'true':'false');
+    layoutLabels();
+    if(satMap){
+      Object.keys(satGroups).forEach(k=>{const g=satGroups[k];if(on(+k))g.addTo(satMap);else g.remove();});
+      lmapEl.classList.toggle('all-days',sel===0);
+      satPins.forEach(({mk,p})=>mk.setOpacity((p.d<=0||on(p.d))?1:.35));
+      fitSat();
+    }
   }
   const ml=document.getElementById('maplist');
   function renderMapText(){
     labels.forEach(([e,t])=>e.textContent=T(t));
+    layoutLabels();
     legendBtns.forEach(([b,d])=>{b.innerHTML=`<i></i>${T(d.label)}`;});
     allBtn.innerHTML=`<i></i>${LANG==='en'?'All days':'Alle Tage'}`;
     ml.innerHTML='';
     places.forEach(p=>{
       const li=document.createElement('li');
-      const col=p.big?'var(--fg)':dayColor(p.d);
-      li.innerHTML=`<span class="pin" style="--c:${col};${p.big?'border-radius:5px;color:var(--surface)':''}">${p.id}</span><span>${T(p.n)}</span>`;
+      const col=p.big?'var(--fg)':pinColor(p);
+      const st=p.big?'border-radius:5px;color:var(--surface)':(p.opt?'background:var(--surface);color:'+col+';border:2px dashed '+col:'');
+      li.innerHTML=`<span class="pin" style="--c:${col};${st}">${p.id}</span><span>${T(p.n)}</span>`;
       ml.appendChild(li);
     });
+    satLabels.forEach(({mk,r,col})=>mk.setIcon(satLabelIcon(r,col)));
+    satPins.forEach(({mk,p})=>{if(mk.getElement())mk.getElement().title=T(p.n);});
   }
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>layoutLabels());
 
   /* ---------- Budget ---------- */
   const rows=[
