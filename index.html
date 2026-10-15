@@ -7,7 +7,7 @@
 :root{
   --bg:#f3f5f4; --surface:#ffffff; --fg:#1d2a2c; --muted:#5b6b6d; --line:#d5dedd;
   --sea:#cfe3e6; --sea2:#b3d1d8; --relief:#d5d9c0; --surf:#f6faf9; --land:#ecebe2; --landline:#b9b6a6; --accent:#0e6e74;
-  --d1:#5f7d1f; --d2:#b8323f; --d3:#2f5d9b; --d4:#7a3b78; --d5:#6a6f72; --air:#c77700;
+  --d1:#5f7d1f; --d2:#b8323f; --d3:#2f5d9b; --d4:#7a3b78; --d5:#6a6f72; --air:#c77700; --c-food:#2a78d6; --c-drinks:#eb6834; --c-travel:#1baf7a; --c-other:#eda100;
   --warn-bg:#fff2dc; --warn-fg:#7a4b00; --ok-bg:#e3f2ea; --ok-fg:#1f5d3c; --info-bg:#e2eef0; --info-fg:#164c52; --bad:#a3242f;
   --font-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
   --font-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
@@ -16,12 +16,12 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#121a1c; --surface:#1a2427; --fg:#e4ecea; --muted:#9aaeae; --line:#2e3d40;
   --sea:#17323a; --sea2:#0e2228; --relief:#383f33; --surf:#2b4b53; --land:#2a2f2b; --landline:#4a5148; --accent:#4fc1c4;
-  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae; --air:#f2a93b;
+  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae; --air:#f2a93b; --c-food:#3987e5; --c-drinks:#d95926; --c-travel:#199e70; --c-other:#c98500;
   --warn-bg:#3a2d12; --warn-fg:#f3cf8a; --ok-bg:#16332a; --ok-fg:#9ad8b6; --info-bg:#163036; --info-fg:#a6dde0; --bad:#ff8a93; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#121a1c; --surface:#1a2427; --fg:#e4ecea; --muted:#9aaeae; --line:#2e3d40;
   --sea:#17323a; --sea2:#0e2228; --relief:#383f33; --surf:#2b4b53; --land:#2a2f2b; --landline:#4a5148; --accent:#4fc1c4;
-  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae; --air:#f2a93b;
+  --d1:#a2c45a; --d2:#f0717b; --d3:#7aa8ec; --d4:#c98ac6; --d5:#a5abae; --air:#f2a93b; --c-food:#3987e5; --c-drinks:#d95926; --c-travel:#199e70; --c-other:#c98500;
   --warn-bg:#3a2d12; --warn-fg:#f3cf8a; --ok-bg:#16332a; --ok-fg:#9ad8b6; --info-bg:#163036; --info-fg:#a6dde0; --bad:#ff8a93; color-scheme:dark}
 
 /* Sprachumschaltung */
@@ -119,6 +119,29 @@ td.num,th.num{text-align:right;font-family:var(--font-mono);font-variant-numeric
 .bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden;display:flex}
 .bar span{display:block;height:100%}
 
+.pie-wrap{display:flex;flex-wrap:wrap;align-items:center;gap:20px 36px;margin-top:10px}
+.pie-wrap svg{flex:0 0 auto;max-width:100%;height:auto}
+.pie-legend{list-style:none;margin:0;padding:0;display:grid;gap:8px;min-width:0;flex:1 1 200px}
+.pie-legend li{display:grid;grid-template-columns:14px 1fr auto;align-items:center;gap:10px;font-size:15px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.pie-legend i{width:12px;height:12px;border-radius:3px;background:var(--cc)}
+.pie-legend b{font-weight:500}
+.incl{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:10px}
+.incl li{display:grid;grid-template-columns:12px 1fr;column-gap:10px;font-size:15px}
+.incl li::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--cc);margin-top:6px;grid-row:span 2}
+.incl li b{font-weight:700}
+.incl li > span{color:var(--muted);font-size:14px}
+.cdot{display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--cc);margin-right:7px;vertical-align:middle}
+.adm-form{display:flex;flex-direction:column;gap:6px;max-width:360px}
+.adm-row{display:flex;gap:8px}
+.adm-row input{flex:1;min-width:0;font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+.adm-form button,.ghost{font:inherit;font-weight:700;padding:8px 14px;border-radius:8px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);cursor:pointer}
+.ghost{background:none;color:var(--fg);font-weight:500;padding:5px 12px;font-size:14px}
+.adm-form button:disabled{opacity:.6;cursor:wait}
+#adm-err{color:var(--bad);margin:2px 0 0}
+.adm-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+#adm-body{display:flex;flex-direction:column;gap:22px}
+#adm-body[hidden]{display:none}
+#p-n{width:72px}
 .wx{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px}
 .wx div{border-top:2px solid var(--accent);padding-top:8px}
 .wx strong{font-family:var(--font-display);font-size:28px;display:block;line-height:1.1}
@@ -157,6 +180,7 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
     <button role="tab" data-p="budget" id="t-budget">Budget</button>
     <button role="tab" data-p="wetter" id="t-wetter"><span data-l="de">Wetter &amp; Packliste</span><span data-l="en">Weather &amp; packing</span></button>
     <button role="tab" data-p="quellen" id="t-quellen"><span data-l="de">Quellen</span><span data-l="en">Sources</span></button>
+    <button role="tab" data-p="admin" id="t-admin">Admin</button>
   </div>
 </nav>
 
@@ -221,7 +245,7 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
 
   <div class="panel">
     <h3><span data-l="de">Grobe Kosten</span><span data-l="en">Rough costs</span></h3>
-    <p class="small" style="margin:4px 0 0"><span data-l="de">Mit den Standardannahmen im Budget-Reiter landet ihr bei rund</span><span data-l="en">With the default assumptions in the Budget tab you end up at around</span> <b class="mono" id="ov-total">–</b> <span data-l="de">gesamt, also etwa</span><span data-l="en">in total, roughly</span> <b class="mono" id="ov-pp">–</b> <span data-l="de">pro Person, ohne Villa, Flüge, Mietwagen-Grundpreis und Flughafen-Fahrten.</span><span data-l="en">per person, excluding villa, flights, the base car-rental price and airport transfers.</span></p>
+    <p class="small" style="margin:4px 0 0"><span data-l="de">Die Gemeinschaftskasse liegt bei rund</span><span data-l="en">The shared kitty comes to around</span> <b class="mono" id="ov-total">–</b> <span data-l="de">gesamt, also etwa</span><span data-l="en">in total, roughly</span> <b class="mono" id="ov-pp">–</b> <span data-l="de">pro Person bei 11 Personen, ohne Villa, Flüge, Mietwagen und Flughafen-Taxis. Details im Reiter Budget.</span><span data-l="en">per person for 11 people, excluding villa, flights, rental cars and airport taxis. Details in the Budget tab.</span></p>
   </div>
 </section>
 
@@ -530,21 +554,48 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
 <!-- BUDGET -->
 <section class="page budget" id="budget" role="tabpanel" hidden>
   <div class="panel">
-    <h2><span data-l="de">Budget-Rechner</span><span data-l="en">Budget calculator</span></h2>
-    <p class="small muted" style="margin:0 0 12px"><span data-l="de">Schätzwerte, ohne Villa, Flüge und Mietwagen-Grundpreis. Beträge anpassen, Optionen umstellen, die Summe rechnet mit.</span><span data-l="en">Estimates, excluding villa, flights and the base car-rental price. Change amounts or options and the total updates.</span></p>
+    <h2><span data-l="de">Gemeinschaftskasse</span><span data-l="en">Shared kitty</span></h2>
+    <p class="small muted" style="margin:0 0 14px"><span data-l="de">Geschätzte gemeinsame Kosten vor Ort, geplant für <b id="p-plan">11</b> Personen. Nicht enthalten: Villa, Flüge, Mietwagen und Flughafen-Taxis.</span><span data-l="en">Estimated shared costs on the island, planned for <b>11</b> people. Not included: villa, flights, rental cars and airport taxis.</span></p>
     <div class="totals">
-      <div><div class="lbl"><span data-l="de">Gesamt</span><span data-l="en">Total</span></div><div class="big mono" id="b-total">–</div></div>
-      <div><div class="lbl"><span data-l="de">pro Person</span><span data-l="en">per person</span> (<span id="b-n">11</span>)</div><div class="big mono" id="b-pp">–</div></div>
-      <div><label class="lbl" for="persons"><span data-l="de">Personen</span><span data-l="en">People</span></label><br><input type="number" id="persons" min="1" value="11"></div>
+      <div><div class="lbl"><span data-l="de">Gesamt</span><span data-l="en">Total</span></div><div class="big mono" id="p-total">–</div></div>
+      <div><label class="lbl" for="p-n"><span data-l="de">Teilen durch</span><span data-l="en">Split between</span></label><br><input type="number" id="p-n" min="1" max="40" value="11"> <span class="small muted"><span data-l="de">Personen</span><span data-l="en">people</span></span></div>
+      <div><div class="lbl"><span data-l="de">Rate pro Person</span><span data-l="en">Share per person</span></div><div class="big mono" id="p-pp">–</div></div>
     </div>
-    <div class="bar" id="b-bar" style="margin-top:14px" aria-hidden="true"></div>
+    <p class="small muted" style="margin:12px 0 0"><span data-l="de">Rate aufgerundet auf ganze Euro. Abgerechnet wird nach den echten Belegen.</span><span data-l="en">Share rounded up to whole euros. Final settlement follows the actual receipts.</span></p>
   </div>
+
   <div class="panel">
-    <div class="tscroll"><table>
-      <thead><tr><th><span data-l="de">Posten</span><span data-l="en">Item</span></th><th>Option</th><th class="num"><span data-l="de">Betrag</span><span data-l="en">Amount</span></th><th class="num"><span data-l="de">Summe</span><span data-l="en">Subtotal</span></th></tr></thead>
-      <tbody id="b-rows"></tbody>
-    </table></div>
-    <p class="small muted" style="margin:10px 0 0"><span data-l="de">„pP“ = pro Person, sonst Pauschale für die Gruppe. Taxi Palma–Santa Ponsa tagsüber ca. 26–32 €. Restaurant- und Barpreise sind eigene Schätzungen. Touristensteuer: prüfen, ob sie im Villapreis enthalten ist.</span><span data-l="en">"pp" = per person, otherwise a flat amount for the group. Taxi Palma–Santa Ponsa approx. €26–32 in daytime. Restaurant and bar prices are my own estimates. Tourist tax: check whether it's included in the villa price.</span></p>
+    <h3><span data-l="de">Wofür das Geld ausgegeben wird</span><span data-l="en">What the money goes on</span></h3>
+    <div class="pie-wrap">
+      <svg id="pie" viewBox="0 0 200 200" width="200" height="200" role="img" aria-labelledby="pie-desc"><desc id="pie-desc">Anteile der Kategorien am Gesamtbudget</desc></svg>
+      <ul class="pie-legend" id="pie-legend"></ul>
+    </div>
+    <p class="small muted" style="margin:12px 0 0"><span data-l="de">Restaurant-Besuche zählen samt Getränken zu „Essen“. „Alkohol &amp; Getränke“ umfasst Getränke für die Villa, Sangria, Bars und die Weinprobe.</span><span data-l="en">Restaurant meals count towards "Food", drinks included. "Alcohol &amp; drinks" covers drinks for the villa, sangria, bars and the wine tasting.</span></p>
+  </div>
+
+  <div class="panel">
+    <h3><span data-l="de">Was inklusive ist</span><span data-l="en">What's included</span></h3>
+    <ul class="incl">
+      <li style="--cc:var(--c-food)"><b><span data-l="de">Do · Grosseinkauf in Porto Pi</span><span data-l="en">Thu · big shop at Porto Pi</span></b><span data-l="de">Grosszügig eingekauft: Frühstück für alle Tage, der gemeinsame Kochabend am Donnerstag, Grillgut und Gemüse fürs BBQ am Freitag, Snacks und das Resteessen am Sonntag.</span><span data-l="en">Shopping on the generous side: breakfast for every day, Thursday's cooking night, meat and veg for Friday's BBQ, snacks and Sunday's leftovers dinner.</span></li>
+      <li style="--cc:var(--c-drinks)"><b><span data-l="de">Getränke für die Villa</span><span data-l="en">Drinks for the villa</span></b><span data-l="de">Reichlich Bier, Wein, Softdrinks und Wasser für die Abende in der Villa.</span><span data-l="en">Plenty of beer, wine, soft drinks and water for the evenings at the villa.</span></li>
+      <li style="--cc:var(--c-food)"><b><span data-l="de">Fr · Mittagessen in Port d'Andratx</span><span data-l="en">Fri · lunch in Port d'Andratx</span></b><span data-l="de">Ein Hauptgericht mit Getränken (Wein, Bier oder Softdrinks) pro Person am Hafen, z. B. Miramar de Giuliano (Fisch, Paella, mallorquinische Küche).</span><span data-l="en">One main course with drinks (wine, beer or soft drinks) per person by the harbour, e.g. Miramar de Giuliano (fish, paella, Mallorcan dishes).</span></li>
+      <li style="--cc:var(--c-drinks)"><b><span data-l="de">Fr · Sangria-Workshop</span><span data-l="en">Fri · sangria workshop</span></b><span data-l="de">Rotwein, Cava, Weisswein, Brandy, Orangenlikör, Früchte und Eis für drei Rezepte im Team-Wettbewerb.</span><span data-l="en">Red wine, cava, white wine, brandy, orange liqueur, fruit and ice for three recipes in a team contest.</span></li>
+      <li style="--cc:var(--c-other)"><b><span data-l="de">Fr · BBQ &amp; Karaoke</span><span data-l="en">Fri · BBQ &amp; karaoke</span></b><span data-l="de">Das Grillgut kommt aus dem Grosseinkauf, dazu ein Karaoke-Mikrofon für den Abend.</span><span data-l="en">The BBQ food comes from the big shop, plus a karaoke mic for the night.</span></li>
+      <li style="--cc:var(--c-travel)"><b><span data-l="de">Sa · Fahrt nach Palma und zurück</span><span data-l="en">Sat · trip to Palma and back</span></b><span data-l="de">Bus 103 hin und Taxis in der Nacht zurück zur Villa.</span><span data-l="en">Bus 103 there and taxis back to the villa at night.</span></li>
+      <li style="--cc:var(--c-food)"><b><span data-l="de">Sa · Abendessen in La Bóveda, Palma</span><span data-l="en">Sat · dinner at La Bóveda, Palma</span></b><span data-l="de">Traditionelle Tapas zum Teilen (Jamón ibérico, Pa amb oli, Knoblauchgarnelen, Pimientos de Padrón) mit Hauswein, Sangria und Cava.</span><span data-l="en">Traditional tapas to share (jamón ibérico, pa amb oli, garlic prawns, pimientos de Padrón) with house wine, sangria and cava.</span></li>
+      <li style="--cc:var(--c-drinks)"><b><span data-l="de">Sa · Bar-Runde in Palma</span><span data-l="en">Sat · bar crawl in Palma</span></b><span data-l="de">Eine lange Nacht mit rund vier bis fünf Drinks pro Person in der Agua Bar, der Polka Bar und weiteren Bars im El Terreno.</span><span data-l="en">A long night with around four to five drinks per person at Agua Bar, Polka Bar and other bars in El Terreno.</span></li>
+      <li style="--cc:var(--c-food)"><b><span data-l="de">So · Mittagessen im Rendezvous, Peguera</span><span data-l="en">Sun · lunch at Rendezvous, Peguera</span></b><span data-l="de">Mittagessen auf der Terrasse mit Meerblick, vom Grill oder aus dem Mittagsmenü, mit Getränken.</span><span data-l="en">Lunch on the sea-view terrace, from the grill or the set menu, with drinks.</span></li>
+      <li style="--cc:var(--c-drinks)"><b><span data-l="de">So · Weinprobe in der Villa</span><span data-l="en">Sun · wine tasting at the villa</span></b><span data-l="de">Sommelier von Wine Industry Mallorca mit Inselweinen („Magical Mallorca“, ca. 2 Std.), geplant für rund 6 Teilnehmende.</span><span data-l="en">Sommelier from Wine Industry Mallorca with island wines ("Magical Mallorca", approx. 2 h), planned for about 6 participants.</span></li>
+      <li style="--cc:var(--c-travel)"><b><span data-l="de">Benzin für beide Mietwagen</span><span data-l="en">Fuel for both rental cars</span></b><span data-l="de">Alle Fahrten im Plan, inklusive der Flughafen-Fahrten mit den eigenen Autos.</span><span data-l="en">Every drive in the plan, including the airport runs in our own cars.</span></li>
+    </ul>
+    <h3 style="margin-top:16px"><span data-l="de">Nicht inklusive</span><span data-l="en">Not included</span></h3>
+    <ul class="clean small">
+      <li><span data-l="de">Villa, Flüge und Mietwagen</span><span data-l="en">Villa, flights and rental cars</span></li>
+      <li><span data-l="de">Taxis zum oder vom Flughafen, falls jemand nicht mit dem Auto fährt (siehe unten)</span><span data-l="en">Taxis to or from the airport if someone doesn't go by car (see below)</span></li>
+      <li><span data-l="de">Optionales: Abstecher Bierkönig, Eintritt Castell de Bellver (4 €), Vall-Verda-Wanderung</span><span data-l="en">Optional extras: Bierkönig detour, Castell de Bellver entry (€4), Vall Verda hike</span></li>
+      <li><span data-l="de">Persönliche Extras wie Souvenirs oder zusätzliche Drinks</span><span data-l="en">Personal extras such as souvenirs or extra drinks</span></li>
+      <li><span data-l="de">Touristensteuer, falls nicht im Villapreis enthalten</span><span data-l="en">Tourist tax, if not included in the villa price</span></li>
+    </ul>
   </div>
   <div class="panel">
     <h3><span data-l="de">Flughafen-Fahrten (nicht im Budget)</span><span data-l="en">Airport runs (not in the budget)</span></h3>
@@ -637,6 +688,38 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
     </ul>
   </div>
 </section>
+<!-- ADMIN -->
+<section class="page budget" id="admin" role="tabpanel" hidden>
+  <div class="panel" id="adm-lock">
+    <h2>Admin</h2>
+    <p class="small muted" style="margin:0 0 12px"><span data-l="de">Detaillierte Budgetplanung mit allen Einzelposten. Passwort eingeben, um sie zu öffnen.</span><span data-l="en">Detailed budget planning with every item. Enter the password to open it.</span></p>
+    <form id="adm-form" class="adm-form" autocomplete="off">
+      <label for="adm-pw" class="lbl"><span data-l="de">Passwort</span><span data-l="en">Password</span></label>
+      <div class="adm-row"><input type="password" id="adm-pw" required><button type="submit" id="adm-go"><span data-l="de">Entsperren</span><span data-l="en">Unlock</span></button></div>
+      <p class="small" id="adm-err" role="alert" hidden><span data-l="de">Falsches Passwort.</span><span data-l="en">Wrong password.</span></p>
+    </form>
+  </div>
+  <div id="adm-body" hidden>
+    <div class="panel">
+      <div class="adm-head"><h2><span data-l="de">Budget-Rechner</span><span data-l="en">Budget calculator</span></h2><button type="button" id="adm-out" class="ghost"><span data-l="de">Sperren</span><span data-l="en">Lock</span></button></div>
+      <p class="small muted" style="margin:0 0 12px"><span data-l="de">Schätzwerte, ohne Villa, Flüge und Mietwagen-Grundpreis. Beträge anpassen, Optionen umstellen, die Summe rechnet mit. Die öffentliche Budget-Seite in diesem Browser rechnet mit; für alle anderen ändert sich erst etwas, wenn die Datei mit den neuen Standardwerten aktualisiert wird.</span><span data-l="en">Estimates, excluding villa, flights and the base car-rental price. Change amounts or options and the total updates. The public Budget page in this browser follows along; for everyone else nothing changes until the file is updated with the new default values.</span></p>
+      <div class="totals">
+        <div><div class="lbl"><span data-l="de">Gesamt</span><span data-l="en">Total</span></div><div class="big mono" id="b-total">–</div></div>
+        <div><div class="lbl"><span data-l="de">pro Person</span><span data-l="en">per person</span> (<span id="b-n">11</span>)</div><div class="big mono" id="b-pp">–</div></div>
+        <div><label class="lbl" for="persons"><span data-l="de">Personen</span><span data-l="en">People</span></label><br><input type="number" id="persons" min="1" value="11"></div>
+      </div>
+      <div class="bar" id="b-bar" style="margin-top:14px" aria-hidden="true"></div>
+    </div>
+    <div class="panel">
+      <div class="tscroll"><table>
+        <thead><tr><th><span data-l="de">Posten</span><span data-l="en">Item</span></th><th>Option</th><th class="num"><span data-l="de">Betrag</span><span data-l="en">Amount</span></th><th class="num"><span data-l="de">Summe</span><span data-l="en">Subtotal</span></th></tr></thead>
+        <tbody id="b-rows"></tbody>
+      </table></div>
+      <p class="small muted" style="margin:10px 0 0"><span data-l="de">„pP“ = pro Person, sonst Pauschale für die Gruppe. Der Punkt vor dem Posten zeigt die Kategorie im Kreisdiagramm. Taxi Palma–Santa Ponsa tagsüber ca. 26–32 €. Restaurant- und Barpreise sind eigene Schätzungen.</span><span data-l="en">"pp" = per person, otherwise a flat amount for the group. The dot before each item shows its pie-chart category. Taxi Palma–Santa Ponsa approx. €26–32 in daytime. Restaurant and bar prices are my own estimates.</span></p>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer class="wrap"><span data-l="de">Plan mit Schätzwerten. Öffnungszeiten, Preise und Fahrzeiten vor Ort prüfen.</span><span data-l="en">Plan based on estimates. Check opening hours, prices and drive times locally.</span></footer>
@@ -872,37 +955,103 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
   }
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>layoutLabels());
 
-  /* ---------- Budget ---------- */
-  const rows=[
-    {k:'food',n:{de:'Grosseinkauf Lebensmittel & Getränke (4 Tage)',en:'Groceries & drinks (4 days)'},opts:[{l:{de:'normal',en:'normal'},v:60,pp:1},{l:{de:'grosszügig',en:'generous'},v:80,pp:1}]},
-    {k:'fuel',n:{de:'Benzin 2 Autos (inkl. Flughafen-Fahrten)',en:'Fuel, 2 cars (incl. airport runs)'},opts:[{l:{de:'Pauschale',en:'flat'},v:90}]},
-    {k:'flunch',n:{de:'Fr Mittagessen Port d’Andratx',en:'Fri lunch, Port d’Andratx'},opts:[{l:{de:'Restaurant',en:'restaurant'},v:35,pp:1},{l:{de:'Tapas/leicht',en:'tapas/light'},v:22,pp:1}]},
-    {k:'sangria',n:{de:'Fr Sangria-Workshop',en:'Fri sangria workshop'},opts:[{l:{de:'selbst gemacht (Extra-Zutaten)',en:'DIY (extra ingredients)'},v:70},{l:{de:'mobile Bar (Schätzung)',en:'mobile bar (estimate)'},v:450}]},
-    {k:'karaoke',n:{de:'Karaoke-Mikrofon',en:'Karaoke mic'},opts:[{l:{de:'kaufen',en:'buy'},v:35},{l:{de:'mitbringen',en:'bring from home'},v:0}]},
-    {k:'palma',n:{de:'Sa Villa ↔ Palma',en:'Sat villa ↔ Palma'},opts:[{l:{de:'Bus hin + 3 Taxis zurück',en:'bus there + 3 taxis back'},v:180},{l:{de:'Kleinbus hin & zurück (Schätzung)',en:'minibus both ways (estimate)'},v:280}]},
-    {k:'sdinner',n:{de:'Sa Abendessen La Bóveda',en:'Sat dinner, La Bóveda'},opts:[{l:{de:'Tapas & Wein',en:'tapas & wine'},v:40,pp:1}]},
-    {k:'bars',n:{de:'Sa Bars Palma',en:'Sat bars, Palma'},opts:[{l:{de:'normal',en:'normal'},v:30,pp:1},{l:{de:'lange Nacht',en:'long night'},v:50,pp:1}]},
-    {k:'sunlunch',n:{de:'So Mittagessen Peguera',en:'Sun lunch, Peguera'},opts:[{l:{de:'Rendezvous',en:'Rendezvous'},v:28,pp:1}]},
-    {k:'wine',n:{de:'So Weinprobe in der Villa (nur Teilnehmende)',en:'Sun wine tasting at the villa (participants only)'},opts:[{l:{de:'6 Pers. × 46 € „Magical Mallorca“',en:'6 people × €46 "Magical Mallorca"'},v:276},{l:{de:'4 Pers. × 46 € (Minimum)',en:'4 people × €46 (minimum)'},v:184},{l:{de:'8 Pers. × 46 €',en:'8 people × €46'},v:368},{l:{de:'Bodega + Transfer, 6 Pers. (Schätzung)',en:'winery + transfer, 6 people (estimate)'},v:420},{l:{de:'selbst organisiert (Wein kaufen)',en:'self-organised (buy wine)'},v:120}]},
-    {k:'tub',n:{de:'Whirlpool',en:'Hot tub'},opts:[{l:{de:'ohne',en:'none'},v:0},{l:{de:'aufblasbar kaufen (Schätzung)',en:'buy inflatable (estimate)'},v:550}]}
+  /* ---------- Budget: öffentlich + Admin ---------- */
+  const BUDGET_ENC={iter:250000,salt:'mBWfXDAL2+r9Q58VxYwGYA==',iv:'af4kdPMTuLTkEz9z',ct:'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'};
+  const BUDGET_PUBLIC={n:11,total:3280,cats:{"food":1782,"drinks":1193,"travel":270,"other":35}};
+  const CATS=[
+    {k:'food',v:'--c-food',n:{de:'Essen',en:'Food'}},
+    {k:'drinks',v:'--c-drinks',n:{de:'Alkohol & Getränke',en:'Alcohol & drinks'}},
+    {k:'travel',v:'--c-travel',n:{de:'Fahrten',en:'Transport'}},
+    {k:'other',v:'--c-other',n:{de:'Sonstiges',en:'Other'}}
   ];
+  const fmt=n=>new Intl.NumberFormat(LANG==='en'?'en-GB':'de-CH',{maximumFractionDigits:0}).format(Math.round(n))+' €';
+  let pub={total:BUDGET_PUBLIC.total,cats:Object.assign({},BUDGET_PUBLIC.cats)};
+  const pN=document.getElementById('p-n');
+  function renderPublic(){
+    const n=Math.max(1,Math.min(99,+pN.value||1));
+    const tot=Math.round(pub.total/10)*10, pp=Math.ceil(pub.total/n);
+    const ca=LANG==='en'?'≈ ':'ca. ';
+    document.getElementById('p-total').textContent=ca+fmt(tot);
+    document.getElementById('p-pp').textContent=ca+fmt(pp);
+    document.getElementById('ov-total').textContent=ca+fmt(tot);
+    document.getElementById('ov-pp').textContent=ca+fmt(Math.ceil(pub.total/(BUDGET_PUBLIC.n)));
+    drawPie();
+  }
+  pN.addEventListener('input',renderPublic);
+  const pieEl=document.getElementById('pie');
+  function drawPie(){
+    [...pieEl.querySelectorAll('path,text,circle')].forEach(e=>e.remove());
+    const NSs='http://www.w3.org/2000/svg';
+    const mk=(t,a)=>{const e=document.createElementNS(NSs,t);for(const k in a)e.setAttribute(k,a[k]);pieEl.appendChild(e);return e;};
+    const tot=CATS.reduce((s,c)=>s+(pub.cats[c.k]||0),0)||1;
+    const cx=100,cy=100,R=92,r=58;
+    let a0=-Math.PI/2;
+    const leg=document.getElementById('pie-legend');leg.innerHTML='';
+    CATS.forEach(c=>{
+      const val=pub.cats[c.k]||0, frac=val/tot, pct=Math.round(frac*100);
+      const li=document.createElement('li');li.style.setProperty('--cc',`var(${c.v})`);
+      li.innerHTML=`<i></i><span>${T(c.n)}</span><b class="mono">${pct} %</b>`;leg.appendChild(li);
+      if(val<=0)return;
+      const a1=a0+frac*Math.PI*2, large=(a1-a0)>Math.PI?1:0;
+      const p=(rad,ang)=>[cx+rad*Math.cos(ang),cy+rad*Math.sin(ang)].map(v=>v.toFixed(2)).join(' ');
+      const d=frac>=0.9999
+        ?`M ${p(R,0)} A ${R} ${R} 0 1 1 ${p(R,Math.PI)} A ${R} ${R} 0 1 1 ${p(R,0)} M ${p(r,0)} A ${r} ${r} 0 1 0 ${p(r,Math.PI)} A ${r} ${r} 0 1 0 ${p(r,0)} Z`
+        :`M ${p(R,a0)} A ${R} ${R} 0 ${large} 1 ${p(R,a1)} L ${p(r,a1)} A ${r} ${r} 0 ${large} 0 ${p(r,a0)} Z`;
+      const path=mk('path',{d,fill:`var(${c.v})`,stroke:'var(--surface)','stroke-width':2,'stroke-linejoin':'round','fill-rule':'evenodd'});
+      const tt=document.createElementNS(NSs,'title');tt.textContent=`${T(c.n)}: ${pct} %`;path.appendChild(tt);
+      a0=a1;
+    });
+    const t1=mk('text',{x:100,y:96,'text-anchor':'middle','font-size':12,fill:'var(--muted)','font-family':'IBM Plex Mono, monospace'});t1.textContent=LANG==='en'?'per person':'pro Person';
+    const t2=mk('text',{x:100,y:118,'text-anchor':'middle','font-size':20,'font-weight':700,fill:'var(--fg)','font-family':'Bricolage Grotesque, system-ui, sans-serif'});
+    t2.textContent=fmt(Math.ceil(pub.total/Math.max(1,+pN.value||1)));
+    document.getElementById('pie-desc').textContent=CATS.map(c=>`${T(c.n)} ${Math.round((pub.cats[c.k]||0)/tot*100)} %`).join(', ');
+  }
+
+  /* Admin: Entschlüsseln und Detail-Rechner */
+  let rows=[];
+  const b64d=s=>Uint8Array.from(atob(s),ch=>ch.charCodeAt(0));
+  async function unlock(pw){
+    const enc=new TextEncoder();
+    const base=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveKey']);
+    const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64d(BUDGET_ENC.salt),iterations:BUDGET_ENC.iter,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['decrypt']);
+    const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64d(BUDGET_ENC.iv)},key,b64d(BUDGET_ENC.ct));
+    return JSON.parse(new TextDecoder().decode(plain));
+  }
+  const admForm=document.getElementById('adm-form'), admErr=document.getElementById('adm-err'), admPw=document.getElementById('adm-pw');
+  admForm.addEventListener('submit',async e=>{
+    e.preventDefault();admErr.hidden=true;
+    const btn=document.getElementById('adm-go');btn.disabled=true;
+    try{const data=await unlock(admPw.value);buildAdmin(data);admPw.value='';}
+    catch(err){admErr.hidden=false;admPw.select();}
+    finally{btn.disabled=false;}
+  });
+  document.getElementById('adm-out').addEventListener('click',()=>{
+    rows=[];document.getElementById('b-rows').innerHTML='';
+    document.getElementById('adm-body').hidden=true;document.getElementById('adm-lock').hidden=false;
+    pub={total:BUDGET_PUBLIC.total,cats:Object.assign({},BUDGET_PUBLIC.cats)};renderPublic();
+  });
   const tb=document.getElementById('b-rows');
   const persons=document.getElementById('persons');
-  const palette=['--d1','--d2','--d3','--d4','--accent','--d5'];
-  rows.forEach(r=>{
-    const tr=document.createElement('tr');
-    const optCell=r.opts.length>1?`<select id="o-${r.k}"></select>`:`<span class="small muted" id="ol-${r.k}"></span>`;
-    tr.innerHTML=`<td id="n-${r.k}"></td><td>${optCell}</td><td class="num"><input type="number" min="0" id="v-${r.k}"> <span class="small muted" id="u-${r.k}"></span></td><td class="num" id="s-${r.k}"></td>`;
-    tb.appendChild(tr);
-    r.cur=r.opts[0];
-    document.getElementById('v-'+r.k).value=r.opts[0].v;
-    const s=document.getElementById('o-'+r.k);
-    if(s){
-      r.opts.forEach((o,j)=>{const op=document.createElement('option');op.value=j;s.appendChild(op);});
-      s.addEventListener('change',()=>{r.cur=r.opts[+s.value];document.getElementById('v-'+r.k).value=r.cur.v;calc();});
-    }
-    document.getElementById('v-'+r.k).addEventListener('input',calc);
-  });
+  const catVar=k=>(CATS.find(c=>c.k===k)||CATS[3]).v;
+  function buildAdmin(data){
+    rows=data.rows;tb.innerHTML='';persons.value=data.n||11;
+    rows.forEach(r=>{
+      const tr=document.createElement('tr');
+      const optCell=r.opts.length>1?`<select id="o-${r.k}"></select>`:`<span class="small muted" id="ol-${r.k}"></span>`;
+      tr.innerHTML=`<td><span class="cdot" style="--cc:var(${catVar(r.cat)})"></span><span id="n-${r.k}"></span></td><td>${optCell}</td><td class="num"><input type="number" min="0" id="v-${r.k}"> <span class="small muted" id="u-${r.k}"></span></td><td class="num" id="s-${r.k}"></td>`;
+      tb.appendChild(tr);
+      r.cur=r.opts[0];
+      document.getElementById('v-'+r.k).value=r.opts[0].v;
+      const s=document.getElementById('o-'+r.k);
+      if(s){
+        r.opts.forEach((o,j)=>{const op=document.createElement('option');op.value=j;s.appendChild(op);});
+        s.addEventListener('change',()=>{r.cur=r.opts[+s.value];document.getElementById('v-'+r.k).value=r.cur.v;calc();});
+      }
+      document.getElementById('v-'+r.k).addEventListener('input',calc);
+    });
+    document.getElementById('adm-lock').hidden=true;document.getElementById('adm-body').hidden=false;
+    renderBudgetText();
+  }
   function renderBudgetText(){
     rows.forEach(r=>{
       document.getElementById('n-'+r.k).textContent=T(r.n);
@@ -913,24 +1062,23 @@ footer{padding-block:20px 40px;color:var(--muted);font-size:13px}
     });
     calc();
   }
-  const fmt=n=>new Intl.NumberFormat(LANG==='en'?'en-GB':'de-CH',{maximumFractionDigits:0}).format(Math.round(n))+' €';
   function calc(){
+    if(!rows.length){renderPublic();return;}
     const n=Math.max(1,+persons.value||1);
-    let total=0;const parts=[];
+    let total=0;const cats={food:0,drinks:0,travel:0,other:0};
     rows.forEach(r=>{
       const v=+document.getElementById('v-'+r.k).value||0;
       const s=r.cur.pp?v*n:v;
       document.getElementById('u-'+r.k).textContent=r.cur.pp?(LANG==='en'?'pp':'pP'):'';
       document.getElementById('s-'+r.k).textContent=fmt(s);
-      total+=s;parts.push(s);
+      total+=s;cats[r.cat]=(cats[r.cat]||0)+s;
     });
     document.getElementById('b-total').textContent=fmt(total);
     document.getElementById('b-pp').textContent=fmt(total/n);
     document.getElementById('b-n').textContent=n;
-    document.getElementById('ov-total').textContent=fmt(total);
-    document.getElementById('ov-pp').textContent=fmt(total/n);
     const bar=document.getElementById('b-bar');bar.innerHTML='';
-    parts.forEach((s,i)=>{if(!s)return;const sp=document.createElement('span');sp.style.width=(s/total*100)+'%';sp.style.background=`var(${palette[i%palette.length]})`;sp.title=T(rows[i].n);bar.appendChild(sp);});
+    CATS.forEach(c=>{const s=cats[c.k];if(!s||!total)return;const sp=document.createElement('span');sp.style.width=(s/total*100)+'%';sp.style.background=`var(${c.v})`;sp.title=T(c.n);bar.appendChild(sp);});
+    pub={total,cats};renderPublic();
   }
   persons.addEventListener('input',calc);
 
